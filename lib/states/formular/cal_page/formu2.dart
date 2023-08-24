@@ -131,5 +131,21 @@ class _Formular2State extends State<Formular2> {
         setState(() => wrongx = true);
       }
     }
+    try {
+      double p = double.parse(inputp.text);
+      try {
+        double q = double.parse(inputq.text);
+        if (q + p != 1) {
+          setState(() {
+            wrongq = true;
+            wrongp = true;
+          });
+        }
+      } catch (e) {
+        setState(() => wrongq = true);
+      }
+    } catch (e) {
+      setState(() => wrongp = true);
+    }
   }
 }

@@ -83,7 +83,10 @@ class _Formular1State extends State<Formular1> {
       setState(() => wrongn = true);
     } else {
       try {
-        int.parse(inputn.text);
+        int n = int.parse(inputn.text);
+        if (n < 1) {
+          setState(() => wrongn = true);
+        }
       } catch (e) {
         setState(() => wrongn = true);
       }

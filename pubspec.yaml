@@ -108,6 +108,10 @@ flutter:
         weight: 400
       - asset: fonts/EkkamaiNew-Thin.ttf
         weight: 300
+
+   - family: MyIcons
+     fonts:
+      - asset: assets/MyIcons.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

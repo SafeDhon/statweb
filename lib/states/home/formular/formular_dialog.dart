@@ -51,7 +51,9 @@ class _FormularDialogState extends State<FormularDialog> {
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Math.tex(
+                                  // mathStyle: MathStyle.text,
                                   formulars[index].formular,
+                                  
                                   textStyle:
                                       enFont('semibold', 20, metallicBlue),
                                 ),

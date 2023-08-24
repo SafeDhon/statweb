@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:statweb/states/score/score_model.dart';
+import 'package:statweb/states/score/updateScore_dialog.dart';
 
 import '../../constants.dart';
 
@@ -101,6 +102,7 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
                     itemBuilder: (context, index) {
                       return scoreWidget(
                         (index + 1).toString(),
+                        scores[index].id.toString(),
                         scores[index].name,
                         scores[index].quiz1.toString(),
                         scores[index].quiz2.toString(),
@@ -128,8 +130,8 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
     );
   }
 
-  SizedBox scoreWidget(String index, String name, String quiz1, String quiz2,
-      String midterm, String finalterm, String total) {
+  SizedBox scoreWidget(String index, String userID, String name, String quiz1,
+      String quiz2, String midterm, String finalterm, String total) {
     return SizedBox(
       height: 40,
       child: Column(
@@ -141,13 +143,34 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
               children: [
                 Expanded(
                     flex: 2,
-                    child: Text(
-                      '$index. $name',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: metallicBlue,
-                          fontFamily: 'Quicksand',
-                          fontWeight: FontWeight.w600),
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => UpdateScoreDialog(
+                            userID: userID,
+                            header: name,
+                            quiz1: quiz1,
+                            quiz2: quiz2,
+                            midterm: midterm,
+                            finalterm: finalterm,
+                            total: total,
+                          ),
+                        ).then((value) {
+                          setState(() => scores = []);
+                          readDataID().then((value) {
+                            setState(() => isloading = false);
+                          });
+                        });
+                      },
+                      child: Text(
+                        '$index. $name',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: metallicBlue,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.w600),
+                      ),
                     )),
                 Expanded(child: studentStyle(quiz1)),
                 Expanded(child: studentStyle(midterm)),

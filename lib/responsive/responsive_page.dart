@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:statweb/constants.dart';
+import 'package:statweb/my_icons_icons.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
 import 'package:statweb/states/formular/formular_list.dart';
 import 'package:statweb/states/home/vdo_list.dart';
@@ -178,7 +179,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
         backgroundColor: metallicBlue,
         child: const Center(
           child: Icon(
-            Icons.message_rounded,
+            MyIcons.icons8_speech_bubble,
             color: Colors.white,
           ),
         ),
@@ -233,13 +234,13 @@ class _ResponsivePageState extends State<ResponsivePage> {
             children: [
               Column(
                 children: [
-                  menuItem(1, "Home", Icons.home_rounded,
+                  menuItem(1, "Home", MyIcons.icons8_home,
                       currentPage == DrawerSections.home ? true : false),
-                  menuItem(2, "E-Book", Icons.menu_book_rounded,
+                  menuItem(2, "E-Book", MyIcons.icons8_bookmark,
                       currentPage == DrawerSections.eBook ? true : false),
-                  menuItem(3, "Quiz", Icons.edit_rounded,
+                  menuItem(3, "Quiz", MyIcons.icons8_edit,
                       currentPage == DrawerSections.quiz ? true : false),
-                  menuItem(4, "Score", Icons.library_books_rounded,
+                  menuItem(4, "Score", MyIcons.icons8_document,
                       currentPage == DrawerSections.score ? true : false),
                   menuItem(5, "Research", Icons.manage_search_rounded,
                       currentPage == DrawerSections.research ? true : false)

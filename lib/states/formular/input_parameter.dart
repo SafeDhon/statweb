@@ -53,7 +53,7 @@ class InputParameter extends StatelessWidget {
                       // keyboardType: TextInputType.number,
 
                       inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.,]'))
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.,-]'))
                       ],
 
                       readOnly: readOnly,

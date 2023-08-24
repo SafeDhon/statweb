@@ -74,10 +74,13 @@ class MyFormularNav extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: Image.asset(
-                'assets/images/calculator.png',
-                height: 500,
-              )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                                  'assets/images/calculator.png',
+                                  height: 500,
+                                ),
+                  )),
             ],
           ),
         ),

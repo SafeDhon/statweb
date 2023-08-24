@@ -18,12 +18,17 @@ class Formular8 extends StatefulWidget {
 
 class _Formular8State extends State<Formular8> {
   bool onCal = false;
+  bool onCalHint = false;
 
   // input parameter
   final inputX = TextEditingController();
   final inputu = TextEditingController();
   final inputS = TextEditingController();
   final inputn = TextEditingController();
+  bool wrongX = false;
+  bool wrongu = false;
+  bool wrongS = false;
+  bool wrongn = false;
   double Z = 0.0;
 
   @override
@@ -36,41 +41,62 @@ class _Formular8State extends State<Formular8> {
           children: [
             headFormular(widget.formu),
             InputParameter(
-                controller: inputX,
-                paramWidget: r'\bar{X}',
-                hintText: 'Input Something'),
+              controller: inputX,
+              paramWidget: r'\bar{X}',
+              hintText: 'Input Something',
+              wrongParam: wrongX,
+            ),
             InputParameter(
-                controller: inputu,
-                paramWidget: r'\mu',
-                hintText: 'Input Something'),
+              controller: inputu,
+              paramWidget: r'\mu',
+              hintText: 'Input Something',
+              wrongParam: wrongu,
+            ),
             InputParameter(
               controller: inputS,
               paramWidget: r'S',
               hintText: 'Input Something',
+              wrongParam: wrongS,
             ),
             InputParameter(
               controller: inputn,
               paramWidget: r'n',
               hintText: 'n = 30,31,32,...',
+              wrongParam: wrongn,
             ),
             calBox(
               () {
                 setState(() {
                   onCal = true;
+                  wrongX = false;
+                  wrongu = false;
+                  wrongS = false;
+                  wrongn = false;
                 });
-                getAnswer().then((value) {
-                  setState(() {
-                    onCal = false;
-                  });
+                checkParam().then((value) {
+                  onCal = false;
+                  if (!wrongX && !wrongu && !wrongS && !wrongn) {
+                    onCal = true;
+                    getAnswer().then((value) {
+                      setState(() {
+                        onCal = false;
+                        wrongX = false;
+                        wrongu = false;
+                        wrongS = false;
+                        wrongn = false;
+                      });
+                    });
+                  }
                 });
               },
               onCal,
             ),
             InputParameter(
               controller: TextEditingController(),
-              paramWidget: r'f(x)',
+              paramWidget: r'Z',
               hintText: Z == 0.0 ? 'Please Input Parameter' : Z.toString(),
               readOnly: true,
+              onCalHint: onCalHint,
             ),
           ],
         ),
@@ -82,7 +108,50 @@ class _Formular8State extends State<Formular8> {
     var X = double.parse(inputX.text);
     var u = double.parse(inputu.text);
     var S = double.parse(inputS.text);
-    var n = double.parse(inputn.text);
+    var n = int.parse(inputn.text);
     Z = (X - u) / (S / (pow(n, 1 / 2)));
+    setState(() => onCalHint = true);
+  }
+
+  Future<void> checkParam() async {
+    if (inputX.text == '') {
+      setState(() => wrongX = true);
+    } else {
+      try {
+        double.parse(inputX.text);
+      } catch (e) {
+        setState(() => wrongX = true);
+      }
+    }
+    if (inputu.text == '') {
+      setState(() => wrongu = true);
+    } else {
+      try {
+        double.parse(inputu.text);
+      } catch (e) {
+        setState(() => wrongu = true);
+      }
+    }
+    if (inputS.text == '') {
+      setState(() => wrongS = true);
+    } else {
+      try {
+        double.parse(inputS.text);
+      } catch (e) {
+        setState(() => wrongS = true);
+      }
+    }
+    if (inputn.text == '') {
+      setState(() => wrongn = true);
+    } else {
+      try {
+        int n = int.parse(inputn.text);
+        if ( n < 30 ) {
+          setState(() => wrongn = true);
+        }
+      } catch (e) {
+        setState(() => wrongn = true);
+      }
+    }
   }
 }

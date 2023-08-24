@@ -23,7 +23,11 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
   @override
   void initState() {
     super.initState();
-    getFireBaseDateTime().then((value) => print('get time'));
+    getFireBaseDateTime().then((value) {
+      setState(() {
+        onAdd = false;
+      });
+    });
   }
 
   Future<void> getformPrefer() async {
@@ -63,81 +67,93 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: onAdd
+              ? Center(
+                  child: SizedBox(
+                    height: 25,
+                    width: 25,
+                    child: CircularProgressIndicator(
+                      color: metallicBlue,
+                      strokeWidth: 2,
+                    ),
+                  ),
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Next Period !!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Quicksand',
-                        fontSize: 33,
-                        fontWeight: FontWeight.w700,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 5.0,
-                            color: Colors.black54,
-                            offset: Offset(3.0, 3.0),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            'Next Period !!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand',
+                              fontSize: 33,
+                              fontWeight: FontWeight.w700,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 5.0,
+                                  color: Colors.black54,
+                                  offset: Offset(3.0, 3.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            description.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand',
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 5.0,
+                                  color: Colors.black54,
+                                  offset: Offset(3.0, 3.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            '$hours:$minutes  ${dateTime.day}/${dateTime.month}/${dateTime.year}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand',
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 5.0,
+                                  color: Colors.black54,
+                                  offset: Offset(3.0, 3.0),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Text(
-                      description.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Quicksand',
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 5.0,
-                            color: Colors.black54,
-                            offset: Offset(3.0, 3.0),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      '$hours:$minutes  ${dateTime.day}/${dateTime.month}/${dateTime.year}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Quicksand',
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 5.0,
-                            color: Colors.black54,
-                            offset: Offset(3.0, 3.0),
-                          ),
-                        ],
-                      ),
-                    ),
+                    Expanded(
+                        child: Image.asset(
+                      'assets/images/period.png',
+                      height: 500,
+                    )),
                   ],
                 ),
-              ),
-              Expanded(
-                  child: Image.asset(
-                'assets/images/calculator.png',
-                height: 500,
-              )),
-            ],
-          ),
         ),
       ),
     );
   }
 
   Future getFireBaseDateTime() async {
+    setState(() => onAdd = true);
     var getPeriod = await FirebaseFirestore.instance
         .collection('period')
         .orderBy('dateTime')
@@ -157,6 +173,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
   }
 
   Future addFirebase(String addDescript, DateTime addDateTime) async {
+    setState(() => onAdd = true);
     final data = <String, dynamic>{
       'dateTime': addDateTime,
       'description': addDescript,
@@ -251,6 +268,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
               addFirebase(description, dateTime).then(
                 (value) {
                   setState(() {
+                    onAdd = false;
                     this.dateTime = dateTime;
                     this.description = description;
                   });

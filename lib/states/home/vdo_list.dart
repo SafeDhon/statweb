@@ -165,7 +165,7 @@ class _VDOListState extends State<VDOList> {
                                             // ),
                                             child: CachedNetworkImage(
                                               imageUrl:
-                                                  'https://drive.google.com/uc?export=view&id=1bJ1j570QHgyn_N6ZXvXZKUtPLPhB-eNv',
+                                                  "https://drive.google.com/uc?export=view&id=${vdos[index]['cover']}",
                                               placeholder: (context, url) =>
                                                   myCircularLoading(),
                                               imageBuilder:
