@@ -114,6 +114,7 @@ FirebaseOptions myFirebaseOptions() {
     appId: "1:473452586512:web:35fc61af78d83bc2fecc95",
     messagingSenderId: "473452586512",
     projectId: "reportstatweb",
+    storageBucket: "reportstatweb.appspot.com",
   );
 }
 

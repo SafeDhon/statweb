@@ -95,7 +95,7 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
               child: columnHeader(),
             ),
             isloading
-                ? SizedBox(height: 150, child: myCircularLoading())
+                ? SizedBox(height: 350, child: myCircularLoading())
                 : ListView.builder(
                     shrinkWrap: true,
                     itemCount: scores.length,

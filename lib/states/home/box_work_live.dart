@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:statweb/constants.dart';
 import 'package:statweb/states/home/home.dart';
+import 'package:statweb/states/home/upload_dialog.dart';
+import 'package:statweb/util/login_dialog.dart';
 
 class MyWorkLiveNav extends StatefulWidget {
   const MyWorkLiveNav({super.key});
@@ -13,6 +17,7 @@ class MyWorkLiveNav extends StatefulWidget {
 
 class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
   bool onAdd = false;
+  String homeworkID = '';
   DateTime assign = DateTime(2023, 8, 20, 00, 00);
   DateTime deadline = DateTime(2023, 8, 20, 00, 00);
   String? description = 'No Description';
@@ -43,8 +48,19 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
       onTap: () async {
         await getformPrefer().then((value) {
           if (userID == '') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const LoginDialog(),
+            ).then((value) async {
+              // await getformPrefer();
+            });
           } else {
-            userType == 'student' ? null : pickDateTime();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => userType == 'student'
+                  ? UploadDialog(userID: userID, homeworkID: homeworkID)
+                  : manageDialog(),
+            );
           }
         });
       },
@@ -65,15 +81,15 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
           child: onAdd
               ? const Center(
-                child: SizedBox(
-                  height: 25,
-                  width: 25,
-                  child: CircularProgressIndicator(
+                  child: SizedBox(
+                    height: 25,
+                    width: 25,
+                    child: CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 2,
                     ),
-                ),
-              )
+                  ),
+                )
               : Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -99,9 +115,11 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                               ],
                             ),
                           ),
-                          Text(description.toString(),
-                              style: homeworkTextStyle(28),
-                              overflow: TextOverflow.ellipsis,),
+                          Text(
+                            description.toString(),
+                            style: homeworkTextStyle(28),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           Column(
                             children: [
                               Row(
@@ -114,13 +132,13 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                        ':  ${assign.day}/${assign.month}/${assign.year}',
+                                       DateFormat(':  d MMM yyyy').format(assign),
                                         style: homeworkTextStyle(20)),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                        '${assign.hour.toString().padLeft(2, '0')}.${assign.minute.toString().padLeft(2, '0')}',
+                                        DateFormat('kk:mm').format(assign),
                                         style: homeworkTextStyle(20)),
                                   ),
                                 ],
@@ -132,16 +150,16 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                     child: Text('Deadline',
                                         style: homeworkTextStyle(20)),
                                   ),
-                                  Expanded(
+                                 Expanded(
                                     flex: 4,
                                     child: Text(
-                                        ':  ${deadline.day}/${deadline.month}/${deadline.year}',
+                                       DateFormat(':  d MMM yyyy').format(deadline),
                                         style: homeworkTextStyle(20)),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                        '${deadline.hour.toString().padLeft(2, '0')}.${deadline.minute.toString().padLeft(2, '0')}',
+                                        DateFormat('kk:mm').format(deadline),
                                         style: homeworkTextStyle(20)),
                                   ),
                                 ],
@@ -152,11 +170,11 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                        flex: 4,
                         child: Image.asset(
-                      'assets/images/hwlive.png',
-                      height: 500,
-                    )),
+                          'assets/images/hwlive.png',
+                          height: 500,
+                        )),
                   ],
                 ),
         ),
@@ -170,10 +188,11 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
         .collection('homework')
         .orderBy('deadline')
         .get();
-    var homework = getHomework.docs.last;
+    var homework = getHomework.docs.first;
     DateTime deadline = homework['deadline'].toDate();
     DateTime assign = homework['assign'].toDate();
     setState(() {
+      homeworkID = homework.id;
       description = homework['description'];
       this.deadline = DateTime(
         deadline.year,
@@ -319,9 +338,128 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
         Shadow(
           blurRadius: 5.0,
           color: Colors.black54,
-          offset: Offset(3.0, 3.0),
+          offset: Offset(1.0, 1.0),
         ),
       ],
+    );
+  }
+
+  Widget manageDialog() {
+    // getHomeworkList();
+    return Dialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      child: SizedBox(
+        width: 250,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('homework')
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasData) {
+                        final snap = snapshot.data!.docs;
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snap.length,
+                            itemBuilder: (context, index) {
+                              return homeworkContainer(
+                                  snap[index], snap[index].id);
+                            });
+                      } else {
+                        return const SizedBox();
+                      }
+                    }),
+                addHomeworkButt(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget addHomeworkButt() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: InkWell(
+        onTap: pickDateTime,
+        child: Container(
+          height: 40,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: metallicBlue,
+            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+          ),
+          child: Center(
+            child: Text(
+              'Add new homework',
+              style: enFont('bold', 18, Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget homeworkContainer(
+      QueryDocumentSnapshot<Object?> object, String homeworkID) {
+    DateTime assign = object['assign'].toDate();
+    DateTime deadline = object['deadline'].toDate();
+    String assignShow = DateFormat('d MMM kk:mm').format(assign);
+    String deadlineShow = DateFormat('d MMM kk:mm').format(deadline);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: InkWell(
+        onTap: () {
+          print(homeworkID);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(width: 2, color: metallicBlue),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${object['description']}',
+                      style: enFont('semibold', 20, metallicBlue),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    Text(
+                      '$assignShow - $deadlineShow',
+                      style: enFont('semibold', 14, glaucous),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    )
+                  ],
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('homework')
+                        .doc(homeworkID)
+                        .delete();
+                  },
+                  icon: const Icon(Icons.cancel_rounded),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

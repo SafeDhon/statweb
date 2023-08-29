@@ -8,13 +8,7 @@ import 'package:statweb/states/home/home_desktop.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
 import 'package:statweb/states/score/score_desktop.dart';
 import 'package:statweb/util/header.dart';
-import 'package:statweb/util/link_box.dart';
-import 'package:statweb/util/my_input_box.dart';
-import 'package:statweb/util/my_signin_box.dart';
-import 'package:statweb/util/my_signup_box.dart';
 
-import '../util/my_box.dart';
-import '../util/my_tile.dart';
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({Key? key}) : super(key: key);

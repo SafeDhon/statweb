@@ -73,11 +73,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
         //   }),
         // )
     
-        VDOList()
+        const VDOList()
     
-        // Expanded(
-        //   flex: 1,
-        //   child: VDOList()),
       ],
     );
 

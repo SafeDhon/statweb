@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:statweb/constants.dart';
+import 'package:statweb/util/login_dialog.dart';
 
 class NextPeriodNav extends StatefulWidget {
   const NextPeriodNav({
@@ -47,6 +49,12 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
       onTap: () async {
         await getformPrefer().then((value) {
           if (userID == '') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const LoginDialog(),
+            ).then((value) async {
+              await getformPrefer();
+            });
           } else {
             userType == 'student' ? null : pickDateTime();
           }
@@ -87,56 +95,18 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Text(
+                          Text(
                             'Next Period !!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand',
-                              fontSize: 33,
-                              fontWeight: FontWeight.w700,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 5.0,
-                                  color: Colors.black54,
-                                  offset: Offset(3.0, 3.0),
-                                ),
-                              ],
-                            ),
+                            style: periodTextStyle(33),
                           ),
+                          Text(description.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: periodTextStyle(22)),
                           Text(
-                            description.toString(),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand',
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 5.0,
-                                  color: Colors.black54,
-                                  offset: Offset(3.0, 3.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            '$hours:$minutes  ${dateTime.day}/${dateTime.month}/${dateTime.year}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand',
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 5.0,
-                                  color: Colors.black54,
-                                  offset: Offset(3.0, 3.0),
-                                ),
-                              ],
-                            ),
-                          ),
+                              DateFormat('kk:mm    d MMM yyyy')
+                                  .format(dateTime),
+                              style: periodTextStyle(22)),
                         ],
                       ),
                     ),
@@ -285,5 +255,21 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
       ),
     );
     // return controller.toString();
+  }
+
+  TextStyle periodTextStyle(double fontSize) {
+    return TextStyle(
+      color: Colors.white,
+      fontFamily: 'Quicksand',
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      shadows: const [
+        Shadow(
+          blurRadius: 5.0,
+          color: Colors.black54,
+          offset: Offset(1.0, 1.0),
+        ),
+      ],
+    );
   }
 }

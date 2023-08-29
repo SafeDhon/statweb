@@ -49,7 +49,7 @@ class MyFormularNav extends StatelessWidget {
                           Shadow(
                             blurRadius: 5.0,
                             color: Colors.black54,
-                            offset: Offset(3.0, 3.0),
+                            offset: Offset(1.0, 1.0),
                           ),
                         ],
                       ),
@@ -65,7 +65,7 @@ class MyFormularNav extends StatelessWidget {
                           Shadow(
                             blurRadius: 5.0,
                             color: Colors.black54,
-                            offset: Offset(3.0, 3.0),
+                            offset: Offset(1.0, 1.0),
                           ),
                         ],
                       ),

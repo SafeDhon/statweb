@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/my_icons_icons.dart';
+import 'package:statweb/states/chat/chat_dialog.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
 import 'package:statweb/states/formular/formular_list.dart';
 import 'package:statweb/states/home/vdo_list.dart';
@@ -47,7 +48,6 @@ class _ResponsivePageState extends State<ResponsivePage> {
   }
 
   Future<void> getformPrefer() async {
-    print('...................... Get Preferences ......................');
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       userID = preferences.getString('id')!;
@@ -55,10 +55,6 @@ class _ResponsivePageState extends State<ResponsivePage> {
       userSur = preferences.getString('surname')!;
       userType = preferences.getString('type')!;
     });
-    print(preferences.getString('id'));
-    print(preferences.getString('name'));
-    print(preferences.getString('surname'));
-    print(preferences.getString('type'));
   }
 
   Future<void> getData(String user) async {
@@ -82,20 +78,19 @@ class _ResponsivePageState extends State<ResponsivePage> {
   Widget build(BuildContext context) {
     dynamic contain;
     if (currentPage == DrawerSections.home) {
-      contain = HomeDesktop();
+      contain = const HomeDesktop();
       currentHeader = 'Home';
     } else if (currentPage == DrawerSections.eBook) {
-      contain = EBookDeskTop();
+      contain = const EBookDeskTop();
       currentHeader = 'E-Book';
     } else if (currentPage == DrawerSections.quiz) {
-      contain = QuizUnit();
+      contain = const QuizUnit();
       currentHeader = 'Quiz';
     } else if (currentPage == DrawerSections.score) {
-      // contain = ScoreDesktop();
-      contain = ScoreDesktop();
+      contain = const ScoreDesktop();
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
-      contain = ResearchDesktop();
+      contain = const ResearchDesktop();
       currentHeader = 'Research';
     }
 
@@ -137,14 +132,6 @@ class _ResponsivePageState extends State<ResponsivePage> {
                                             const LoginDialog(),
                                       ).then((value) async {
                                         await getformPrefer();
-                                        // getData(widget.user).then((value) {
-                                        //   print('get Data 555555555555555555555');
-                                        //   // if (userName.isNotEmpty) {
-                                        //   //   isLoading = false;
-                                        //   // } else {
-                                        //   //   isLoading = true;
-                                        //   // }
-                                        // });
                                       });
                                     },
                                   )
@@ -175,7 +162,22 @@ class _ResponsivePageState extends State<ResponsivePage> {
       bottom: 10,
       right: 10,
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if (userID == '') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const LoginDialog(),
+            ).then((value) async {
+              await getformPrefer();
+            });
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => ChatDialog(
+                      userID: userID,
+                    ));
+          }
+        },
         backgroundColor: metallicBlue,
         child: const Center(
           child: Icon(
@@ -268,9 +270,12 @@ class _ResponsivePageState extends State<ResponsivePage> {
       color: selected ? Colors.black12 : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (MediaQuery.of(context).size.width < 1100) {
+          if (MediaQuery.of(context).size.width < tabletWidth) {
             Navigator.pop(context);
           }
+
+          // Navigator.pop(context);
+
           setState(() {
             if (id == 1) {
               currentPage = DrawerSections.home;

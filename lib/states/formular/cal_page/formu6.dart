@@ -87,7 +87,8 @@ class _Formular6State extends State<Formular6> {
   Future<void> getAnswer() async {
     var u = double.parse(inputu.text);
     var x = int.parse(inputx.text);
-    fx = (pow(e, -u) * pow(u, e)) / fac(x);
+    double e = 2.71828;
+    fx = (pow(e, -u) * pow(u, x)) / fac(x);
     setState(() => onCalHint = true);
   }
   
