@@ -15,6 +15,7 @@ class QuizUnit extends StatefulWidget {
 class _QuizUnitState extends State<QuizUnit> {
   bool onChoose = false;
   int unitChoose = 0;
+  String descriptionQuiz = '';
   // List<EBookPage> pages = [];
   // String unit = '';
   // String description = '';
@@ -25,7 +26,9 @@ class _QuizUnitState extends State<QuizUnit> {
       height: 630,
       child: onChoose
           ? QuizPage(
+              onBack: () => setState(() => onChoose = false),
               unit: unitChoose,
+              description: descriptionQuiz,
             )
           : unitGrid(),
     );
@@ -48,6 +51,7 @@ class _QuizUnitState extends State<QuizUnit> {
               // unit = ebook_units[index].id.toString();
               // description = ebook_units[index].description;
               unitChoose = quiz_units[index].id;
+              descriptionQuiz = quiz_units[index].description;
               onChoose = true;
             });
           },

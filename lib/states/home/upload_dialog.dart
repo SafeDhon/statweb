@@ -7,16 +7,19 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:statweb/constants.dart';
 
 class UploadDialog extends StatefulWidget {
   final String userID;
+  final String userName;
   final String homeworkID;
 
   const UploadDialog({
     Key? key,
     required this.userID,
+    required this.userName,
     required this.homeworkID,
   }) : super(key: key);
 
@@ -163,7 +166,8 @@ class _UploadDialogState extends State<UploadDialog> {
                 await uploadToFirebase(files[i].fileName, files[i].uint8);
             downloadUrls.add(url);
             if (i == files.length - 1) {
-              upToDatabase(downloadUrls, widget.userID, widget.homeworkID)
+              upToDatabase(downloadUrls, widget.userID, widget.userName,
+                      widget.homeworkID)
                   .then((value) {
                 setState(() => onUpload = false);
                 Navigator.pop(context);
@@ -205,8 +209,8 @@ class _UploadDialogState extends State<UploadDialog> {
   }
 
   Future<String> uploadToFirebase(String filename, Uint8List filebytes) async {
-    Timestamp now = Timestamp.now();
-    final storageRef = FirebaseStorage.instance.ref('homeworks/$now$filename');
+    String now =  DateFormat('dd_MMM_yy_kk:mm').format(DateTime.now());
+    final storageRef = FirebaseStorage.instance.ref('homeworks/$filename$now');
     final uploadTask = storageRef.putData(filebytes);
     // await FirebaseStorage.instance.ref('homeworks/$filename').putData(filebytes);
     final takeSnapshot = await uploadTask.whenComplete(() => null);
@@ -214,9 +218,14 @@ class _UploadDialogState extends State<UploadDialog> {
     return url;
   }
 
-  Future<void> upToDatabase(
-      List<String> urlFiles, String userID, String homeworkID) async {
-    final data = {"url_list": urlFiles};
+  Future<void> upToDatabase(List<String> urlFiles, String userID,
+      String userName, String homeworkID) async {
+    final data = {
+      // "homwork_id": homeworkID,
+      "name": userName,
+      "timestamp": FieldValue.serverTimestamp(),
+      "url_list": urlFiles
+    };
     FirebaseFirestore.instance
         .collection('user')
         .doc(userID)

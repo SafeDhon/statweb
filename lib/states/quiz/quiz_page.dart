@@ -8,10 +8,14 @@ import 'package:statweb/states/quiz/quizPage_class.dart';
 
 class QuizPage extends StatefulWidget {
   final int unit;
+  final String description;
+  final Function() onBack;
 
   const QuizPage({
     Key? key,
     required this.unit,
+    required this.description,
+    required this.onBack,
   }) : super(key: key);
 
   @override
@@ -76,12 +80,30 @@ class _QuizPageState extends State<QuizPage> {
   Widget exams(QuizQuestion question) {
     return Column(
       children: [
+        quizHeader(),
+        const SizedBox(height: 5),
         problemBox(question.id),
         ListView.builder(
           shrinkWrap: true,
           itemCount: 4,
           itemBuilder: (context, index) => choiceBox(index, question),
         ),
+      ],
+    );
+  }
+
+  Widget quizHeader() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: widget.onBack,
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: metallicBlue,
+          ),
+        ),
+        Text('  ${widget.description}', style: enFont('bold', 25, glaucous)),
       ],
     );
   }
@@ -135,7 +157,7 @@ class _QuizPageState extends State<QuizPage> {
         },
         child: Container(
             alignment: Alignment.centerLeft,
-            height: 60,
+            height: 50,
             decoration: BoxDecoration(
                 color: onCheck
                     ? question.answer == index

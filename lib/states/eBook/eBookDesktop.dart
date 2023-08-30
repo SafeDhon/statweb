@@ -27,6 +27,7 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
       // width: 400,
       child: onChoose
           ? EBookpage(
+              onBack: () => setState(() => onChoose = false),
               pages: pages,
               unit: unit,
               description: description,

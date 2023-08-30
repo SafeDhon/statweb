@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:statweb/constants.dart';
 
+import 'package:statweb/constants.dart';
 import 'package:statweb/states/eBook/eBook_class.dart';
 import 'package:statweb/states/eBook/navbar_ebook.dart';
 
@@ -8,11 +8,13 @@ class EBookpage extends StatefulWidget {
   final List<EBookPage> pages;
   final String unit;
   final String description;
+  final Function() onBack;
   const EBookpage({
     Key? key,
     required this.pages,
     required this.unit,
     required this.description,
+    required this.onBack,
   }) : super(key: key);
 
   @override
@@ -29,6 +31,14 @@ class _EBookpageState extends State<EBookpage> {
       children: [
         Row(
           children: [
+            IconButton(
+              onPressed: widget.onBack,
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: metallicBlue,
+              ),
+            ),
+            const SizedBox(width: 5),
             Text('Unit ${widget.unit}',
                 style: enFont('bold', 30, metallicBlue)),
             Text('  ${widget.description}',

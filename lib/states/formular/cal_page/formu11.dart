@@ -72,13 +72,13 @@ class _Formular11State extends State<Formular11> {
             ),
             InputParameter(
               controller: inputs1,
-              paramWidget: r'S_1^2',
+              paramWidget: r'S_1',
               hintText: 'Input Something',
               wrongParam: wrongs1,
             ),
             InputParameter(
               controller: inputs2,
-              paramWidget: r'S_2^2',
+              paramWidget: r'S_2',
               hintText: 'Input Something',
               wrongParam: wrongs2,
             ),

@@ -72,13 +72,13 @@ class _Formular10State extends State<Formular10> {
             ),
             InputParameter(
               controller: inputO1,
-              paramWidget: r'\sigma_1^2',
+              paramWidget: r'\sigma_1',
               hintText: 'Input Something',
               wrongParam: wrongO1,
             ),
             InputParameter(
               controller: inputO2,
-              paramWidget: r'\sigma_2^2',
+              paramWidget: r'\sigma_2',
               hintText: 'Input Something',
               wrongParam: wrongO2,
             ),

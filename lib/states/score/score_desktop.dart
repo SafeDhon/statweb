@@ -97,6 +97,8 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
             isloading
                 ? SizedBox(height: 350, child: myCircularLoading())
                 : ListView.builder(
+                    primary: false,
+                    // physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: scores.length,
                     itemBuilder: (context, index) {
