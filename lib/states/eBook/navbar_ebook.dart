@@ -112,11 +112,11 @@ class NavBarEBOOK extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.bottomCenter,
                     width: 50,
                     child: Text(
                       page,
-                      style: enFont('bold', 25, metallicBlue),
+                      style: enFont('bold', 23, metallicBlue),
                     )),
                 IconButton(
                   onPressed: forwardPress,

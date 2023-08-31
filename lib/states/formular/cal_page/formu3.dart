@@ -98,7 +98,7 @@ class _Formular3State extends State<Formular3> {
     var n = int.parse(inputn.text);
     var x = int.parse(inputx.text);
     var p = double.parse(inputp.text);
-    fx = (fac(n) / ((n - fac(x)) * fac(x))) * pow(p, x) * pow(1 - p, n - x);
+    fx = nchoosex(n, x) * pow(p, x) * pow(1 - p, n - x);
     setState(() => onCalHint = true);
   }
 

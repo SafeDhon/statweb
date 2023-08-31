@@ -62,6 +62,6 @@ double fac(int number) {
 
 double nchoosex(int n, int x) {
   double ans;
-  ans = (fac(n) / ((n - fac(x)) * fac(x)));
+  ans = (fac(n) / (fac(n - x) * fac(x)));
   return ans;
 }

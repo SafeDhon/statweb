@@ -150,7 +150,8 @@ class _Formular12State extends State<Formular12> {
     var d0 = double.parse(inputd0.text);
     var sp = pow(
         (((n1 - 1) * (s1 * s1)) + ((n2 - 1) * (s2 * s2))) / (n1 + n2 - 2),
-        1 / 2);
+        (1 / 2));
+
     t = ((x1 - x2) - d0) / (sp * pow(((1 / n1) + (1 / n2)), 1 / 2));
     setState(() => onCalHint = true);
   }

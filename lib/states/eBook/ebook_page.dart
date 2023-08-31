@@ -45,7 +45,13 @@ class _EBookpageState extends State<EBookpage> {
                 style: enFont('bold', 30, glaucous)),
           ],
         ),
-        Expanded(child: Center(child: widget.pages[page - 1].contain)),
+        Expanded(
+          child: Center(
+            child: SizedBox(
+              width: double.maxFinite,
+              child: widget.pages[page - 1].contain),
+          ),
+        ),
         NavBarEBOOK(
           backwardPress: () {
             if (page != 1) {
