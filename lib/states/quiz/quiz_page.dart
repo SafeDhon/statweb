@@ -39,7 +39,6 @@ class _QuizPageState extends State<QuizPage> {
           .orderBy('id')
           .get()
           .then((value) {
-        // print('>>>>>>>>>>>>>>>>>>>>> $value');
         for (var data in value.docs) {
           QuizQuestion model = QuizQuestion(
               unit: data['unit'],
@@ -48,6 +47,7 @@ class _QuizPageState extends State<QuizPage> {
               choice: data['choice'],
               answer: data['answer'],
               choose: 5);
+          print('>>>>>>>>>>>>>>>>>>>>> ${data['unit'].toString()}');
           questions.add(model);
         }
       });

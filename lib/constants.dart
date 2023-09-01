@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 var myDefaultBackground = Colors.grey[300];
 
 int tabletWidth = 1350;
-int mobileWidth = 1150;
+int mobileWidth = 800;
 
 AppBar myAppBar(String text,List<Widget> actions) {
   return AppBar(

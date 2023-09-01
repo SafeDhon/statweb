@@ -42,9 +42,10 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
 
   @override
   Widget build(BuildContext context) {
-    final hours = dateTime.hour.toString().padLeft(2, '0');
-    final minutes = dateTime.minute.toString().padLeft(2, '0');
-
+    double widthUI = MediaQuery.of(context).size.width;
+    double headFontSize = widthUI < 1150 ? 25 : 35;
+    double descriptFontSize = widthUI < 1150 ? 22 : 25;
+    double subFontSize = widthUI < 1150 ? 18 : 20;
     return InkWell(
       onTap: () async {
         await getformPrefer().then((value) {
@@ -83,23 +84,23 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
                             'Next Period !!',
-                            style: periodTextStyle(33),
+                            style: periodTextStyle(headFontSize),
                           ),
                           Text(description.toString(),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
-                              style: periodTextStyle(22)),
+                              style: periodTextStyle(descriptFontSize)),
                           Text(
                               DateFormat('kk:mm    d MMM yyyy')
                                   .format(dateTime),
-                              style: periodTextStyle(22)),
+                              style: periodTextStyle(subFontSize)),
                         ],
                       ),
                     ),

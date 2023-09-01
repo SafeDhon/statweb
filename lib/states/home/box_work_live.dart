@@ -47,6 +47,10 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
 
   @override
   Widget build(BuildContext context) {
+    double widthUI = MediaQuery.of(context).size.width;
+    double headFontSize = widthUI < 1150 ? 28 : 35;
+    double descriptFontSize = widthUI < 1150 ? 22 : 28;
+    double subFontSize = widthUI < 1150 ? 15 : 20;
     return InkWell(
       onTap: () async {
         await getformPrefer().then((value) {
@@ -98,14 +102,14 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Text(
+                          Text(
                             'Home work Live !!',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Quicksand',
-                              fontSize: 35,
+                              fontSize: headFontSize,
                               fontWeight: FontWeight.w700,
-                              shadows: [
+                              shadows: const [
                                 Shadow(
                                   blurRadius: 5.0,
                                   color: Colors.black54,
@@ -116,7 +120,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                           ),
                           Text(
                             description.toString(),
-                            style: homeworkTextStyle(28),
+                            style: homeworkTextStyle(descriptFontSize),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Column(
@@ -125,21 +129,26 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                 children: [
                                   Expanded(
                                     flex: 3,
-                                    child: Text('Assign',
-                                        style: homeworkTextStyle(20)),
+                                    child: Text(
+                                      'Assign',
+                                      style: homeworkTextStyle(subFontSize),
+                                    ),
                                   ),
                                   Expanded(
                                     flex: 4,
                                     child: Text(
                                         DateFormat(':  d MMM yyyy')
                                             .format(assign),
-                                        style: homeworkTextStyle(20)),
+                                        style: homeworkTextStyle(subFontSize)),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                        DateFormat('kk:mm').format(assign),
-                                        style: homeworkTextStyle(20)),
+                                      DateFormat('kk:mm').format(assign),
+                                      style: homeworkTextStyle(subFontSize),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -148,20 +157,23 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   Expanded(
                                     flex: 3,
                                     child: Text('Deadline',
-                                        style: homeworkTextStyle(20)),
+                                        style: homeworkTextStyle(subFontSize)),
                                   ),
                                   Expanded(
                                     flex: 4,
                                     child: Text(
                                         DateFormat(':  d MMM yyyy')
                                             .format(deadline),
-                                        style: homeworkTextStyle(20)),
+                                        style: homeworkTextStyle(subFontSize)),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                        DateFormat('kk:mm').format(deadline),
-                                        style: homeworkTextStyle(20)),
+                                      DateFormat('kk:mm').format(deadline),
+                                      style: homeworkTextStyle(subFontSize),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -171,7 +183,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                       ),
                     ),
                     Expanded(
-                        flex: 4,
+                        flex: widthUI < tabletWidth ? 3 : 4,
                         child: Image.asset(
                           'assets/images/hwlive.png',
                           height: 500,

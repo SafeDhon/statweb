@@ -7,6 +7,9 @@ class MyFormularNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthUI = MediaQuery.of(context).size.width;
+    double headFontSize = widthUI < 1150 ? 28 : 35;
+    double descriptFontSize = widthUI < 1150 ? 22 : 22;
     return InkWell(
       onTap: () {
         showDialog(
@@ -30,15 +33,15 @@ class MyFormularNav extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children:[
                     Text(
                       'Calculator !!',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Quicksand',
-                        fontSize: 33,
+                        fontSize: headFontSize,
                         fontWeight: FontWeight.w700,
-                        shadows: [
+                        shadows: const [
                           Shadow(
                             blurRadius: 5.0,
                             color: Colors.black54,
@@ -52,7 +55,7 @@ class MyFormularNav extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Quicksand',
-                        fontSize: 22,
+                        fontSize: descriptFontSize,
                         fontWeight: FontWeight.w700,
                         shadows: [
                           Shadow(

@@ -101,7 +101,10 @@ class _ResponsivePageState extends State<ResponsivePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Center(
-                  child: Text(
+                  child: 
+                  userID == ''
+                  ? Container()
+                  :Text(
                     '$userID  $userName ${userSur[0]}.',
                     style: enFont('semibold', 18, Colors.white),
                   ),
@@ -128,7 +131,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                   children: [
                     SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
