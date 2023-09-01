@@ -8,11 +8,17 @@ var myDefaultBackground = Colors.grey[300];
 int tabletWidth = 1350;
 int mobileWidth = 1150;
 
-var myAppBar = AppBar(
-  centerTitle: true,
-  title: const Text('Stat Tablet'),
-  backgroundColor: metallicBlue,
-);
+AppBar myAppBar(String text,List<Widget> actions) {
+  return AppBar(
+    centerTitle: true,
+    title: Text(
+      text,
+      style: enFont('bold', 25, Colors.white),
+    ),
+    actions: actions,
+    backgroundColor: metallicBlue,
+  );
+}
 
 var paleYellow = const Color(0xFFFBFBBC);
 var milk = const Color(0xFFFDFFF5);
@@ -118,41 +124,49 @@ FirebaseOptions myFirebaseOptions() {
   );
 }
 
-Theme dateTimePickTheme(BuildContext context,Widget? child) {
+Theme dateTimePickTheme(BuildContext context, Widget? child) {
   return Theme(
-              data: Theme.of(context).copyWith(
-                textTheme: TextTheme(
-                  headlineLarge: enFont('semibold', 15, metallicBlue),
-                  headlineMedium: enFont('semibold', 15, metallicBlue),
-                  headlineSmall: enFont('semibold', 15, metallicBlue),
-                  displayLarge: enFont('semibold', 15, metallicBlue),
-                  displayMedium: enFont('semibold', 15, metallicBlue),
-                  displaySmall: enFont('semibold', 15, metallicBlue),
-                  titleLarge: enFont('semibold', 15, metallicBlue),
-                  titleMedium: enFont('semibold', 15, metallicBlue),
-                  titleSmall: enFont('semibold', 15, metallicBlue),
-                  bodyLarge: enFont('semibold', 15, metallicBlue),
-                  bodyMedium: enFont('semibold', 15, metallicBlue),
-                  bodySmall: enFont('semibold', 15, metallicBlue),
-                  labelLarge: enFont('semibold', 15, metallicBlue),
-                  labelMedium: enFont('semibold', 15, metallicBlue),
-                  labelSmall: enFont('semibold', 15, metallicBlue),
-                ),
-                inputDecorationTheme: InputDecorationTheme(
-                  labelStyle:
-                      enFont('semibold', 15, metallicBlue), // Input label
-                ),
-                colorScheme: ColorScheme.light(
-                  primary: metallicBlue, // <-- SEE HERE
-                  onPrimary: Colors.white, // <-- SEE HERE
-                  onSurface: metallicBlue, // <-- SEE HERE
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                      textStyle: enFont(
-                          'semibold', 15, metallicBlue) // button text color
-                      ),
-                ),
+      data: Theme.of(context).copyWith(
+        textTheme: TextTheme(
+          headlineLarge: enFont('semibold', 15, metallicBlue),
+          headlineMedium: enFont('semibold', 15, metallicBlue),
+          headlineSmall: enFont('semibold', 15, metallicBlue),
+          displayLarge: enFont('semibold', 15, metallicBlue),
+          displayMedium: enFont('semibold', 15, metallicBlue),
+          displaySmall: enFont('semibold', 15, metallicBlue),
+          titleLarge: enFont('semibold', 15, metallicBlue),
+          titleMedium: enFont('semibold', 15, metallicBlue),
+          titleSmall: enFont('semibold', 15, metallicBlue),
+          bodyLarge: enFont('semibold', 15, metallicBlue),
+          bodyMedium: enFont('semibold', 15, metallicBlue),
+          bodySmall: enFont('semibold', 15, metallicBlue),
+          labelLarge: enFont('semibold', 15, metallicBlue),
+          labelMedium: enFont('semibold', 15, metallicBlue),
+          labelSmall: enFont('semibold', 15, metallicBlue),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: enFont('semibold', 15, metallicBlue), // Input label
+        ),
+        colorScheme: ColorScheme.light(
+          primary: metallicBlue, // <-- SEE HERE
+          onPrimary: Colors.white, // <-- SEE HERE
+          onSurface: metallicBlue, // <-- SEE HERE
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+              textStyle:
+                  enFont('semibold', 15, metallicBlue) // button text color
               ),
-              child: child!);
+        ),
+      ),
+      child: child!);
+}
+
+BoxShadow homeBoxShadow() {
+  return BoxShadow(
+    color: Colors.grey.shade500,
+    blurRadius: 6,
+    spreadRadius: 0.5,
+    offset: const Offset(2, 2),
+  );
 }

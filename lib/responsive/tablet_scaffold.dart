@@ -36,7 +36,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
 
     return Scaffold(
         backgroundColor: myDefaultBackground,
-        appBar: test ? myAppBar : null,
+        appBar: test ? myAppBar('currentHeader', []) : null,
         drawer: myDrawer(),
         body: container);
   }

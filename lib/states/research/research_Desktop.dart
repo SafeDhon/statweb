@@ -25,7 +25,7 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
     readData();
   }
 
-  Future<Null> readData() async {
+  Future<void> readData() async {
     await Firebase.initializeApp().then((value) async {
       print('Initialize Success');
       await FirebaseFirestore.instance
@@ -46,7 +46,8 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
     double windowHeight = MediaQuery.of(context).size.height;
     return Container(
       width: 1200,
-      height: windowHeight * 0.8,
+      // height: windowHeight * 0.8,
+      height: 630,
       child: Column(
         children: [
           Padding(
@@ -152,6 +153,8 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
                   return (snapshots.connectionState == ConnectionState.waiting)
                       ? myCircularLoading()
                       : ListView.builder(
+                        // shrinkWrap: true,
+                        // primary: false,
                           itemCount: snapshots.data?.docs.length,
                           itemBuilder: (context, index) {
                             var data = snapshots.data!.docs[index].data()

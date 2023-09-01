@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
               unit: data['unit'],
               id: data['id'],
               question: data['question'],
-              chioce: data['chioce'],
+              choice: data['choice'],
               answer: data['answer'],
               choose: 5);
           questions.add(model);
@@ -196,7 +196,7 @@ class _QuizPageState extends State<QuizPage> {
                     style: enFont('bold', 25, metallicBlue),
                   ),
                   Text(
-                    onloadQuestion ? 'loading chioce' : question.chioce[index],
+                    onloadQuestion ? 'loading choice' : question.choice[index],
                     style: enFont('regular', 22, Colors.black),
                   ),
                 ],

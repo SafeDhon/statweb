@@ -76,6 +76,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
 
   @override
   Widget build(BuildContext context) {
+    double widthUI = MediaQuery.of(context).size.width;
     dynamic contain;
     if (currentPage == DrawerSections.home) {
       contain = const HomeDesktop();
@@ -95,63 +96,88 @@ class _ResponsivePageState extends State<ResponsivePage> {
     }
 
     return Scaffold(
-      appBar: MediaQuery.of(context).size.width < tabletWidth ? myAppBar : null,
+      appBar: widthUI < tabletWidth
+          ? myAppBar(currentHeader, [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Center(
+                  child: Text(
+                    '$userID  $userName ${userSur[0]}.',
+                    style: enFont('semibold', 18, Colors.white),
+                  ),
+                ),
+              )
+            ])
+          : null,
       drawer: myDrawer(),
       body: Row(
+        // mainAxisSize: MainAxisSize.max,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MediaQuery.of(context).size.width < tabletWidth
-              ? Container()
-              : myDrawer(),
-          Expanded(child: Container()),
-          SizedBox(
-            width: MediaQuery.of(context).size.width < mobileWidth ? 500 : 1100,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          widthUI < tabletWidth ? Container() : myDrawer(),
+          // Expanded(child: Container()),
+          Expanded(
+            child: Container(
+              alignment: Alignment.topCenter,
+              // color: Colors.green.shade400,
+              child: Container(
+                // color: Colors.pink.shade400,
+                width: widthUI < mobileWidth ? null : 1080,
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
-                              currentHeader,
-                              style: enFont('semibold', 50, metallicBlue),
-                            ),
-                            // widget.user == ''
-                            userID == ''
-                                ? LoginTopButton(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            const LoginDialog(),
-                                      ).then((value) async {
-                                        await getformPrefer();
-                                      });
-                                    },
-                                  )
-                                : MyHeader(
-                                    user_name: '$userID  $userName $userSur',
+                            widthUI < tabletWidth
+                                ? Container()
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        currentHeader,
+                                        style: enFont(
+                                            'semibold', 50, metallicBlue),
+                                      ),
+                                      // widget.user == ''
+                                      userID == ''
+                                          ? LoginTopButton(
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          const LoginDialog(),
+                                                ).then((value) async {
+                                                  await getformPrefer();
+                                                });
+                                              },
+                                            )
+                                          : MyHeader(
+                                              user_name:
+                                                  '$userID  $userName $userSur',
+                                            ),
+                                    ],
                                   ),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: contain),
                           ],
                         ),
-                        Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: contain),
-                      ],
+                      ),
                     ),
-                  ),
-                  chatButton(),
-                ],
+                    chatButton(),
+                  ],
+                ),
               ),
             ),
           ),
-          Expanded(child: Container()),
+          // Expanded(child: Container()),
         ],
       ),
     );

@@ -107,23 +107,23 @@ class NavBarEBOOK extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_back_ios_new_rounded,
                     color: metallicBlue,
-                    size: 30,
+                    size: 28,
                   ),
                 ),
                 const SizedBox(width: 8),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    width: 50,
+                    width: 53,
                     child: Text(
                       page,
-                      style: enFont('bold', 23, metallicBlue),
+                      style: enFont('bold', 18, metallicBlue),
                     )),
                 IconButton(
                   onPressed: forwardPress,
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
                     color: metallicBlue,
-                    size: 30,
+                    size: 28,
                   ),
                 )
               ],

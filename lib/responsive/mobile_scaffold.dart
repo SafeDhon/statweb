@@ -16,7 +16,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
 
     var currentPage = DrawerSections.home;
     return Scaffold(
-      appBar: myAppBar,
+      appBar:  myAppBar('currentHeader', []),
       backgroundColor: myDefaultBackground,
       // drawer: myDrawer(currentPage,(){}),
       body: Column(

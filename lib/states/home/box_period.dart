@@ -64,14 +64,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
         decoration: BoxDecoration(
           color: paleYellow,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade500,
-              blurRadius: 10,
-              spreadRadius: 1,
-              offset: const Offset(4, 4),
-            )
-          ],
+          boxShadow: [homeBoxShadow()],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),

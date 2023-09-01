@@ -97,6 +97,12 @@ class _QuizUnitState extends State<QuizUnit> {
                             ),
                           );
                         },
+                        errorWidget: (context, url, error) => Center(
+                          child: Text(
+                            'Error loading',
+                            style: enFont('bold', 15, Colors.grey.shade400),
+                          ),
+                        ),
                       ),
                     ),
                   ),

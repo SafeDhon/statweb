@@ -4,14 +4,14 @@ class QuizQuestion {
   int unit;
   int id;
   String question;
-  List<dynamic> chioce;
+  List<dynamic> choice;
   int answer;
   int choose;
   QuizQuestion({
     required this.unit,
     required this.id,
     required this.question,
-    required this.chioce,
+    required this.choice,
     required this.answer,
     required this.choose,
   });
