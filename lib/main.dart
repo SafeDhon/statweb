@@ -45,7 +45,6 @@ Future<void> getUser(String user) async {
       value['surname'],
       value['typeuser'],
     ).then((value) {
-      print('get user complete');
     });
   });
 }

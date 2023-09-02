@@ -10,7 +10,7 @@ List<EBookPage> ebookU5 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 2,
@@ -19,5 +19,5 @@ List<EBookPage> ebookU5 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
 ];

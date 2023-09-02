@@ -20,28 +20,6 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
   int filter = 0;
 
   @override
-  void initState() {
-    super.initState();
-    readData();
-  }
-
-  Future<void> readData() async {
-    await Firebase.initializeApp().then((value) async {
-      print('Initialize Success');
-      await FirebaseFirestore.instance
-          .collection('document')
-          .snapshots()
-          .listen((event) {
-        print('snapshot = ${event.docs}');
-        for (var snapshots in event.docs) {
-          Map<String, dynamic> map = snapshots.data();
-          print('****** map = $map');
-        }
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     double widthUI = MediaQuery.of(context).size.width;
     return SizedBox(
@@ -51,10 +29,10 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
+            padding: const EdgeInsets.only(bottom: 12.0),
             child: widthUI < mobileWidth
                 ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       searchBox(),
                       const SizedBox(height: 15),
@@ -71,9 +49,8 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('document')
-                  .snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection('document').snapshots(),
               builder: (context, snapshots) {
                 return (snapshots.connectionState == ConnectionState.waiting)
                     ? myCircularLoading()
@@ -131,6 +108,8 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
   }
 
   Widget filterRow() {
+    double widthUI = MediaQuery.of(context).size.width;
+    double boxHeight = widthUI < 501 ? 35 : 45;
     return Row(
       children: [
         InkWell(
@@ -140,7 +119,7 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
             });
           },
           child: Container(
-            height: 45,
+            height: boxHeight,
             width: 110,
             decoration: BoxDecoration(
               color: filter == 1 ? Colors.transparent : metallicBlue,
@@ -167,7 +146,7 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
             });
           },
           child: Container(
-            height: 45,
+            height: boxHeight,
             width: 110,
             decoration: BoxDecoration(
               color: filter == 0 ? Colors.transparent : metallicBlue,

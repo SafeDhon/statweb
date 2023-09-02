@@ -51,6 +51,8 @@ class _VDOGridState extends State<VDOGrid> {
                         mainAxisSpacing: 20,
                         // mainAxisExtent: 300
                       ),
+                      primary: false,
+                      // physics: const NeverScrollableScrollPhysics(),
                       itemCount: vdos.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {

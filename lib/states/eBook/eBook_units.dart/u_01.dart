@@ -20,9 +20,9 @@ List<EBookPage> ebookU1 = [
               '3. วิธีจิตวิสัย (Subject Method) เป็นวิธีที่ใช้ประสบการณ์หรือความเชี่ยวชาญส่วนบุคคล ซึ่งประสบการณ์หรือความชํานาญของแต่ละบุคคลย่อมต่างกัน'),
         ],
       ),
-      vdo_url: 'vdo_url',
-      music_url: 'music_url',
-      quiz: Container()),
+      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
+      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      quiz: [1,'11111']),
   EBookPage(
       unit: 1,
       page: 2,
@@ -43,7 +43,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'222222']),
   EBookPage(
       unit: 1,
       page: 3,
@@ -62,7 +62,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 4,
@@ -82,7 +82,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 5,
@@ -102,7 +102,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 6,
@@ -129,7 +129,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 7,
@@ -153,7 +153,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 8,
@@ -170,7 +170,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 9,
@@ -189,7 +189,7 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
   EBookPage(
       unit: 1,
       page: 10,
@@ -214,5 +214,5 @@ List<EBookPage> ebookU1 = [
       ),
       vdo_url: 'vdo_url',
       music_url: 'music_url',
-      quiz: Container()),
+      quiz: [1,'']),
 ];

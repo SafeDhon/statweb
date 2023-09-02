@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -5,6 +7,7 @@ import '../../constants.dart';
 class NavBarEBOOK extends StatelessWidget {
   final Function() backwardPress;
   final Function() forwardPress;
+  final Function() quizPress;
   final String vdo;
   final String music;
   final Widget quiz;
@@ -14,6 +17,7 @@ class NavBarEBOOK extends StatelessWidget {
     Key? key,
     required this.backwardPress,
     required this.forwardPress,
+    required this.quizPress,
     required this.vdo,
     required this.music,
     required this.quiz,
@@ -47,7 +51,7 @@ class NavBarEBOOK extends StatelessWidget {
                 child: IconButton(
                   color: metallicBlue,
                   icon: const Icon(Icons.music_note_rounded),
-                  onPressed: () {},
+                  onPressed: () {js.context.callMethod('open', [music]);},
                 ),
               ),
               const SizedBox(width: 15),
@@ -69,7 +73,9 @@ class NavBarEBOOK extends StatelessWidget {
                 child: IconButton(
                   color: metallicBlue,
                   icon: const Icon(Icons.video_collection_rounded),
-                  onPressed: () {},
+                  onPressed: () {
+                    js.context.callMethod('open', [vdo]);
+                  },
                 ),
               ),
               const SizedBox(width: 15),
@@ -91,7 +97,7 @@ class NavBarEBOOK extends StatelessWidget {
                 child: IconButton(
                   color: metallicBlue,
                   icon: const Icon(Icons.edit_note_rounded),
-                  onPressed: () {},
+                  onPressed: quizPress,
                 ),
               ),
             ],

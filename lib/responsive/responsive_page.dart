@@ -12,6 +12,7 @@ import 'package:statweb/states/formular/formular_list.dart';
 import 'package:statweb/states/home/vdo_list.dart';
 import 'package:statweb/states/quiz/quiz_units.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
+import 'package:statweb/states/score/score_mobile.dart';
 import 'package:statweb/util/login_top.dart';
 import 'package:statweb/util/logout_dialog.dart';
 
@@ -88,7 +89,8 @@ class _ResponsivePageState extends State<ResponsivePage> {
       contain = const QuizUnit();
       currentHeader = 'Quiz';
     } else if (currentPage == DrawerSections.score) {
-      contain = const ScoreDesktop();
+      contain =
+          widthUI < mobileWidth ? const ScoreMobile() : const ScoreDesktop();
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
       contain = const ResearchDesktop();
@@ -101,13 +103,28 @@ class _ResponsivePageState extends State<ResponsivePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Center(
-                  child: 
-                  userID == ''
-                  ? Container()
-                  :Text(
-                    '$userID  $userName ${userSur[0]}.',
-                    style: enFont('semibold', 18, Colors.white),
-                  ),
+                  child: userID == ''
+                      ? IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  const LoginDialog(),
+                            ).then((value) async {
+                              await getformPrefer();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.login_rounded,
+                            color: Colors.white,
+                            size: 25,
+                          ))
+                      : Text(
+                          widthUI < 501
+                              ? userID
+                              : '$userID  $userName ${userSur[0]}.',
+                          style: enFont('semibold', 18, Colors.white),
+                        ),
                 ),
               )
             ])
@@ -131,7 +148,8 @@ class _ResponsivePageState extends State<ResponsivePage> {
                   children: [
                     SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 12.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -231,7 +249,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Image.asset(
-                    'assets/icons/idea.png',
+                    'assets/icons/logo.png',
                     width: 50,
                   ),
                   Column(

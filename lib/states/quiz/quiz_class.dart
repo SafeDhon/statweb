@@ -14,27 +14,27 @@ class Quiz {
 List<Quiz> quiz_units = [
   Quiz(
     id: 1,
-    description: 'description',
+    description: 'Probability',
     picture: '1kzj9zzgny0l3xgKK9p_5RMC3Vm1W2Dpu',
   ),
    Quiz(
     id: 2,
-    description: 'description',
+    description: 'Random Variable',
     picture: '16bbIvEcA_jYpSTTmHTC5uAQPTmoCsBDj',
   ),
    Quiz(
     id: 3,
-    description: 'description',
+    description: 'Discrete Probability Distributions',
     picture: '1vFsv-V73MwAtQ3qgFM_Ns_VIh4wtn30Q',
   ),
    Quiz(
     id: 4,
-    description: 'description',
+    description: 'Continuous Probability Distributions',
     picture: '18xvNN2wCVAgNBTV5A8xzaGqDgZIvknx2',
   ),
    Quiz(
     id: 5,
-    description: 'description',
+    description: 'Sampling Distribution',
     picture: '1vAayJ5VlZ_dez_QrOk1CvupeJkKYM4cP',
   ),
 ];

@@ -3,12 +3,14 @@ import 'package:flutter_math_fork/flutter_math.dart';
 
 import '../../constants.dart';
 
-Padding headFormular(String formuText) {
+Padding headFormular(String formuText, BuildContext context) {
+  double widthUI = MediaQuery.of(context).size.width;
+  double fontSize = widthUI < 501 ? 23 : 28;
   return Padding(
     padding: const EdgeInsets.only(bottom: 24.0),
     child: Container(
       // width: 100,
-      height: 150,
+      height: widthUI < 501 ? 130 : 150,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -19,7 +21,7 @@ Padding headFormular(String formuText) {
           scrollDirection: Axis.horizontal,
           child: Math.tex(
             formuText,
-            textStyle: enFont('semibold', 28, metallicBlue),
+            textStyle: enFont('semibold', fontSize, metallicBlue),
           ),
         ),
       ),

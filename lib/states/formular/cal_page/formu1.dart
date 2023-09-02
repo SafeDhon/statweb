@@ -25,13 +25,14 @@ class _Formular1State extends State<Formular1> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
+    double widthUI = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            headFormular(widget.formu),
+            headFormular(widget.formu,context),
             InputParameter(
               controller: inputn,
               paramWidget: r'n',

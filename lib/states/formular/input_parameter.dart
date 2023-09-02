@@ -23,17 +23,25 @@ class InputParameter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthUI = MediaQuery.of(context).size.width;
+    double fontSize1 = widthUI < 501 ? 22 : 25;
+    double fontSize2 = widthUI < 501 ? 18 : 20;
+    double boxHeight = widthUI < 501 ? 45 : 50;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
+      padding: EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: widthUI < 501 ? 20 : 32,
+      ),
       child: SizedBox(
-          height: 50,
+          height: boxHeight,
           child: Row(
             children: [
               Expanded(
                   child: Math.tex(paramWidget,
-                      textStyle: enFont('bold', 25, metallicBlue))),
+                      textStyle: enFont('bold', fontSize1, metallicBlue))),
               Expanded(
-                  child: Text('=', style: enFont('bold', 25, metallicBlue))),
+                  child: Text('=',
+                      style: enFont('bold', fontSize1, metallicBlue))),
               Expanded(
                 flex: 4,
                 child: Container(
@@ -48,7 +56,7 @@ class InputParameter extends StatelessWidget {
                         bottom: 6.0, right: 12.0, left: 12.0),
                     child: TextField(
                       // keyboardType:
-                          // TextInputType.numberWithOptions(decimal: true),
+                      // TextInputType.numberWithOptions(decimal: true),
 
                       // keyboardType: TextInputType.number,
 
@@ -59,15 +67,15 @@ class InputParameter extends StatelessWidget {
                       readOnly: readOnly,
                       textAlignVertical: TextAlignVertical.top,
                       // textAlign: TextAlign.center,
-                      style: enFont('bold', 20, metallicBlue),
+                      style: enFont('bold', fontSize2, metallicBlue),
                       onChanged: (value) {},
                       controller: controller,
                       // keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: hintText,
                         hintStyle: readOnly
-                            ? enFont(
-                                'bold', 20, onCalHint ? metallicBlue : beauBlue)
+                            ? enFont('bold', fontSize2,
+                                onCalHint ? metallicBlue : beauBlue)
                             : enFont('bold', 20,
                                 wrongParam ? Colors.red.shade300 : beauBlue),
                         border: InputBorder.none,

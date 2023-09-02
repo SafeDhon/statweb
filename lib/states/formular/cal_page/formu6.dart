@@ -31,11 +31,11 @@ class _Formular6State extends State<Formular6> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            headFormular(widget.formu),
+            headFormular(widget.formu,context),
             InputParameter(
               controller: inputu,
               paramWidget: r'\mu',

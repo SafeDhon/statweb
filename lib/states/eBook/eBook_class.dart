@@ -106,7 +106,7 @@ class EBookPage {
   Widget contain;
   String vdo_url;
   String music_url;
-  Widget quiz;
+  List<dynamic> quiz;
   EBookPage({
     required this.unit,
     required this.page,

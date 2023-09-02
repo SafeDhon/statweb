@@ -47,7 +47,6 @@ class _QuizPageState extends State<QuizPage> {
               choice: data['choice'],
               answer: data['answer'],
               choose: 5);
-          print('>>>>>>>>>>>>>>>>>>>>> ${data['unit'].toString()}');
           questions.add(model);
         }
       });
@@ -67,13 +66,16 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
+    // double widthUI = MediaQuery.of(context).size.width;
     return onloadQuestion
         ? myCircularLoading()
-        : Column(
-            children: [
-              exams(questions[questionID - 1]),
-              numberList(questions),
-            ],
+        : SingleChildScrollView(
+            child: Column(
+              children: [
+                exams(questions[questionID - 1]),
+                numberList(questions),
+              ],
+            ),
           );
   }
 
@@ -121,7 +123,13 @@ class _QuizPageState extends State<QuizPage> {
           Center(
             child: onloadQuestion
                 ? myCircularLoading()
-                : Text(questions[questionID - 1].question),
+                : Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      questions[questionID - 1].question,
+                      style: thFont('bold', 18, Colors.black),
+                    ),
+                  ),
           ),
           Positioned(
             left: 10,
@@ -184,6 +192,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     index == 0
@@ -193,11 +202,11 @@ class _QuizPageState extends State<QuizPage> {
                             : index == 2
                                 ? 'C.  '
                                 : 'D.  ',
-                    style: enFont('bold', 25, metallicBlue),
+                    style: thFont('bold', 20, metallicBlue),
                   ),
                   Text(
                     onloadQuestion ? 'loading choice' : question.choice[index],
-                    style: enFont('regular', 22, Colors.black),
+                    style: thFont('bold', 20, Colors.black),
                   ),
                 ],
               ),
@@ -207,41 +216,76 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget numberList(List<QuizQuestion> questions) {
+    double widthUI = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 60,
-      child: Row(
-        children: [
-          ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: questions.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 15.0, right: 8.0),
-                child: FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      questionID = index + 1;
-                    });
-                  },
-                  backgroundColor:
-                      questions[index].choose == 5 ? paleYellow : metallicBlue,
-                  child: Center(
-                    child: Text(
-                      (index + 1).toString(),
-                      style: enFont(
-                        'bold',
-                        23,
-                        questions[index].choose == 5 ? glaucous : Colors.white,
-                      ),
-                    ),
+      child: widthUI < 501
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [choiceList(), checkandfx()],
+            )
+          : Row(
+              children: [
+                choiceList(),
+                const SizedBox(
+                  width: 30,
+                ),
+                checkandfx()
+              ],
+            ),
+    );
+  }
+
+  Widget choiceList() {
+    double widthUI = MediaQuery.of(context).size.width;
+    return SizedBox(
+      height: widthUI < 501 ? 55 : 60,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: questions.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 15.0, right: 4.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  questionID = index + 1;
+                });
+              },
+              backgroundColor: questionID == index + 1
+                  ? metallicBlue
+                  : questions[index].choose == 5
+                      ? paleYellow
+                      : glaucous,
+              child: Center(
+                child: Text(
+                  (index + 1).toString(),
+                  style: enFont(
+                    'bold',
+                    23,
+                    questionID == index + 1
+                        ? Colors.white
+                        : questions[index].choose == 5
+                            ? glaucous
+                            : Colors.white,
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget checkandfx() {
+    double widthUI = MediaQuery.of(context).size.width;
+    return SizedBox(
+      height: widthUI < 501 ? 55 : 60,
+      child: Row(
+        children: [
           Padding(
-            padding: const EdgeInsets.only(top: 15.0, left: 30.0),
+            padding: const EdgeInsets.only(top: 15.0),
             child: FloatingActionButton(
               onPressed: () {
                 bool chooseAll = true;
@@ -250,29 +294,32 @@ class _QuizPageState extends State<QuizPage> {
                 }
                 if (chooseAll) {
                   checkAnswer().then((value) => setState(() => questionID = 1));
-                } else {
-                  print('please choose the answer');
-                }
+                } else {}
               },
               backgroundColor: metallicBlue,
-              child: const Center(child: Icon(Icons.done_rounded)),
+              child: const Center(
+                  child: Icon(
+                Icons.done_rounded,
+                size: 30,
+                // weight: 100,
+              )),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15.0, left: 8.0),
+            padding: const EdgeInsets.only(top: 15.0, left: 4.0),
             child: FloatingActionButton(
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) => FormularDialog(),
+                  builder: (BuildContext context) => const FormularDialog(),
                 );
               },
               backgroundColor: metallicBlue,
               child: const Center(
-                child: Text('fx'),
+                child: Icon(Icons.functions_rounded),
               ),
             ),
-          ),
+          )
         ],
       ),
     );
