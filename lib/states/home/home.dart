@@ -22,15 +22,15 @@ import 'package:statweb/states/home/home_tablet.dart';
 //   }
 // }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+// class Home extends StatelessWidget {
+//   const Home({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      mobileScaffold: const HonmeMobile(),
-      tabletScaffold: const HomeTablet(),
-      desktopScaffold: const HomeDesktop(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ResponsiveLayout(
+//       mobileScaffold: const HonmeMobile(),
+//       tabletScaffold: const HomeTablet(),
+//       desktopScaffold: const HomeDesktop(),
+//     );
+//   }
+// }

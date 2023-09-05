@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statweb/my_icons_icons.dart';
 
 import 'package:statweb/util/login_dialog.dart';
 
@@ -32,11 +33,10 @@ class MyHeader extends StatelessWidget {
             color: metallicBlue,
             borderRadius: BorderRadius.circular(60),
           ),
-          child: IconButton(
-            iconSize: 30,
+          child: const Icon(
+            MyIcons.user1,
             color: Colors.white,
-            icon: const Icon(Icons.person_rounded),
-            onPressed: () {},
+            size: 27,
           ),
         ),
       ],

@@ -275,19 +275,29 @@ class _ChatDialogState extends State<ChatDialog> {
   Future<void> uploadImage(Uint8List bytesPick) async {
     int status = 1;
     Timestamp now = Timestamp.now();
+    String dataID = '';
 
-    await _firestore.collection('chat').doc(now.toString()).set({
+    // await _firestore.collection('chat').doc(now.toString()).set({
+    //   "sendby": userID,
+    //   "sendby_name": userName,
+    //   "message": "",
+    //   "type": "img",
+    //   "time": FieldValue.serverTimestamp(),
+    // });
+
+    await _firestore.collection('chat').add({
       "sendby": userID,
       "sendby_name": userName,
       "message": "",
       "type": "img",
       "time": FieldValue.serverTimestamp(),
-    });
+    }).then((value) => dataID = value.id);
 
     final storageRef = FirebaseStorage.instance.ref('chatFiles/$now.png');
     final uploadTask = storageRef.putData(bytesPick);
     final takeSnapshot = await uploadTask.catchError((error) async {
-      await _firestore.collection('chat').doc(now.toString()).delete();
+      // await _firestore.collection('chat').doc(now.toString()).delete();
+      await _firestore.collection('chat').doc(dataID).delete();
       status = 0;
     });
 
@@ -301,7 +311,8 @@ class _ChatDialogState extends State<ChatDialog> {
       String url = await takeSnapshot.ref.getDownloadURL();
       await _firestore
           .collection('chat')
-          .doc(now.toString())
+          // .doc(now.toString())
+          .doc(dataID)
           .update({"message": url});
     }
   }

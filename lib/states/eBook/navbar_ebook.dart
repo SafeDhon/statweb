@@ -26,6 +26,9 @@ class NavBarEBOOK extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double iconSize = size.width < mobileWidth ? 45 : 50;
+    double iconPad = size.width < mobileWidth ? 12 : 15;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Row(
@@ -34,8 +37,8 @@ class NavBarEBOOK extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: 50,
-                width: 50,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   color: paleYellow,
                   borderRadius: BorderRadius.circular(60),
@@ -51,13 +54,15 @@ class NavBarEBOOK extends StatelessWidget {
                 child: IconButton(
                   color: metallicBlue,
                   icon: const Icon(Icons.music_note_rounded),
-                  onPressed: () {js.context.callMethod('open', [music]);},
+                  onPressed: () {
+                    js.context.callMethod('open', [music]);
+                  },
                 ),
               ),
-              const SizedBox(width: 15),
+              SizedBox(width: iconPad),
               Container(
-                height: 50,
-                width: 50,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   color: paleYellow,
                   borderRadius: BorderRadius.circular(60),
@@ -78,10 +83,10 @@ class NavBarEBOOK extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(width: 15),
+              SizedBox(width: iconPad),
               Container(
-                height: 50,
-                width: 50,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   color: paleYellow,
                   borderRadius: BorderRadius.circular(60),

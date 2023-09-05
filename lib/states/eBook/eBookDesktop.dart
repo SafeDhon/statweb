@@ -23,7 +23,7 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 630,
+      // height: 630,
       // width: 400,
       child: onChoose
           ? EBookpage(
@@ -44,6 +44,8 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
+      primary: false,
+      shrinkWrap: true,
       itemCount: ebook_units.length,
       itemBuilder: (context, index) {
         return InkWell(

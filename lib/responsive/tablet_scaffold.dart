@@ -21,7 +21,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
   Widget build(BuildContext context) {
     var container;
     if (currentPage == DrawerSections.home) {
-      container = HomeDesktop();
+      // container = HomeDesktop();
     } else if (currentPage == DrawerSections.eBook) {
       container = Container();
     } else if (currentPage == DrawerSections.quiz) {

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:statweb/constants.dart';
+import 'package:statweb/my_icons_icons.dart';
 
 class LoginDialog extends StatefulWidget {
   const LoginDialog({super.key});
@@ -48,7 +49,7 @@ class _LoginDialogState extends State<LoginDialog> {
                   style: enFont('bold', 15, metallicBlue),
                   textAlignVertical: TextAlignVertical.top,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person_sharp),
+                    prefixIcon: const Icon(MyIcons.user1),
                     prefixIconColor: emptyUser ? Colors.red.shade300 : glaucous,
                     focusColor: metallicBlue,
                     hintText: 'Student ID',
@@ -82,7 +83,7 @@ class _LoginDialogState extends State<LoginDialog> {
                   style: enFont('bold', 15, metallicBlue),
                   textAlignVertical: TextAlignVertical.top,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock_sharp),
+                    prefixIcon: const Icon(MyIcons.icons8_lock),
                     prefixIconColor:
                         emptyPassword ? Colors.red.shade300 : glaucous,
                     focusColor: metallicBlue,

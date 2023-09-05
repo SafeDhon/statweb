@@ -189,7 +189,11 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
                             color: metallicBlue,
                             fontFamily: 'Quicksand',
                             fontWeight: FontWeight.w600),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                       ),
+                      
+                      
                     )),
                 Expanded(child: studentStyle(quiz1)),
                 Expanded(child: studentStyle(midterm)),

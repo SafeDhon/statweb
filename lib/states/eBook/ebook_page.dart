@@ -28,61 +28,69 @@ class _EBookpageState extends State<EBookpage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return onQuiz
         ? QuizPage(
             onBack: () => setState(() => onQuiz = false),
             unit: widget.pages[page - 1].quiz[0],
             description: widget.pages[page - 1].quiz[1],
           )
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: widget.onBack,
-                    icon: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: metallicBlue,
+        : SizedBox(
+            height: size.height * 0.85,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: widget.onBack,
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: metallicBlue,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 5),
-                  Text('Unit ${widget.unit}',
-                      style: enFont('bold', 30, metallicBlue)),
-                  Text('  ${widget.description}',
-                      style: enFont('bold', 30, glaucous)),
-                ],
-              ),
-              Expanded(
-                child: Center(
-                  child: SizedBox(
-                      width: double.maxFinite,
-                      child: widget.pages[page - 1].contain),
+                    const SizedBox(width: 5),
+                    Text('Unit ${widget.unit}',
+                        style: enFont('bold', 30, metallicBlue)),
+                    Text('  ${widget.description}',
+                        style: enFont('bold', 30, glaucous)),
+                  ],
                 ),
-              ),
-              NavBarEBOOK(
-                backwardPress: () {
-                  if (page != 1) {
-                    setState(() {
-                      page = page - 1;
-                    });
-                  }
-                },
-                forwardPress: () {
-                  if (page != widget.pages.length) {
-                    setState(() {
-                      page = page + 1;
-                    });
-                  }
-                },
-                quizPress: () => setState(() => onQuiz = true),
-                vdo: widget.pages[page - 1].vdo_url,
-                music: widget.pages[page - 1].music_url,
-                quiz: Container(),
-                page:
-                    '${widget.pages[page - 1].page.toString()}/${widget.pages.length}',
-              )
-            ],
+                Expanded(
+                  child: Center(
+                    child: SizedBox(
+                        width: double.maxFinite,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SingleChildScrollView(
+                              child: widget.pages[page - 1].contain),
+                        )),
+                  ),
+                ),
+                NavBarEBOOK(
+                  backwardPress: () {
+                    if (page != 1) {
+                      setState(() {
+                        page = page - 1;
+                      });
+                    }
+                  },
+                  forwardPress: () {
+                    if (page != widget.pages.length) {
+                      setState(() {
+                        page = page + 1;
+                      });
+                    }
+                  },
+                  quizPress: () => setState(() => onQuiz = true),
+                  vdo: widget.pages[page - 1].vdo_url,
+                  music: widget.pages[page - 1].music_url,
+                  quiz: Container(),
+                  page:
+                      '${widget.pages[page - 1].page.toString()}/${widget.pages.length}',
+                )
+              ],
+            ),
           );
   }
 }

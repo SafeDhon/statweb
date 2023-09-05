@@ -25,7 +25,7 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
     return SizedBox(
       width: 1200,
       // height: windowHeight * 0.8,
-      height: 630,
+      // height: 630,
       child: Column(
         children: [
           Padding(
@@ -47,60 +47,61 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
                     ],
                   ),
           ),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('document').snapshots(),
-              builder: (context, snapshots) {
-                return (snapshots.connectionState == ConnectionState.waiting)
-                    ? myCircularLoading()
-                    : ListView.builder(
-                        // shrinkWrap: true,
-                        // primary: false,
-                        itemCount: snapshots.data?.docs.length,
-                        itemBuilder: (context, index) {
-                          var data = snapshots.data!.docs[index].data()
-                              as Map<String, dynamic>;
-                          String type = 'book';
-                          if (filter == 0) {
-                            type = 'book';
-                          } else {
-                            type = 'report';
-                          }
-                          if (search.isEmpty &&
-                              data['type']
-                                  .toString()
-                                  .toLowerCase()
-                                  .contains(type)) {
-                            return researchBox(
-                              data['name_en'],
-                              data['name_th'],
-                              data['document_url'],
-                            );
-                          }
-                          if ((data['name_en']
-                                      .toString()
-                                      .toLowerCase()
-                                      .contains(search.toLowerCase()) ||
-                                  data['name_th']
-                                      .toString()
-                                      .toLowerCase()
-                                      .contains(search.toLowerCase())) &&
-                              data['type']
-                                  .toString()
-                                  .toLowerCase()
-                                  .contains(type)) {
-                            return researchBox(
-                              data['name_en'],
-                              data['name_th'],
-                              data['document_url'],
-                            );
-                          }
-                          return Container();
-                        },
-                      );
-              },
-            ),
+          StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection('document').snapshots(),
+            builder: (context, snapshots) {
+              return (snapshots.connectionState == ConnectionState.waiting)
+                  ? SizedBox(
+                    height: 200,
+                    
+                    child: myCircularLoading())
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: snapshots.data?.docs.length,
+                      itemBuilder: (context, index) {
+                        var data = snapshots.data!.docs[index].data()
+                            as Map<String, dynamic>;
+                        String type = 'book';
+                        if (filter == 0) {
+                          type = 'book';
+                        } else {
+                          type = 'report';
+                        }
+                        if (search.isEmpty &&
+                            data['type']
+                                .toString()
+                                .toLowerCase()
+                                .contains(type)) {
+                          return researchBox(
+                            data['name_en'],
+                            data['name_th'],
+                            data['document_url'],
+                          );
+                        }
+                        if ((data['name_en']
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(search.toLowerCase()) ||
+                                data['name_th']
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(search.toLowerCase())) &&
+                            data['type']
+                                .toString()
+                                .toLowerCase()
+                                .contains(type)) {
+                          return researchBox(
+                            data['name_en'],
+                            data['name_th'],
+                            data['document_url'],
+                          );
+                        }
+                        return Container();
+                      },
+                    );
+            },
           )
         ],
       ),

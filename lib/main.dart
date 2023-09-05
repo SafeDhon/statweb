@@ -10,6 +10,7 @@ import 'package:statweb/responsive/responsive_page.dart';
 Future<void> main() async {
   String? user = '';
   WidgetsFlutterBinding.ensureInitialized();
+  // changeDisplayname('7229', '123456');
   await Firebase.initializeApp(options: myFirebaseOptions())
       .then((value) async {
     FirebaseAuth.instance.authStateChanges().listen((event) async {
@@ -17,12 +18,6 @@ Future<void> main() async {
         // Loged in
         user = event.displayName;
         getUser(user.toString());
-        // FirebaseAuth.instance.currentUser!.updateDisplayName('7160').then(
-        //   (value) {
-        //     print(' >>>>>>>>>>>>>>>>>>>>..   finish');
-        //   }
-        // );
-
         runApp(const MyApp());
       } else {
         // Logout
@@ -30,6 +25,16 @@ Future<void> main() async {
         runApp(const MyApp());
       }
     });
+  });
+}
+
+Future<void> changeDisplayname(String id, String password) async {
+  await FirebaseAuth.instance
+      .signInWithEmailAndPassword(email: '$id@gmail.com', password: password)
+      .then((value) async {
+    await FirebaseAuth.instance.currentUser!
+        .updateDisplayName(id)
+        .then((value) => print('Updated Displayname'));
   });
 }
 
@@ -44,8 +49,7 @@ Future<void> getUser(String user) async {
       value['name'],
       value['surname'],
       value['typeuser'],
-    ).then((value) {
-    });
+    ).then((value) {});
   });
 }
 

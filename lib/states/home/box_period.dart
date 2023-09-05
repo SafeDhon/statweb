@@ -57,7 +57,13 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
               await getformPrefer();
             });
           } else {
-            userType == 'student' ? null : pickDateTime();
+            userType == 'student'
+                ? showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        descriptionDialog(dateTime, description.toString()),
+                  )
+                : pickDateTime();
           }
         });
       },
@@ -264,6 +270,49 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
           offset: Offset(1.0, 1.0),
         ),
       ],
+    );
+  }
+
+  Widget descriptionDialog(DateTime date, String description) {
+    Size size = MediaQuery.of(context).size;
+    return Dialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      child: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Next Period', style: enFont('bold', 28, metallicBlue)),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.timer_sharp),
+                Text(
+                  DateFormat(size.width < mobileWidth
+                          ? ' kk:mm  d/MMM/yy'
+                          : '  kk:mm  d MMMM yyyy')
+                      .format(date),
+                  style: enFont('semibold', 20, glaucous),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              description,
+              style: thFont('bold', 20, metallicBlue),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

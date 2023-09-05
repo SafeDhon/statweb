@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/my_icons_icons.dart';
+
 import 'package:statweb/states/chat/chat_dialog.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
 import 'package:statweb/states/formular/formular_list.dart';
@@ -115,7 +116,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                             });
                           },
                           icon: const Icon(
-                            Icons.login_rounded,
+                            MyIcons.user1,
                             color: Colors.white,
                             size: 25,
                           ))
@@ -138,18 +139,19 @@ class _ResponsivePageState extends State<ResponsivePage> {
           widthUI < tabletWidth ? Container() : myDrawer(),
           // Expanded(child: Container()),
           Expanded(
-            child: Container(
-              alignment: Alignment.topCenter,
-              // color: Colors.green.shade400,
-              child: Container(
-                // color: Colors.pink.shade400,
-                width: widthUI < mobileWidth ? null : 1080,
-                child: Stack(
-                  children: [
-                    SingleChildScrollView(
+            child: Stack(
+              children: [
+                Container(
+                  alignment: Alignment.topCenter,
+                  // color: Colors.green.shade400,
+                  child: SizedBox(
+                    // color: Colors.pink.shade400,
+                    width: widthUI < mobileWidth ? null : 1080,
+                    child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 12.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: widthUI < tabletWidth ? 8 : 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -186,16 +188,17 @@ class _ResponsivePageState extends State<ResponsivePage> {
                                     ],
                                   ),
                             Padding(
-                                padding: const EdgeInsets.only(top: 16),
+                                padding: EdgeInsets.only(
+                                    top: widthUI < tabletWidth ? 4 : 16),
                                 child: contain),
                           ],
                         ),
                       ),
                     ),
-                    chatButton(),
-                  ],
+                  ),
                 ),
-              ),
+                chatButton(),
+              ],
             ),
           ),
           // Expanded(child: Container()),
@@ -208,30 +211,37 @@ class _ResponsivePageState extends State<ResponsivePage> {
     return Positioned(
       bottom: 10,
       right: 10,
-      child: FloatingActionButton(
-        onPressed: () {
-          if (userID == '') {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => const LoginDialog(),
-            ).then((value) async {
-              await getformPrefer();
-            });
-          } else {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => ChatDialog(
-                      userID: userID,
-                    ));
-          }
-        },
-        backgroundColor: metallicBlue,
-        child: const Center(
-          child: Icon(
-            MyIcons.icons8_speech_bubble,
-            color: Colors.white,
+      child: Stack(
+        children: [
+          FloatingActionButton(
+            backgroundColor: metallicBlue,
+            onPressed: () {
+              if (userID == '') {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => const LoginDialog(),
+                ).then((value) async {
+                  await getformPrefer();
+                });
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => ChatDialog(
+                          userID: userID,
+                        ));
+              }
+            },
           ),
-        ),
+          const Positioned(
+            top: 12,
+            left: 13,
+            child: Icon(
+              MyIcons.chat,
+              size: 26,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -244,30 +254,38 @@ class _ResponsivePageState extends State<ResponsivePage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
-            padding: const EdgeInsetsDirectional.only(top: 15),
+            // padding: const EdgeInsetsDirectional.only(top: 15),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(
-                    'assets/icons/logo.png',
-                    width: 50,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Image.asset(
+                        'assets/icons/logo.png',
+                        // width: 50,
+                      ),
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "STAT",
-                        style: enFont('bold', 25, Colors.white),
-                      ),
-                      Text(
-                        "FOR",
-                        style: enFont('bold', 25, Colors.white),
-                      ),
-                      Text(
-                        "ENGINEER",
-                        style: enFont('bold', 25, Colors.white),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "STAT",
+                          style: enFont('bold', 35, Colors.white),
+                        ),
+                        Text(
+                          "FOR",
+                          style: enFont('bold', 26, Colors.white),
+                        ),
+                        Text(
+                          "ENGINEER",
+                          style: enFont('bold', 20, Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 ]),
           ),
@@ -291,8 +309,11 @@ class _ResponsivePageState extends State<ResponsivePage> {
                       currentPage == DrawerSections.quiz ? true : false),
                   menuItem(4, "Score", MyIcons.icons8_document,
                       currentPage == DrawerSections.score ? true : false),
-                  menuItem(5, "Research", Icons.manage_search_rounded,
-                      currentPage == DrawerSections.research ? true : false)
+                  menuItem(5, "Research", Icons.search_rounded,
+                      currentPage == DrawerSections.research ? true : false),
+                  if (userType == 'admin')
+                    menuItem(6, "Manage User", MyIcons.person_add,
+                        currentPage == DrawerSections.logout ? true : false),
                 ],
               ),
             ],
@@ -302,7 +323,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 15),
-              child: menuItem(6, "Logout", Icons.logout_rounded,
+              child: menuItem(7, "Logout", MyIcons.logout,
                   currentPage == DrawerSections.logout ? true : false),
             ),
           ))
@@ -337,6 +358,12 @@ class _ResponsivePageState extends State<ResponsivePage> {
             }
           });
           if (id == 6) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const Dialog(),
+            ).then((value) {});
+          }
+          if (id == 7) {
             showDialog(
               context: context,
               builder: (BuildContext context) => const LogoutDialog(),

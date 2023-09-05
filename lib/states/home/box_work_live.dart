@@ -1,16 +1,20 @@
+import 'dart:js' as js;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:statweb/constants.dart';
 import 'package:statweb/states/home/home.dart';
 import 'package:statweb/states/home/upload_dialog.dart';
 import 'package:statweb/util/login_dialog.dart';
-import 'dart:js' as js;
 
 class MyWorkLiveNav extends StatefulWidget {
-  const MyWorkLiveNav({super.key});
+  const MyWorkLiveNav({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyWorkLiveNav> createState() => _MyWorkLiveNavState();
@@ -117,6 +121,8 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                 ),
                               ],
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             description.toString(),
@@ -137,7 +143,9 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                        DateFormat(':  d MMM yyyy')
+                                        DateFormat(widthUI < 1150
+                                                ? ':  d/MM/yy'
+                                                : ':  d MMM yyyy')
                                             .format(assign),
                                         style: homeworkTextStyle(subFontSize)),
                                   ),
@@ -162,7 +170,9 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(
-                                        DateFormat(':  d MMM yyyy')
+                                        DateFormat(widthUI < 1150
+                                                ? ':  d/MM/yy'
+                                                : ':  d MMM yyyy')
                                             .format(deadline),
                                         style: homeworkTextStyle(subFontSize)),
                                   ),

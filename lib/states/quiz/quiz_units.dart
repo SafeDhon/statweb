@@ -22,16 +22,14 @@ class _QuizUnitState extends State<QuizUnit> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 630,
-      child: onChoose
-          ? QuizPage(
-              onBack: () => setState(() => onChoose = false),
-              unit: unitChoose,
-              description: descriptionQuiz,
-            )
-          : unitGrid(),
-    );
+    // height: 630,
+    return onChoose
+        ? QuizPage(
+            onBack: () => setState(() => onChoose = false),
+            unit: unitChoose,
+            description: descriptionQuiz,
+          )
+        : unitGrid();
   }
 
   Widget unitGrid() {
@@ -42,6 +40,8 @@ class _QuizUnitState extends State<QuizUnit> {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
+      primary: false,
+      shrinkWrap: true,
       itemCount: quiz_units.length,
       itemBuilder: (context, index) {
         return InkWell(

@@ -87,6 +87,7 @@ class _QuizPageState extends State<QuizPage> {
         problemBox(question.id),
         ListView.builder(
           shrinkWrap: true,
+          primary: false,
           itemCount: 4,
           itemBuilder: (context, index) => choiceBox(index, question),
         ),
@@ -105,7 +106,10 @@ class _QuizPageState extends State<QuizPage> {
             color: metallicBlue,
           ),
         ),
-        Text('  ${widget.description}', style: enFont('bold', 25, glaucous)),
+        Text('  ${widget.description}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: enFont('bold', 25, glaucous)),
       ],
     );
   }

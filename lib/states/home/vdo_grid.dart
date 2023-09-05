@@ -35,13 +35,13 @@ class _VDOGridState extends State<VDOGrid> {
                 return const Text('Error');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return myCircularLoading();
+                return SizedBox(height: 200, child: myCircularLoading());
               }
 
               vdos = snapshot.data!.docs;
 
               return snapshot.connectionState == ConnectionState.waiting
-                  ? myCircularLoading()
+                  ? SizedBox(height: 200, child: myCircularLoading())
                   : GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithMaxCrossAxisExtent(
