@@ -15,26 +15,26 @@ List<Quiz> quiz_units = [
   Quiz(
     id: 1,
     description: 'Probability',
-    picture: '1kzj9zzgny0l3xgKK9p_5RMC3Vm1W2Dpu',
+    picture: 'quiz1.png',
   ),
    Quiz(
     id: 2,
     description: 'Random Variable',
-    picture: '16bbIvEcA_jYpSTTmHTC5uAQPTmoCsBDj',
+    picture: 'quiz2.png',
   ),
    Quiz(
     id: 3,
     description: 'Discrete Probability Distributions',
-    picture: '1vFsv-V73MwAtQ3qgFM_Ns_VIh4wtn30Q',
+    picture: 'quiz3.png',
   ),
    Quiz(
     id: 4,
     description: 'Continuous Probability Distributions',
-    picture: '18xvNN2wCVAgNBTV5A8xzaGqDgZIvknx2',
+    picture: 'quiz4.png',
   ),
    Quiz(
     id: 5,
     description: 'Sampling Distribution',
-    picture: '1vAayJ5VlZ_dez_QrOk1CvupeJkKYM4cP',
+    picture: 'quiz5.png',
   ),
 ];

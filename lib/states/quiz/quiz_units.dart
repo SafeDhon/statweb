@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:statweb/states/quiz/quiz_class.dart';
 import 'package:statweb/states/quiz/quiz_page.dart';
 
@@ -83,26 +84,45 @@ class _QuizUnitState extends State<QuizUnit> {
                     flex: 5,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://drive.google.com/uc?export=view&id=${quiz_units[index].picture}',
-                        placeholder: (context, url) => myCircularLoading(),
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
-                        },
-                        errorWidget: (context, url, error) => Center(
+                      // child: CachedNetworkImage(
+                      //   imageUrl:
+                      //       'https://drive.google.com/uc?export=view&id=${quiz_units[index].picture}',
+                      //   placeholder: (context, url) => myCircularLoading(),
+                      //   imageBuilder: (context, imageProvider) {
+                      //     return Container(
+                      //       decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //           image: imageProvider,
+                      //           fit: BoxFit.fill,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      //   errorWidget: (context, url, error) => Center(
+                      //     child: Text(
+                      //       'Error loading',
+                      //       style: enFont('bold', 15, Colors.grey.shade400),
+                      //     ),
+                      //   ),
+                      // ),
+                      child: Image.asset(
+                        '/images/illustrations/${quiz_units[index].picture}',
+                        fit: BoxFit.fill,
+                        errorBuilder: (context, url, error) => Center(
                           child: Text(
                             'Error loading',
                             style: enFont('bold', 15, Colors.grey.shade400),
                           ),
                         ),
+                        frameBuilder: (context, child, frame,
+                                wasSynchronouslyLoaded) =>
+                            SimpleShadow(
+                                opacity: 0.9, // Default: 0.5
+                                color: Colors.black, // Default: Black
+                                offset:
+                                    const Offset(0, 0), // Default: Offset(2, 2)
+                                sigma: 2,
+                                child: child),
                       ),
                     ),
                   ),

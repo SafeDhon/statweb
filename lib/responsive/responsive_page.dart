@@ -11,6 +11,7 @@ import 'package:statweb/states/chat/chat_dialog.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
 import 'package:statweb/states/formular/formular_list.dart';
 import 'package:statweb/states/home/vdo_list.dart';
+import 'package:statweb/states/manage/mangeUser_dialog.dart';
 import 'package:statweb/states/quiz/quiz_units.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
 import 'package:statweb/states/score/score_mobile.dart';
@@ -360,7 +361,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
           if (id == 6) {
             showDialog(
               context: context,
-              builder: (BuildContext context) => const Dialog(),
+              builder: (BuildContext context) => const ManageUserDialog(),
             ).then((value) {});
           }
           if (id == 7) {
