@@ -21,7 +21,7 @@ Future<void> main() async {
         runApp(const MyApp());
       } else {
         // Logout
-        setPreferences('', '', '', '');
+        setPreferences('', '', '', '', '');
         runApp(const MyApp());
       }
     });
@@ -49,17 +49,19 @@ Future<void> getUser(String user) async {
       value['name'],
       value['surname'],
       value['typeuser'],
+      value['password'],
     ).then((value) {});
   });
 }
 
-Future<void> setPreferences(
-    String id, String name, String surname, String type) async {
+Future<void> setPreferences(String id, String name, String surname, String type,
+    String password) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   preferences.setString('id', id);
   preferences.setString('name', name);
   preferences.setString('surname', surname);
   preferences.setString('type', type);
+  preferences.setString('password', password);
 }
 
 class MyApp extends StatelessWidget {
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Stat For Engineer',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
       // home: ResponsiveLayout(
       //   mobileScaffold: const MobileScaffold(),

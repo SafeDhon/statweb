@@ -222,18 +222,18 @@ class _LoginDialogState extends State<LoginDialog> {
         value['name'],
         value['surname'],
         value['typeuser'],
-      ).then((value) {
-        print('get user complete');
-      });
+        value['password'],
+      ).then((value) {});
     });
   }
 
-  Future<void> setPreferences(
-      String id, String name, String surname, String type) async {
+  Future<void> setPreferences(String id, String name, String surname,
+      String type, String password) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('id', id);
     preferences.setString('name', name);
     preferences.setString('surname', surname);
     preferences.setString('type', type);
+    preferences.setString('password', password);
   }
 }

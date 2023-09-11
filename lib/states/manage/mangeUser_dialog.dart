@@ -1,13 +1,22 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:statweb/states/manage/infoUser_dialog.dart';
+
 import '../../constants.dart';
 
 class ManageUserDialog extends StatefulWidget {
-  const ManageUserDialog({super.key});
+  final String currentUserID;
+  final String currentUserPassword;
+
+  const ManageUserDialog({
+    Key? key,
+    required this.currentUserID,
+    required this.currentUserPassword,
+  }) : super(key: key);
 
   @override
   State<ManageUserDialog> createState() => _ManageUserDialogState();
@@ -90,10 +99,24 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    await FirebaseFirestore.instance
-                        .collection('user')
-                        .doc(object.id)
-                        .delete();
+                    print('>>>>>>>>>>>>>>>>>> ${widget.currentUserID}');
+                    print('>>>>>>>>>>>>>>>>>> ${widget.currentUserPassword}');
+                    deleteUser(object.id, object['password'])
+                        .then((value) async {
+                      await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: '${widget.currentUserID}@gmail.com',
+                              password: widget.currentUserPassword)
+                          .then(
+                              (value) => print('..................... ReAuth'));
+                    }).catchError((e) async {
+                      await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: '${widget.currentUserID}@gmail.com',
+                              password: widget.currentUserPassword)
+                          .then(
+                              (value) => print('..................... ReAuth'));
+                    });
                   },
                   icon: Icon(
                     Icons.cancel_rounded,
@@ -108,9 +131,25 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
     );
   }
 
+  Future deleteUser(String id, String password) async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(id)
+        .delete()
+        .then((value) {
+      final userToDelete = FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: '$id@gmail.com', password: password)
+          .then((value) async {
+        final user = FirebaseAuth.instance.currentUser!;
+        await user.delete();
+      });
+    });
+  }
+
   Widget addUserButt() {
     return Padding(
-      padding: const EdgeInsets.symmetric( vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: InkWell(
         onTap: () {
           showDialog(

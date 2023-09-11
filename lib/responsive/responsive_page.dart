@@ -10,7 +10,6 @@ import 'package:statweb/my_icons_icons.dart';
 import 'package:statweb/states/chat/chat_dialog.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
 import 'package:statweb/states/formular/formular_list.dart';
-import 'package:statweb/states/home/vdo_list.dart';
 import 'package:statweb/states/manage/mangeUser_dialog.dart';
 import 'package:statweb/states/quiz/quiz_units.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
@@ -43,6 +42,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
   String userName = '';
   String userSur = '';
   String userType = '';
+  String userPass = '';
 
   @override
   void initState() {
@@ -57,23 +57,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
       userName = preferences.getString('name')!;
       userSur = preferences.getString('surname')!;
       userType = preferences.getString('type')!;
-    });
-  }
-
-  Future<void> getData(String user) async {
-    await FirebaseFirestore.instance
-        .collection('user')
-        .doc(user)
-        .get()
-        .then((value) {
-      // userName = value['name'];
-      // userSur = value['surname'];
-      // userType = value['typeuser'];
-      setState(() {
-        userName = value['name'];
-        userSur = value['surname'];
-        userType = value['typeuser'];
-      });
+      userPass = preferences.getString('password')!;
     });
   }
 
@@ -144,7 +128,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
               children: [
                 Container(
                   alignment: Alignment.topCenter,
-                  // color: Colors.green.shade400,
+                  color: Colors.white,
                   child: SizedBox(
                     // color: Colors.pink.shade400,
                     width: widthUI < mobileWidth ? null : 1080,
@@ -213,9 +197,39 @@ class _ResponsivePageState extends State<ResponsivePage> {
       bottom: 10,
       right: 10,
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          FloatingActionButton(
-            backgroundColor: metallicBlue,
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: metallicBlue,
+              borderRadius: BorderRadius.circular(60),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade500,
+                  blurRadius: 5,
+                  spreadRadius: 0.5,
+                  offset: const Offset(2, 2),
+                )
+              ],
+            ),
+          ),
+          const Positioned(
+            top: 14,
+            left: 14,
+            child: Icon(
+              MyIcons.chat,
+              size: 28,
+              color: Colors.white,
+            ),
+          ),
+          IconButton(
+            iconSize: 45,
+            color: Colors.transparent,
+            icon: const Icon(
+              MyIcons.chat_2,
+            ),
             onPressed: () {
               if (userID == '') {
                 showDialog(
@@ -232,15 +246,6 @@ class _ResponsivePageState extends State<ResponsivePage> {
                         ));
               }
             },
-          ),
-          const Positioned(
-            top: 12,
-            left: 13,
-            child: Icon(
-              MyIcons.chat,
-              size: 26,
-              color: Colors.white,
-            ),
           ),
         ],
       ),
@@ -361,7 +366,10 @@ class _ResponsivePageState extends State<ResponsivePage> {
           if (id == 6) {
             showDialog(
               context: context,
-              builder: (BuildContext context) => const ManageUserDialog(),
+              builder: (BuildContext context) => ManageUserDialog(
+                currentUserID: userID,
+                currentUserPassword: userPass,
+              ),
             ).then((value) {});
           }
           if (id == 7) {

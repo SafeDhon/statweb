@@ -159,7 +159,9 @@ class _InfoUserDialogState extends State<InfoUserDialog> {
               controllerName.text,
               controllerSurname.text,
               controllerPassword.text,
-            ).then((value) {});
+            ).then((value) {
+              Navigator.pop(context);
+            });
           }
         },
         child: Container(
@@ -204,6 +206,7 @@ class _InfoUserDialogState extends State<InfoUserDialog> {
     var data = {
       "name": name,
       "surname": surname,
+      "password": password,
       "section": "IEA",
       "year": "2",
       "typeuser": "student",

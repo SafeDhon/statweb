@@ -57,15 +57,14 @@ class _EBookpageState extends State<EBookpage> {
                   ],
                 ),
                 Expanded(
-                  child: Center(
-                    child: SizedBox(
-                        width: double.maxFinite,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: SingleChildScrollView(
-                              child: widget.pages[page - 1].contain),
-                        )),
-                  ),
+                  child: SizedBox(
+                      width: double.maxFinite,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, top: 12, bottom: 4.0),
+                        child: SingleChildScrollView(
+                            child: widget.pages[page - 1].contain),
+                      )),
                 ),
                 NavBarEBOOK(
                   backwardPress: () {
