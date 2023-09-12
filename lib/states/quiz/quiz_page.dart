@@ -81,6 +81,7 @@ class _QuizPageState extends State<QuizPage> {
 
   Widget exams(QuizQuestion question) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         quizHeader(),
         const SizedBox(height: 5),
@@ -96,25 +97,30 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget quizHeader() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: widget.onBack,
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: metallicBlue,
+    double widthUI = MediaQuery.of(context).size.width;
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: widget.onBack,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: metallicBlue,
+            ),
           ),
-        ),
-        Text('  ${widget.description}',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: enFont('bold', 25, glaucous)),
-      ],
+          Text('  ${widget.description}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: enFont('bold', widthUI < 550 ? 18 :25, glaucous)),
+        ],
+      ),
     );
   }
 
   Widget problemBox(int number) {
+    double widthUI = MediaQuery.of(context).size.width;
     return Container(
       height: 250,
       width: double.maxFinite,
@@ -131,7 +137,7 @@ class _QuizPageState extends State<QuizPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       questions[questionID - 1].question,
-                      style: thFont('bold', 18, Colors.black),
+                      style: thFont('bold', widthUI < 550 ? 16 :18, Colors.black),
                     ),
                   ),
           ),
@@ -140,15 +146,15 @@ class _QuizPageState extends State<QuizPage> {
             top: 10,
             child: Container(
               alignment: Alignment.center,
-              height: 40,
-              width: 40,
+              height: widthUI < 550 ? 30 :40,
+              width: widthUI < 550 ? 30 :40,
               decoration: BoxDecoration(
                 color: metallicBlue,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Text(
                 number.toString(),
-                style: enFont('bold', 20, Colors.white),
+                style: enFont('bold', widthUI < 550 ? 16 :20, Colors.white),
               ),
             ),
           ),
@@ -159,6 +165,7 @@ class _QuizPageState extends State<QuizPage> {
 
   // Widget choiceBox(String choice, String text) {
   Widget choiceBox(int index, QuizQuestion question) {
+    double widthUI = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: InkWell(
@@ -196,6 +203,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Row(
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
@@ -206,11 +214,13 @@ class _QuizPageState extends State<QuizPage> {
                             : index == 2
                                 ? 'C.  '
                                 : 'D.  ',
-                    style: thFont('bold', 20, metallicBlue),
+                    style: thFont('bold', widthUI < 550 ? 16 :20, metallicBlue),
                   ),
                   Text(
                     onloadQuestion ? 'loading choice' : question.choice[index],
-                    style: thFont('bold', 20, Colors.black),
+                    style: thFont('bold', widthUI < 550 ? 16 :20, Colors.black),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -304,6 +314,7 @@ class _QuizPageState extends State<QuizPage> {
               child: const Center(
                   child: Icon(
                 Icons.done_rounded,
+                color: Colors.white,
                 size: 30,
                 // weight: 100,
               )),
@@ -320,7 +331,10 @@ class _QuizPageState extends State<QuizPage> {
               },
               backgroundColor: metallicBlue,
               child: const Center(
-                child: Icon(Icons.functions_rounded),
+                child: Icon(
+                  Icons.functions_rounded,
+                  color: Colors.white,
+                ),
               ),
             ),
           )

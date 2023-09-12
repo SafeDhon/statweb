@@ -33,8 +33,8 @@ List<EBookPage> ebookU2 = [
               '2.  	ตัวแปรสุ่มต่อเนื่อง (Continuous Random Variable) เป็นตัวแปรสุ่มที่มีจำนวนตัวเลขมากเป็นอนันต์จนนับไม่ได้ เช่น ค่าของคัวแปรสุ่ม X ในช่วง 0 ≤ X ≤ 1'),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=iqhuVXEAzgQ',
+      music_url: 'https://www.youtube.com/watch?v=fX7k3W-2BMM',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -69,11 +69,11 @@ List<EBookPage> ebookU2 = [
           ebookTextWithTab(
               'กรณีการหาค่าความน่าจะเป็นสะสมที่เป็นช่วง P(a<X≤b) = F(b) - F(a)'),
           SizedBox(height: space),
-          ebookImage('unit2/1.png', pictureH),
+          ebookImage('ebooks%2F2_1.png?alt=media&token=61622f8f-6e43-4053-9a34-e52fbe267e19', pictureH),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=iqhuVXEAzgQ',
+      music_url: 'https://www.youtube.com/watch?v=DyiPr9jkW38',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -113,8 +113,8 @@ List<EBookPage> ebookU2 = [
               '3. P[(X,Y) ∈ A] = ∑∑f(x,y) เมื่อ A เป็นพื้นที่บนระนาบ XY'),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=iqhuVXEAzgQ',
+      music_url: 'https://www.youtube.com/watch?v=FXl9BpEWeI8',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -160,27 +160,36 @@ List<EBookPage> ebookU2 = [
           ebookText(
               'ให้ 	A เป็นเหตุการณ์ที่ตัวแปรสุ่ม X = x และ 	B เป็นเหตุการณ์ที่ตัวแปรสุ่ม Y = y   ดังนั้น'),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookMath(r"P(Y=y|X=x) = \frac {P(X=x,Y=y)} {P(X=x)}"),
-              ebookTextWithTab('P(X=x) > 0 หรือเขียนใหม่ได้เป็น'),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookMath(r"P(Y=y|X=x) = \frac {P(X=x,Y=y)} {P(X=x)}"),
+                ebookTextWithTab('P(X=x) > 0 หรือเขียนใหม่ได้เป็น'),
+              ],
+            ),
           ),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookTextWithTab('                    '),
-              ebookMath(r"f(y|x) = \frac {f(x,y)} {g(x)}"),
-              ebookTextWithTab('g(x) > 0 ทำนองเดียวกัน'),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookTextWithTab('                    '),
+                ebookMath(r"f(y|x) = \frac {f(x,y)} {g(x)}"),
+                ebookTextWithTab('g(x) > 0 ทำนองเดียวกัน'),
+              ],
+            ),
           ),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookTextWithTab('                    '),
-              ebookMath(r"f(x|y) = \frac {f(x,y)} {h(y)}"),
-              ebookTextWithTab('h(y) > 0'),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookTextWithTab('                    '),
+                ebookMath(r"f(x|y) = \frac {f(x,y)} {h(y)}"),
+                ebookTextWithTab('h(y) > 0'),
+              ],
+            ),
           ),
           SizedBox(height: space),
           spanText([
@@ -191,8 +200,8 @@ List<EBookPage> ebookU2 = [
           ]),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=52R9V6Qvl0A',
+      music_url: 'https://www.youtube.com/watch?v=64aNeYsa6Iw',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -228,16 +237,19 @@ List<EBookPage> ebookU2 = [
             ebookTextSpan('  E[u(x)] = ∑ u(x)f(x)', 'regular')
           ]),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookText('เช่น กำหนดให้   '),
-              ebookMath(r"u(x) = X^2 ; E(X^2) = \sum{X^2f(x)}"),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookText('เช่น กำหนดให้   '),
+                ebookMath(r"u(x) = X^2 ; E(X^2) = \sum{X^2f(x)}"),
+              ],
+            ),
           ),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=52R9V6Qvl0A',
+      music_url: 'https://www.youtube.com/watch?v=jfKfPfyJRdk',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -267,8 +279,8 @@ List<EBookPage> ebookU2 = [
           ebookTextWithTab('  E(XY) = E(X)E(Y)'),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=52R9V6Qvl0A',
+      music_url: 'https://www.youtube.com/watch?v=XstikgbeTPI',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -305,17 +317,20 @@ List<EBookPage> ebookU2 = [
           SizedBox(height: space),
           ebookMath(r"E(X-\mu)^2 = E(X^2)-{\mu}^2"),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookTextBold('หมายเหตุ  :  '),
-              ebookText('ส่วนเบี่ยงเบนมาตรฐาน     '),
-              ebookMath(r"\sigma = \sqrt{V(X)}")
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookTextBold('หมายเหตุ  :  '),
+                ebookText('ส่วนเบี่ยงเบนมาตรฐาน     '),
+                ebookMath(r"\sigma = \sqrt{V(X)}")
+              ],
+            ),
           )
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=52R9V6Qvl0A',
+      music_url: 'https://www.youtube.com/watch?v=7JPTlqRRf1w',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -334,20 +349,26 @@ List<EBookPage> ebookU2 = [
             ],
           ),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookMath(r"V(cX) = c^2V(X)"),
-              ebookText('   เช่น   '),
-              ebookMath(r"V(5X) = 25V(X)"),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookMath(r"V(cX) = c^2V(X)"),
+                ebookText('   เช่น   '),
+                ebookMath(r"V(5X) = 25V(X)"),
+              ],
+            ),
           ),
           SizedBox(height: space),
-          Row(
-            children: [
-              ebookMath(r"V(cX{\pm}b) = c^2V(X)"),
-              ebookText('   เช่น   '),
-              ebookMath(r"V(5X-10) = 25V(X)"),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ebookMath(r"V(cX{\pm}b) = c^2V(X)"),
+                ebookText('   เช่น   '),
+                ebookMath(r"V(5X-10) = 25V(X)"),
+              ],
+            ),
           ),
           SizedBox(height: space),
           ebookTextBold('แนวทางการพิสูจน์คุณสมบัติของความแปรปรวน'),
@@ -368,8 +389,8 @@ List<EBookPage> ebookU2 = [
           ebookMath(r"V(a) = 0"),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=wkrTm2QAvR0',
+      music_url: 'https://www.youtube.com/watch?v=rFJol2pYlEo',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -409,8 +430,8 @@ List<EBookPage> ebookU2 = [
           ebookMath(r"V(X+c) = V(X)"),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=wkrTm2QAvR0',
+      music_url: 'https://www.youtube.com/watch?v=r8hjfGhwK-c',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -429,7 +450,7 @@ List<EBookPage> ebookU2 = [
           ]),
           SizedBox(height: space),
           ebookMath(
-              r"\sigma_{XY} = E[(X-\mu_X)(Y-\mu_Y)] = E(XY)-\mu_X\mu_Y = E(XY)-E(X)E(Y)"),
+              r"""\sigma_{XY} = E[(X-\mu_X)(Y-\mu_Y)] = E(XY)-\mu_X\mu_Y = E(XY)-E(X)E(Y)"""),
           SizedBox(height: space),
           ebookTextBold('พิสูจน์'),
           SizedBox(height: space),
@@ -457,8 +478,8 @@ List<EBookPage> ebookU2 = [
               r"2. \sigma_{aX-bY}^2 = a^2\sigma_X^2+b^2\sigma_Y^2-2ab\sigma_{XY}"),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=wkrTm2QAvR0',
+      music_url: 'https://www.youtube.com/watch?v=jwjRGZp_Xxg',
       quiz: [2, 'Random Variable']),
   EBookPage(
       unit: 2,
@@ -510,7 +531,7 @@ List<EBookPage> ebookU2 = [
           ebookMath(r"\sigma_{aX{\pm}bY}^2 = a^2\sigma_X^2+b^2\sigma_Y^2"),
         ],
       ),
-      vdo_url: 'https://www.youtube.com/watch?v=LkwvF6OVhnk',
-      music_url: 'https://www.youtube.com/watch?v=QJusTUOyahE',
+      vdo_url: 'https://www.youtube.com/watch?v=wkrTm2QAvR0',
+      music_url: 'https://www.youtube.com/watch?v=GSdYPkgCvtE&t=127s',
       quiz: [2, 'Random Variable']),
 ];

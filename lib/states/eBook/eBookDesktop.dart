@@ -84,54 +84,55 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
                   ),
                   Expanded(
                     flex: 5,
-                    // child: Padding(
-                    //   padding: const EdgeInsets.all(12.0),
-                    //   child: CachedNetworkImage(
-                    //     imageUrl:
-                    //         'https://drive.google.com/uc?export=view&id=${ebook_units[index].picture}',
-                    //     placeholder: (context, url) => myCircularLoading(),
-                    //     imageBuilder: (context, imageProvider) {
-                    //       return SimpleShadow(
-                    //         opacity: 0.9, // Default: 0.5
-                    //         color: Colors.black, // Default: Black
-                    //         offset: const Offset(0, 0), // Default: Offset(2, 2)
-                    //         sigma: 2, // Default: 2
-                    //         child: Container(
-                    //           decoration: BoxDecoration(
-                    //             image: DecorationImage(
-                    //               image: imageProvider,
-                    //               fit: BoxFit.fill,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //     errorWidget: (context, url, error) => Center(
-                    //       child: Text(
-                    //         'Error loading',
-                    //         style: enFont('bold', 15, Colors.grey.shade400),
-                    //       ),
-                    //     ),
-                    //   ),
-                    child: Image.asset(
-                      '/images/illustrations/${ebook_units[index].picture}',
-                      fit: BoxFit.fill,
-                      errorBuilder: (context, url, error) => Center(
-                        child: Text(
-                          'Error loading',
-                          style: enFont('bold', 15, Colors.grey.shade400),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://firebasestorage.googleapis.com/v0/b/reportstatweb.appspot.com/o/${ebook_units[index].picture}',
+                        placeholder: (context, url) => myCircularLoading(),
+                        imageBuilder: (context, imageProvider) {
+                          return SimpleShadow(
+                            opacity: 0.9, // Default: 0.5
+                            color: Colors.black, // Default: Black
+                            offset: const Offset(0, 0), // Default: Offset(2, 2)
+                            sigma: 2, // Default: 2
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        errorWidget: (context, url, error) => Center(
+                          child: Text(
+                            'Error loading',
+                            style: enFont('bold', 15, Colors.grey.shade400),
+                          ),
                         ),
                       ),
-                      frameBuilder: (context, child, frame,
-                              wasSynchronouslyLoaded) =>
-                          SimpleShadow(
-                              opacity: 0.9, // Default: 0.5
-                              color: Colors.black, // Default: Black
-                              offset:
-                                  const Offset(0, 0), // Default: Offset(2, 2)
-                              sigma: 2,
-                              child: child),
                     ),
+                    // child: Image.asset(
+                    //   '/images/illustrations/${ebook_units[index].picture}',
+                    //   fit: BoxFit.fill,
+                    //   errorBuilder: (context, url, error) => Center(
+                    //     child: Text(
+                    //       'Error loading',
+                    //       style: enFont('bold', 15, Colors.grey.shade400),
+                    //     ),
+                    //   ),
+                    //   frameBuilder: (context, child, frame,
+                    //           wasSynchronouslyLoaded) =>
+                    //       SimpleShadow(
+                    //           opacity: 0.9, // Default: 0.5
+                    //           color: Colors.black, // Default: Black
+                    //           offset:
+                    //               const Offset(0, 0), // Default: Offset(2, 2)
+                    //           sigma: 2,
+                    //           child: child),
+                    // ),
                   ),
                 ],
               ),

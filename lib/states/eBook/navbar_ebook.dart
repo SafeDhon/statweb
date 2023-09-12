@@ -1,6 +1,7 @@
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
+import 'package:statweb/my_icons_icons.dart';
 
 import '../../constants.dart';
 
@@ -27,7 +28,7 @@ class NavBarEBOOK extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double iconSize = size.width < mobileWidth ? 45 : 50;
+    double iconSize = size.width < mobileWidth ? 42 : 50;
     double iconPad = size.width < mobileWidth ? 12 : 15;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
@@ -53,7 +54,10 @@ class NavBarEBOOK extends StatelessWidget {
                 ),
                 child: IconButton(
                   color: metallicBlue,
-                  icon: const Icon(Icons.music_note_rounded),
+                  icon: const Icon(
+                    // Icons.music_note_rounded,
+                    MyIcons.icons8_music,
+                  ),
                   onPressed: () {
                     js.context.callMethod('open', [music]);
                   },
@@ -77,7 +81,10 @@ class NavBarEBOOK extends StatelessWidget {
                 ),
                 child: IconButton(
                   color: metallicBlue,
-                  icon: const Icon(Icons.video_collection_rounded),
+                  icon: const Icon(
+                    MyIcons.icons8_youtube,
+                    // Icons.video_collection_rounded,
+                  ),
                   onPressed: () {
                     js.context.callMethod('open', [vdo]);
                   },
@@ -101,7 +108,10 @@ class NavBarEBOOK extends StatelessWidget {
                 ),
                 child: IconButton(
                   color: metallicBlue,
-                  icon: const Icon(Icons.edit_note_rounded),
+                  icon: const Icon(
+                    // Icons.edit_note_rounded,
+                    MyIcons.icons8_edit
+                  ),
                   onPressed: quizPress,
                 ),
               ),
@@ -118,13 +128,13 @@ class NavBarEBOOK extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_back_ios_new_rounded,
                     color: metallicBlue,
-                    size: 28,
+                    size: size.width < 550 ? 23 : 28,
                   ),
                 ),
                 const SizedBox(width: 8),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    width: 53,
+                    width: size.width < 550 ? 48 : 53,
                     child: Text(
                       page,
                       style: enFont('bold', 18, metallicBlue),
@@ -134,13 +144,13 @@ class NavBarEBOOK extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
                     color: metallicBlue,
-                    size: 28,
+                    size: size.width < 550 ? 23 : 28,
                   ),
                 )
               ],
             ),
           ),
-          const SizedBox(width: 80),
+          SizedBox(width: size.width < 550 ? 70 : 80),
         ],
       ),
     );

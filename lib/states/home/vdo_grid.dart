@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:js' as js;
 import '../../constants.dart';
 
 class VDOGrid extends StatefulWidget {
@@ -57,7 +57,11 @@ class _VDOGridState extends State<VDOGrid> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+
+                               js.context.callMethod(
+                                        'open', [vdos[index]['vdo_url']]);
+                          },
                           child: Container(
                             // height: 100,
                             // width: 100,

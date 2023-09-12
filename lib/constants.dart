@@ -8,8 +8,9 @@ var myDefaultBackground = Colors.grey[300];
 int tabletWidth = 1350;
 int mobileWidth = 800;
 
-AppBar myAppBar(String text,List<Widget> actions) {
+AppBar myAppBar(String text, List<Widget> actions) {
   return AppBar(
+    iconTheme: const IconThemeData(color: Colors.white),
     centerTitle: true,
     title: Text(
       text,

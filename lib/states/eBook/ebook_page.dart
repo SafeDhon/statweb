@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/states/eBook/eBook_class.dart';
+import 'package:statweb/states/eBook/eBook_constant.dart';
 import 'package:statweb/states/eBook/navbar_ebook.dart';
 import 'package:statweb/states/quiz/quiz_page.dart';
 
@@ -28,6 +29,7 @@ class _EBookpageState extends State<EBookpage> {
 
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return onQuiz
         ? QuizPage(
@@ -40,21 +42,26 @@ class _EBookpageState extends State<EBookpage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: widget.onBack,
-                      icon: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: metallicBlue,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: widget.onBack,
+                        icon: Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: metallicBlue,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 5),
-                    Text('Unit ${widget.unit}',
-                        style: enFont('bold', 30, metallicBlue)),
-                    Text('  ${widget.description}',
-                        style: enFont('bold', 30, glaucous)),
-                  ],
+                      const SizedBox(width: 5),
+                      Text('Unit ${widget.unit}',
+                          style: enFont('bold', size.width < 550 ? 25 : 30,
+                              metallicBlue)),
+                      Text('  ${widget.description}',
+                          style: enFont(
+                              'bold', size.width < 550 ? 25 : 30, glaucous)),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: SizedBox(
