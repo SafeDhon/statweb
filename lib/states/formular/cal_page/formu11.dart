@@ -61,13 +61,13 @@ class _Formular11State extends State<Formular11> {
             InputParameter(
               controller: inputn1,
               paramWidget: r'n_1',
-              hintText: 'n = 30,31,32,...',
+              hintText: 'n ≥ 30',
               wrongParam: wrongn1,
             ),
             InputParameter(
               controller: inputn2,
               paramWidget: r'n_2',
-              hintText: 'n = 30,31,32,...',
+              hintText: 'n ≥ 30',
               wrongParam: wrongn2,
             ),
             InputParameter(

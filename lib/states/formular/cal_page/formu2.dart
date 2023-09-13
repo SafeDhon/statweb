@@ -39,13 +39,13 @@ class _Formular2State extends State<Formular2> {
             InputParameter(
               controller: inputp,
               paramWidget: r'p',
-              hintText: 'Input Something',
+              hintText: 'p + q = 1',
               wrongParam: wrongp,
             ),
             InputParameter(
               controller: inputq,
               paramWidget: r'q',
-              hintText: 'Input Something',
+              hintText: 'p + q = 1',
               wrongParam: wrongq,
             ),
             InputParameter(

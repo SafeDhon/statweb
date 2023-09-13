@@ -41,7 +41,7 @@ class _Formular3State extends State<Formular3> {
             InputParameter(
               controller: inputn,
               paramWidget: r'n',
-              hintText: 'n = 1,2,3,...',
+              hintText: 'n > x',
               wrongParam: wrongn,
             ),
             InputParameter(

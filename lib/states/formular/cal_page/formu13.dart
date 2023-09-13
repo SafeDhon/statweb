@@ -73,13 +73,13 @@ class _Formular13State extends State<Formular13> {
             InputParameter(
               controller: inputn1,
               paramWidget: r'n_1',
-              hintText: 'n = 1,2,...,29',
+              hintText: 'n < 30',
               wrongParam: wrongn1,
             ),
             InputParameter(
               controller: inputn2,
               paramWidget: r'n_2',
-              hintText: 'n = 1,2,...,29',
+              hintText: 'n < 30',
               wrongParam: wrongn2,
             ),
             InputParameter(

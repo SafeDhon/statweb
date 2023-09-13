@@ -41,7 +41,7 @@ class _Formular5State extends State<Formular5> {
             InputParameter(
               controller: inputk,
               paramWidget: r'k',
-              hintText: 'k = 1,2,3,...',
+              hintText: 'k > x',
               wrongParam: wrongk,
             ),
             InputParameter(
@@ -53,7 +53,7 @@ class _Formular5State extends State<Formular5> {
             InputParameter(
               controller: inputN,
               paramWidget: r'N',
-              hintText: 'N = 1,2,3,...',
+              hintText: 'N > n',
               wrongParam: wrongN,
             ),
             InputParameter(

@@ -61,7 +61,7 @@ class _Formular8State extends State<Formular8> {
             InputParameter(
               controller: inputn,
               paramWidget: r'n',
-              hintText: 'n = 30,31,32,...',
+              hintText: 'n ≥ 30',
               wrongParam: wrongn,
             ),
             calBox(

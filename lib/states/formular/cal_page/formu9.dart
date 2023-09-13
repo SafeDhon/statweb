@@ -61,7 +61,7 @@ class _Formular9State extends State<Formular9> {
             InputParameter(
               controller: inputn,
               paramWidget: r'n',
-              hintText: 'n = 1,2,...,29',
+              hintText: 'n < 30',
               wrongParam: wrongn,
             ),
             calBox(

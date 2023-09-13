@@ -21,12 +21,12 @@ class _FormularDialogState extends State<FormularDialog> {
     return Dialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
-      child: SingleChildScrollView(
-        child: SizedBox(
-          width: 500,
-          height: 850,
-          child: onChoose
-              ? Column(
+      child: SizedBox(
+        width: 500,
+        height: 850,
+        child: onChoose
+            ? SingleChildScrollView(
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
@@ -43,51 +43,53 @@ class _FormularDialogState extends State<FormularDialog> {
                             color: metallicBlue,
                           )),
                     ),
-                    cal
+                    cal,
                   ],
-                )
-              : Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 24.0),
-                  child: ListView.builder(
-                      itemCount: formulars.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                cal = formulars[index].contain;
-                                onChoose = true;
-                              });
-                            },
-                            child: Container(
-                              // width: 100,
-                              height: 100,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                      color: metallicBlue, width: 2)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Math.tex(
-                                    // mathStyle: MathStyle.text,
-                                    formulars[index].formular,
-
-                                    textStyle: enFont(
-                                        'semibold', fontSize, metallicBlue),
-                                  ),
+                ),
+            )
+            : Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 24.0),
+                child: ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: formulars.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              cal = formulars[index].contain;
+                              onChoose = true;
+                            });
+                          },
+                          child: Container(
+                            // width: 100,
+                            height: 100,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: metallicBlue, width: 2)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Math.tex(
+                                  // mathStyle: MathStyle.text,
+                                  formulars[index].formular,
+      
+                                  textStyle: enFont(
+                                      'semibold', fontSize, metallicBlue),
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      }),
-                ),
-        ),
+                        ),
+                      );
+                    }),
+              ),
       ),
     );
   }

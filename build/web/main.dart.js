@@ -99364,9 +99364,9 @@ A.Ek.prototype={
 a_(){var s=null
 return new A.a0X(A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a0X.prototype={
-I(a){var s=this,r="Input Something",q="n = 30,31,32,...",p=A.kt(s.a.c,a),o=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),n=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),m=A.bs(s.w,q,!1,"n_1",!1,s.ax),l=A.bs(s.x,q,!1,"n_2",!1,s.ay),k=A.bs(s.y,r,!1,"S_1",!1,s.ch),j=A.bs(s.z,r,!1,"S_2",!1,s.CW),i=A.bs(s.Q,r,!1,"d_0",!1,s.cx),h=A.kq(new A.aCs(s),s.d),g=A.bc(null),f=s.cy
-f=f===0?"Please Input Parameter":B.d.j(f)
-return A.c3(new A.aa(B.bF,A.aF(A.a([p,o,n,m,l,k,j,i,h,A.bs(g,f,s.e,"Z",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
+I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),o=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),n=A.bs(s.w,"n \u2265 30",!1,"n_1",!1,s.ax),m=A.bs(s.x,"n \u2265 30",!1,"n_2",!1,s.ay),l=A.bs(s.y,r,!1,"S_1",!1,s.ch),k=A.bs(s.z,r,!1,"S_2",!1,s.CW),j=A.bs(s.Q,r,!1,"d_0",!1,s.cx),i=A.kq(new A.aCs(s),s.d),h=A.bc(null),g=s.cy
+g=g===0?"Please Input Parameter":B.d.j(g)
+return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,l,k,j,i,A.bs(h,g,s.e,"Z",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o,n,m,l,k
 var $async$by=A.r(function(a,b){if(a===1)return A.t(b,r)
 while(true)switch(s){case 0:p=A.bg(q.f.a.a)
@@ -99478,9 +99478,9 @@ A.El.prototype={
 a_(){var s=null
 return new A.a0Y(A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a0Y.prototype={
-I(a){var s=this,r="Input Something",q="n = 1,2,...,29",p=A.kt(s.a.c,a),o=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),n=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),m=A.bs(s.w,r,!1,"S_1",!1,s.ax),l=A.bs(s.x,r,!1,"S_2",!1,s.ay),k=A.bs(s.y,q,!1,"n_1",!1,s.ch),j=A.bs(s.z,q,!1,"n_2",!1,s.CW),i=A.bs(s.Q,r,!1,"d_0",!1,s.cx),h=A.kq(new A.aCO(s),s.d),g=A.bc(null),f=s.cy
-f=f===0?"Please Input Parameter":B.d.j(f)
-return A.c3(new A.aa(B.bF,A.aF(A.a([p,o,n,m,l,k,j,i,h,A.bs(g,f,s.e,"t",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
+I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),o=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),n=A.bs(s.w,r,!1,"S_1",!1,s.ax),m=A.bs(s.x,r,!1,"S_2",!1,s.ay),l=A.bs(s.y,"n < 30",!1,"n_1",!1,s.ch),k=A.bs(s.z,"n < 30",!1,"n_2",!1,s.CW),j=A.bs(s.Q,r,!1,"d_0",!1,s.cx),i=A.kq(new A.aCO(s),s.d),h=A.bc(null),g=s.cy
+g=g===0?"Please Input Parameter":B.d.j(g)
+return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,l,k,j,i,A.bs(h,g,s.e,"t",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o,n,m,l,k
 var $async$by=A.r(function(a,b){if(a===1)return A.t(b,r)
 while(true)switch(s){case 0:p=A.bg(q.f.a.a)
@@ -99592,9 +99592,9 @@ A.Em.prototype={
 a_(){var s=null
 return new A.a0Z(A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a0Z.prototype={
-I(a){var s=this,r="Input Something",q="n = 1,2,...,29",p=A.kt(s.a.c,a),o=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),n=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),m=A.bs(s.w,r,!1,"S_1",!1,s.ax),l=A.bs(s.x,r,!1,"S_2",!1,s.ay),k=A.bs(s.y,q,!1,"n_1",!1,s.ch),j=A.bs(s.z,q,!1,"n_2",!1,s.CW),i=A.bs(s.Q,r,!1,"d_0",!1,s.cx),h=A.kq(new A.aD9(s),s.d),g=A.bc(null),f=s.cy
-f=f===0?"Please Input Parameter":B.d.j(f)
-return A.c3(new A.aa(B.bF,A.aF(A.a([p,o,n,m,l,k,j,i,h,A.bs(g,f,s.e,"t",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
+I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X_1}",!1,s.as),o=A.bs(s.r,r,!1,"\\bar{X_2}",!1,s.at),n=A.bs(s.w,r,!1,"S_1",!1,s.ax),m=A.bs(s.x,r,!1,"S_2",!1,s.ay),l=A.bs(s.y,"n < 30",!1,"n_1",!1,s.ch),k=A.bs(s.z,"n < 30",!1,"n_2",!1,s.CW),j=A.bs(s.Q,r,!1,"d_0",!1,s.cx),i=A.kq(new A.aD9(s),s.d),h=A.bc(null),g=s.cy
+g=g===0?"Please Input Parameter":B.d.j(g)
+return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,l,k,j,i,A.bs(h,g,s.e,"t",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o,n,m,l,k
 var $async$by=A.r(function(a,b){if(a===1)return A.t(b,r)
 while(true)switch(s){case 0:p=A.bg(q.f.a.a)
@@ -99705,7 +99705,7 @@ $S:0}
 A.En.prototype={
 a_(){return new A.a10(A.bc(null),A.bc(null),A.bc(null),B.n)}}
 A.a10.prototype={
-I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"p",!1,s.x),o=A.bs(s.r,r,!1,"q",!1,s.y),n=A.bs(s.w,"x = 0,1",!1,"x",!1,s.z),m=A.kq(new A.aDE(s),s.d),l=A.bc(null),k=s.Q
+I(a){var s=this,r="p + q = 1",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"p",!1,s.x),o=A.bs(s.r,r,!1,"q",!1,s.y),n=A.bs(s.w,"x = 0,1",!1,"x",!1,s.z),m=A.kq(new A.aDE(s),s.d),l=A.bc(null),k=s.Q
 k=k===0?"Please Input Parameter":B.d.j(k)
 return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,A.bs(l,k,s.e,"f(x)",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o
@@ -99792,7 +99792,7 @@ $S:0}
 A.Eo.prototype={
 a_(){return new A.a11(A.bc(null),A.bc(null),A.bc(null),B.n)}}
 A.a11.prototype={
-I(a){var s=this,r=A.kt(s.a.c,a),q=A.bs(s.f,"n = 1,2,3,...",!1,"n",!1,s.x),p=A.bs(s.r,"x = 0,1,2,...,n",!1,"x",!1,s.y),o=A.bs(s.w,"Input Something",!1,"p",!1,s.z),n=A.kq(new A.aDU(s),s.d),m=A.bc(null),l=s.Q
+I(a){var s=this,r=A.kt(s.a.c,a),q=A.bs(s.f,"n > x",!1,"n",!1,s.x),p=A.bs(s.r,"x = 0,1,2,...,n",!1,"x",!1,s.y),o=A.bs(s.w,"Input Something",!1,"p",!1,s.z),n=A.kq(new A.aDU(s),s.d),m=A.bc(null),l=s.Q
 l=l===0?"Please Input Parameter":B.d.j(l)
 return A.c3(new A.aa(B.bF,A.aF(A.a([r,q,p,o,n,A.bs(m,l,s.e,"f(x)",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o,n
@@ -99973,7 +99973,7 @@ A.Eq.prototype={
 a_(){var s=null
 return new A.a13(A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a13.prototype={
-I(a){var s=this,r=A.kt(s.a.c,a),q=A.bs(s.f,"k = 1,2,3,...",!1,"k",!1,s.y),p=A.bs(s.r,"x = 0,1,2,...,k",!1,"x",!1,s.z),o=A.bs(s.w,"N = 1,2,3,...",!1,"N",!1,s.Q),n=A.bs(s.x,"n = 0,1,2,...,N",!1,"n",!1,s.as),m=A.kq(new A.aEp(s),s.d),l=A.bc(null),k=s.at
+I(a){var s=this,r=A.kt(s.a.c,a),q=A.bs(s.f,"k > x",!1,"k",!1,s.y),p=A.bs(s.r,"x = 0,1,2,...,k",!1,"x",!1,s.z),o=A.bs(s.w,"N > n",!1,"N",!1,s.Q),n=A.bs(s.x,"n = 0,1,2,...,N",!1,"n",!1,s.as),m=A.kq(new A.aEp(s),s.d),l=A.bc(null),k=s.at
 k=k===0?"Please Input Parameter":B.d.j(k)
 return A.c3(new A.aa(B.bF,A.aF(A.a([r,q,p,o,n,m,A.bs(l,k,s.e,"f(x)",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this,p,o,n,m
@@ -100223,7 +100223,7 @@ A.Et.prototype={
 a_(){var s=null
 return new A.a16(A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a16.prototype={
-I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X}",!1,s.y),o=A.bs(s.r,r,!1,"\\mu",!1,s.z),n=A.bs(s.w,r,!1,"S",!1,s.Q),m=A.bs(s.x,"n = 30,31,32,...",!1,"n",!1,s.as),l=A.kq(new A.aF8(s),s.d),k=A.bc(null),j=s.at
+I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X}",!1,s.y),o=A.bs(s.r,r,!1,"\\mu",!1,s.z),n=A.bs(s.w,r,!1,"S",!1,s.Q),m=A.bs(s.x,"n \u2265 30",!1,"n",!1,s.as),l=A.kq(new A.aF8(s),s.d),k=A.bc(null),j=s.at
 j=j===0?"Please Input Parameter":B.d.j(j)
 return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,l,A.bs(k,j,s.e,"Z",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this
@@ -100303,7 +100303,7 @@ A.Eu.prototype={
 a_(){var s=null
 return new A.a17(A.bc(s),A.bc(s),A.bc(s),A.bc(s),B.n)}}
 A.a17.prototype={
-I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X}",!1,s.y),o=A.bs(s.r,r,!1,"\\mu",!1,s.z),n=A.bs(s.w,r,!1,"S",!1,s.Q),m=A.bs(s.x,"n = 1,2,...,29",!1,"n",!1,s.as),l=A.kq(new A.aFn(s),s.d),k=A.bc(null),j=s.at
+I(a){var s=this,r="Input Something",q=A.kt(s.a.c,a),p=A.bs(s.f,r,!1,"\\bar{X}",!1,s.y),o=A.bs(s.r,r,!1,"\\mu",!1,s.z),n=A.bs(s.w,r,!1,"S",!1,s.Q),m=A.bs(s.x,"n < 30",!1,"n",!1,s.as),l=A.kq(new A.aFn(s),s.d),k=A.bc(null),j=s.at
 j=j===0?"Please Input Parameter":B.d.j(j)
 return A.c3(new A.aa(B.bF,A.aF(A.a([q,p,o,n,m,l,A.bs(k,j,s.e,"t",!0,!1)],t.p),B.bf,B.i,B.h),null),null,B.B)},
 by(){var s=0,r=A.w(t.H),q=this
@@ -100870,9 +100870,9 @@ A.pS.prototype={
 a_(){return new A.a18(B.n)}}
 A.a18.prototype={
 I(a){var s,r=this,q=null,p=a.L(t.w).f.a.a<501?18:20
-if(r.d)s=A.aF(A.a([new A.aa(B.kA,A.eV(q,A.jH(B.alh,B.m,25),q,new A.aFB(r),q),q),r.e],t.p),B.C,B.i,B.h)
+if(r.d)s=A.c3(A.aF(A.a([new A.aa(B.kA,A.eV(q,A.jH(B.alh,B.m,25),q,new A.aFB(r),q),q),r.e],t.p),B.C,B.i,B.h),q,B.B)
 else{$.aTc()
-s=new A.aa(B.Bj,A.kU(q,new A.aFC(r,p),13,q,!1,B.B,!1),q)}return A.hn(q,q,A.c3(A.U(s,850,500),q,B.B),B.j,q,B.bq,q,B.cC,q)}}
+s=new A.aa(B.Bj,A.kU(q,new A.aFC(r,p),13,!1,!1,B.B,!0),q)}return A.hn(q,q,A.U(s,850,500),B.j,q,B.bq,q,B.cC,q)}}
 A.aFB.prototype={
 $0(){var s=this.a
 s.q(new A.aFA(s))},
@@ -101224,7 +101224,7 @@ return new A.aa(B.Bg,A.d2(!1,!0,A.ay(B.O,A.cf(A.aY(A.a([B.ot,B.j3,A.ap("Create U
 A.aHR.prototype={
 $2(a,b){var s,r=b.b
 if(r!=null){s=J.rV(r)
-return A.kU(null,new A.aHQ(this.a,s),s.length,null,!1,B.B,!0)}else return B.Le},
+return A.kU(null,new A.aHQ(this.a,s),s.length,!1,!1,B.B,!0)}else return B.Le},
 $S:100}
 A.aHQ.prototype={
 $2(a,b){return this.a.avT(this.b[b])},

@@ -30,6 +30,7 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: SizedBox(
         width: 280,
+        // SingleChildScrollView
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -45,6 +46,7 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                       if (snapshot.hasData) {
                         final snap = snapshot.data!.docs;
                         return ListView.builder(
+                            primary: false,
                             shrinkWrap: true,
                             itemCount: snap.length,
                             itemBuilder: (context, index) {
