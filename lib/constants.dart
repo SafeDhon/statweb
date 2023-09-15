@@ -22,6 +22,9 @@ AppBar myAppBar(String text, List<Widget> actions) {
 }
 
 var paleYellow = const Color(0xFFFBFBBC);
+var paleYellow1 = const Color(0xFFFFDE59);
+var paleYellow2 = const Color(0xFFFFED00);
+var paleYellow3 = const Color(0xFFF6AA00);
 var milk = const Color(0xFFFDFFF5);
 var water = const Color(0xFFD8EBFE);
 var beauBlue = const Color(0xFFB8CDEF);
@@ -169,5 +172,40 @@ BoxShadow homeBoxShadow() {
     blurRadius: 6,
     spreadRadius: 0.5,
     offset: const Offset(2, 2),
+  );
+}
+
+BoxDecoration homeBox(Color color) {
+  return BoxDecoration(
+    gradient: LinearGradient(
+      colors: [color, Colors.grey.shade300],
+      stops: const [0.1, 0.99],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    // color: metallicBlue,
+    borderRadius: BorderRadius.circular(20),
+    boxShadow: [homeBoxShadow()],
+  );
+}
+
+Text textHomeBox(String text, double fontSize) {
+  return Text(
+    text,
+    overflow: TextOverflow.ellipsis,
+    maxLines: 1,
+    style: TextStyle(
+      color: Colors.white,
+      fontFamily: 'Quicksand',
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      shadows: const [
+        Shadow(
+          blurRadius: 2.0,
+          color: Colors.black54,
+          offset: Offset(1.3, 1.3),
+        ),
+      ],
+    ),
   );
 }

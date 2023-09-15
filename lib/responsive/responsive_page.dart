@@ -9,7 +9,7 @@ import 'package:statweb/my_icons_icons.dart';
 
 import 'package:statweb/states/chat/chat_dialog.dart';
 import 'package:statweb/states/eBook/eBookDesktop.dart';
-import 'package:statweb/states/formular/formular_list.dart';
+
 import 'package:statweb/states/manage/mangeUser_dialog.dart';
 import 'package:statweb/states/quiz/quiz_units.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
@@ -35,6 +35,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
   String userTest = '';
   bool isLoading = true;
   bool isDialogLoading = false;
+  ScrollController mainpageController = ScrollController();
 
   var currentPage = DrawerSections.home;
   String currentHeader = 'Home';
@@ -132,51 +133,70 @@ class _ResponsivePageState extends State<ResponsivePage> {
                   child: SizedBox(
                     // color: Colors.pink.shade400,
                     width: widthUI < mobileWidth ? null : 1080,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0,
-                            vertical: widthUI < tabletWidth ? 8 : 12),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            widthUI < tabletWidth
-                                ? Container()
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        currentHeader,
-                                        style: enFont(
-                                            'semibold', 50, metallicBlue),
-                                      ),
-                                      // widget.user == ''
-                                      userID == ''
-                                          ? LoginTopButton(
-                                              onTap: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          const LoginDialog(),
-                                                ).then((value) async {
-                                                  await getformPrefer();
-                                                });
-                                              },
-                                            )
-                                          : MyHeader(
-                                              user_name:
-                                                  '$userID  $userName $userSur',
-                                            ),
-                                    ],
-                                  ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    top: widthUI < tabletWidth ? 4 : 16),
-                                child: contain),
-                          ],
+                    child: RawScrollbar(
+                      controller: mainpageController,
+                      thumbColor: glaucous.withOpacity(0.6),
+                      radius: const Radius.circular(20),
+                      thumbVisibility: true,
+                      thickness: 10,
+                      scrollbarOrientation: ScrollbarOrientation.right,
+
+                      // isAlwaysShown: true,
+                      // trackVisibility: true,
+                      // interactive: true,
+                      // showTrackOnHover: true,
+                      // hoverThickness: 100,
+
+                      child: SingleChildScrollView(
+                        controller: mainpageController,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: widthUI < tabletWidth ? 8 : 12,
+                            bottom: widthUI < tabletWidth ? 8 : 12,
+                            left: 10.0,
+                            right: 20.0,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              widthUI < tabletWidth
+                                  ? Container()
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          currentHeader,
+                                          style: enFont(
+                                              'semibold', 50, metallicBlue),
+                                        ),
+                                        // widget.user == ''
+                                        userID == ''
+                                            ? LoginTopButton(
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        const LoginDialog(),
+                                                  ).then((value) async {
+                                                    await getformPrefer();
+                                                  });
+                                                },
+                                              )
+                                            : MyHeader(
+                                                user_name:
+                                                    '$userID  $userName $userSur',
+                                              ),
+                                      ],
+                                    ),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      top: widthUI < tabletWidth ? 4 : 16),
+                                  child: contain),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -255,7 +275,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
   Widget myDrawer() {
     return Drawer(
       width: 250,
-      backgroundColor: glaucous,
+      backgroundColor: metallicBlue,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

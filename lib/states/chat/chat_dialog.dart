@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:statweb/constants.dart';
+import 'package:statweb/my_icons_icons.dart';
 
 class ChatDialog extends StatefulWidget {
   final String userID;
@@ -209,7 +210,7 @@ class _ChatDialogState extends State<ChatDialog> {
 
   Widget inputChatBox() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: const BoxDecoration(color: Colors.transparent),
       child: SafeArea(
         child: Row(
@@ -217,11 +218,13 @@ class _ChatDialogState extends State<ChatDialog> {
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                 decoration: BoxDecoration(
                     border: Border.all(color: metallicBlue, width: 2),
                     borderRadius: BorderRadius.circular(30)),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: TextField(
@@ -235,7 +238,11 @@ class _ChatDialogState extends State<ChatDialog> {
                     ),
                     IconButton(
                       onPressed: () => getImage(),
-                      icon: Icon(Icons.image, color: metallicBlue),
+                      icon: Icon(
+                        MyIcons.icons8_picture,
+                        size: 27,
+                        color: metallicBlue,
+                      ),
                     ),
                   ],
                 ),
@@ -321,7 +328,14 @@ class _ChatDialogState extends State<ChatDialog> {
     return Container(
       height: 50,
       width: double.maxFinite,
-      decoration: BoxDecoration(color: metallicBlue),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [metallicBlue, glaucous],
+          stops: const [0.1, 0.99],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
       child: Center(
         child: Text(
           'Class CS 243',

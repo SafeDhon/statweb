@@ -73,10 +73,13 @@ class _QuizUnitState extends State<QuizUnit> {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: Text(
+                    
                       quiz_units[index].description,
+                      textAlign: TextAlign.center,
                       style: enFont('bold', 20, glaucous),
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -89,11 +92,17 @@ class _QuizUnitState extends State<QuizUnit> {
                             'https://firebasestorage.googleapis.com/v0/b/reportstatweb.appspot.com/o/${quiz_units[index].picture}',
                         placeholder: (context, url) => myCircularLoading(),
                         imageBuilder: (context, imageProvider) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.fill,
+                          return SimpleShadow(
+                            opacity: 0.9, // Default: 0.5
+                            color: Colors.black, // Default: Black
+                            offset: const Offset(0, 0), // Default: Offset(2, 2)
+                            sigma: 2,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  // fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           );

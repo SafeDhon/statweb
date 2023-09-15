@@ -90,7 +90,7 @@ class _VDOGridState extends State<VDOGrid> {
                                       color: paleYellow,
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                            "https://drive.google.com/uc?export=view&id=${vdos[index]['cover']}",
+                                            "https://firebasestorage.googleapis.com/v0/b/reportstatweb.appspot.com/o/${vdos[index]['cover']}",
                                         placeholder: (context, url) =>
                                             myCircularLoading(),
                                         imageBuilder: (context, imageProvider) {

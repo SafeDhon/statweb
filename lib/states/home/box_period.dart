@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/util/login_dialog.dart';
@@ -68,11 +69,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
         });
       },
       child: Container(
-        decoration: BoxDecoration(
-          color: paleYellow,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [homeBoxShadow()],
-        ),
+        decoration: homeBox(paleYellow1),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
           child: onAdd
@@ -95,25 +92,37 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            'Next Period !!',
-                            style: periodTextStyle(headFontSize),
-                          ),
-                          Text(description.toString(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: periodTextStyle(descriptFontSize)),
-                          Text(
+                          textHomeBox('Next Period !!', headFontSize),
+                          // Text(
+                          //   'Next Period !!',
+                          //   style: periodTextStyle(headFontSize),
+                          // ),
+                          textHomeBox(description.toString(), descriptFontSize),
+                          // Text(description.toString(),
+                          //     overflow: TextOverflow.ellipsis,
+                          //     maxLines: 1,
+                          //     style: periodTextStyle(descriptFontSize)),
+                          textHomeBox(
                               DateFormat('kk:mm    d MMM yyyy')
                                   .format(dateTime),
-                              style: periodTextStyle(subFontSize)),
+                              subFontSize),
+                          // Text(
+                          //     DateFormat('kk:mm    d MMM yyyy')
+                          //         .format(dateTime),
+                          //     style: periodTextStyle(subFontSize)),
                         ],
                       ),
                     ),
                     Expanded(
-                        child: Image.asset(
-                      'assets/images/period.png',
-                      height: 500,
+                        child: SimpleShadow(
+                      opacity: 0.9, // Default: 0.5
+                      color: Colors.black, // Default: Black
+                      offset: const Offset(0, 0), // Default: Offset(2, 2)
+                      sigma: 2,
+                      child: Image.asset(
+                        'assets/images/period.png',
+                        height: 500,
+                      ),
                     )),
                   ],
                 ),
@@ -255,22 +264,6 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
       ),
     );
     // return controller.toString();
-  }
-
-  TextStyle periodTextStyle(double fontSize) {
-    return TextStyle(
-      color: Colors.white,
-      fontFamily: 'Quicksand',
-      fontSize: fontSize,
-      fontWeight: FontWeight.w700,
-      shadows: const [
-        Shadow(
-          blurRadius: 5.0,
-          color: Colors.black54,
-          offset: Offset(1.0, 1.0),
-        ),
-      ],
-    );
   }
 
   Widget descriptionDialog(DateTime date, String description) {

@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/states/home/home.dart';
@@ -79,11 +80,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
         });
       },
       child: Container(
-        decoration: BoxDecoration(
-          color: metallicBlue,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [homeBoxShadow()],
-        ),
+        decoration: homeBox(metallicBlue),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
           child: onAdd
@@ -106,57 +103,53 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            'Home work Live !!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand',
-                              fontSize: headFontSize,
-                              fontWeight: FontWeight.w700,
-                              shadows: const [
-                                Shadow(
-                                  blurRadius: 5.0,
-                                  color: Colors.black54,
-                                  offset: Offset(3.0, 3.0),
-                                ),
-                              ],
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            description.toString(),
-                            style: homeworkTextStyle(descriptFontSize),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          textHomeBox('Home work Live !!', headFontSize),
+                          // Text(
+                          //   'Home work Live !!',
+                          //   style: TextStyle(
+                          //     color: Colors.white,
+                          //     fontFamily: 'Quicksand',
+                          //     fontSize: headFontSize,
+                          //     fontWeight: FontWeight.w700,
+                          //     shadows: const [
+                          //       Shadow(
+                          //         blurRadius: 5.0,
+                          //         color: Colors.black54,
+                          //         offset: Offset(3.0, 3.0),
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   maxLines: 1,
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
+                          textHomeBox(description.toString(), descriptFontSize),
+                          // Text(
+                          //   description.toString(),
+                          //   style: homeworkTextStyle(descriptFontSize),
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
                           Column(
                             children: [
                               Row(
                                 children: [
                                   Expanded(
                                     flex: 3,
-                                    child: Text(
-                                      'Assign',
-                                      style: homeworkTextStyle(subFontSize),
-                                    ),
+                                    child: textHomeBox('Assign', subFontSize),
                                   ),
                                   Expanded(
                                     flex: 4,
-                                    child: Text(
+                                    child: textHomeBox(
                                         DateFormat(widthUI < 1150
                                                 ? ':  d/MM/yy'
                                                 : ':  d MMM yyyy')
                                             .format(assign),
-                                        style: homeworkTextStyle(subFontSize)),
+                                        subFontSize),
                                   ),
                                   Expanded(
                                     flex: 2,
-                                    child: Text(
-                                      DateFormat('kk:mm').format(assign),
-                                      style: homeworkTextStyle(subFontSize),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
+                                    child: textHomeBox(
+                                        DateFormat('kk:mm').format(assign),
+                                        subFontSize),
                                   ),
                                 ],
                               ),
@@ -164,26 +157,22 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                 children: [
                                   Expanded(
                                     flex: 3,
-                                    child: Text('Deadline',
-                                        style: homeworkTextStyle(subFontSize)),
+                                    child: textHomeBox('Deadline', subFontSize),
                                   ),
                                   Expanded(
                                     flex: 4,
-                                    child: Text(
+                                    child: textHomeBox(
                                         DateFormat(widthUI < 1150
                                                 ? ':  d/MM/yy'
                                                 : ':  d MMM yyyy')
                                             .format(deadline),
-                                        style: homeworkTextStyle(subFontSize)),
+                                        subFontSize),
                                   ),
                                   Expanded(
                                     flex: 2,
-                                    child: Text(
-                                      DateFormat('kk:mm').format(deadline),
-                                      style: homeworkTextStyle(subFontSize),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
+                                    child: textHomeBox(
+                                        DateFormat('kk:mm').format(deadline),
+                                        subFontSize),
                                   ),
                                 ],
                               ),
@@ -194,9 +183,15 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                     ),
                     Expanded(
                         flex: widthUI < tabletWidth ? 3 : 4,
-                        child: Image.asset(
-                          'assets/images/hwlive.png',
-                          height: 500,
+                        child: SimpleShadow(
+                          opacity: 0.9, // Default: 0.5
+                          color: Colors.black, // Default: Black
+                          offset: const Offset(0, 0), // Default: Offset(2, 2)
+                          sigma: 2,
+                          child: Image.asset(
+                            'assets/images/hwlive.png',
+                            height: 500,
+                          ),
                         )),
                   ],
                 ),
@@ -349,22 +344,6 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
         .collection("homework")
         .add(data)
         .then((value) => print('$deadline $description'));
-  }
-
-  TextStyle homeworkTextStyle(double fontSize) {
-    return TextStyle(
-      color: Colors.white,
-      fontFamily: 'Quicksand',
-      fontSize: fontSize,
-      fontWeight: FontWeight.w700,
-      shadows: const [
-        Shadow(
-          blurRadius: 5.0,
-          color: Colors.black54,
-          offset: Offset(1.0, 1.0),
-        ),
-      ],
-    );
   }
 
   Widget manageDialog() {
