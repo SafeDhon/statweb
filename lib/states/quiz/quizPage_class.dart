@@ -7,6 +7,7 @@ class QuizQuestion {
   List<dynamic> choice;
   int answer;
   int choose;
+  String solution;
   QuizQuestion({
     required this.unit,
     required this.id,
@@ -14,5 +15,6 @@ class QuizQuestion {
     required this.choice,
     required this.answer,
     required this.choose,
+    required this.solution,
   });
 }

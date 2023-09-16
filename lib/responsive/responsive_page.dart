@@ -85,6 +85,8 @@ class _ResponsivePageState extends State<ResponsivePage> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      
       appBar: widthUI < tabletWidth
           ? myAppBar(currentHeader, [
               Padding(
@@ -337,7 +339,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                       currentPage == DrawerSections.score ? true : false),
                   menuItem(5, "Research", Icons.search_rounded,
                       currentPage == DrawerSections.research ? true : false),
-                  if (userType == 'admin')
+                  if (userType == 'admin' || userType == 'teacher')
                     menuItem(6, "Manage User", MyIcons.person_add,
                         currentPage == DrawerSections.logout ? true : false),
                 ],

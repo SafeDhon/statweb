@@ -77,7 +77,7 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
                   Expanded(
                     child: Text(
                       ebook_units[index].description,
-                      style: enFont('bold', 20, glaucous),
+                      style: enFont('bold', 18, glaucous),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -100,7 +100,7 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: imageProvider,
-                                  fit: BoxFit.fill,
+                                  // fit: BoxFit.fill,
                                 ),
                               ),
                             ),

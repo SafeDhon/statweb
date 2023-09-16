@@ -73,13 +73,11 @@ class _QuizUnitState extends State<QuizUnit> {
                     ),
                   ),
                   Expanded(
-                    flex: 2,
                     child: Text(
-                    
                       quiz_units[index].description,
                       textAlign: TextAlign.center,
-                      style: enFont('bold', 20, glaucous),
-                      maxLines: 2,
+                      style: enFont('bold', 18, glaucous),
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

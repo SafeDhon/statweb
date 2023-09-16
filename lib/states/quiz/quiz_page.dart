@@ -23,6 +23,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  int scoreCheck = 0;
   bool onloadQuestion = false;
   bool onCheck = false;
   int questionID = 1;
@@ -41,12 +42,14 @@ class _QuizPageState extends State<QuizPage> {
           .then((value) {
         for (var data in value.docs) {
           QuizQuestion model = QuizQuestion(
-              unit: data['unit'],
-              id: data['id'],
-              question: data['question'],
-              choice: data['choice'],
-              answer: data['answer'],
-              choose: 5);
+            unit: data['unit'],
+            id: data['id'],
+            question: data['question'],
+            choice: data['choice'],
+            answer: data['answer'],
+            choose: 5,
+            solution: data['solution'],
+          );
           questions.add(model);
         }
       });
@@ -113,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
           Text('  ${widget.description}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: enFont('bold', widthUI < 550 ? 18 :25, glaucous)),
+              style: enFont('bold', widthUI < 550 ? 18 : 25, glaucous)),
         ],
       ),
     );
@@ -137,7 +140,8 @@ class _QuizPageState extends State<QuizPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       questions[questionID - 1].question,
-                      style: thFont('bold', widthUI < 550 ? 16 :18, Colors.black),
+                      style:
+                          thFont('bold', widthUI < 550 ? 16 : 18, Colors.black),
                     ),
                   ),
           ),
@@ -146,18 +150,25 @@ class _QuizPageState extends State<QuizPage> {
             top: 10,
             child: Container(
               alignment: Alignment.center,
-              height: widthUI < 550 ? 30 :40,
-              width: widthUI < 550 ? 30 :40,
+              height: widthUI < 550 ? 30 : 40,
+              width: widthUI < 550 ? 30 : 40,
               decoration: BoxDecoration(
                 color: metallicBlue,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Text(
                 number.toString(),
-                style: enFont('bold', widthUI < 550 ? 16 :20, Colors.white),
+                style: enFont('bold', widthUI < 550 ? 16 : 20, Colors.white),
               ),
             ),
           ),
+          onCheck
+              ? Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: solutionButton(questions[questionID - 1].solution),
+                )
+              : Container()
         ],
       ),
     );
@@ -214,11 +225,13 @@ class _QuizPageState extends State<QuizPage> {
                             : index == 2
                                 ? 'C.  '
                                 : 'D.  ',
-                    style: thFont('bold', widthUI < 550 ? 16 :20, metallicBlue),
+                    style:
+                        thFont('bold', widthUI < 550 ? 16 : 20, metallicBlue),
                   ),
                   Text(
                     onloadQuestion ? 'loading choice' : question.choice[index],
-                    style: thFont('bold', widthUI < 550 ? 16 :20, Colors.black),
+                    style:
+                        thFont('bold', widthUI < 550 ? 16 : 20, Colors.black),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -232,7 +245,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget numberList(List<QuizQuestion> questions) {
     double widthUI = MediaQuery.of(context).size.width;
     return SizedBox(
-      child: widthUI < 501
+      child: widthUI < 600
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [choiceList(), checkandfx()],
@@ -268,9 +281,13 @@ class _QuizPageState extends State<QuizPage> {
               },
               backgroundColor: questionID == index + 1
                   ? metallicBlue
-                  : questions[index].choose == 5
-                      ? paleYellow
-                      : glaucous,
+                  : onCheck
+                      ? questions[index].answer == questions[index].choose
+                          ? Colors.green.shade300
+                          : Colors.red.shade300
+                      : questions[index].choose == 5
+                          ? paleYellow
+                          : glaucous,
               child: Center(
                 child: Text(
                   (index + 1).toString(),
@@ -297,11 +314,20 @@ class _QuizPageState extends State<QuizPage> {
     return SizedBox(
       height: widthUI < 501 ? 55 : 60,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15.0),
             child: FloatingActionButton(
               onPressed: () {
+                scoreCheck = 0;
+
+                for (var i in questions) {
+                  if (i.answer == i.choose) {
+                    scoreCheck = scoreCheck + 1;
+                  }
+                }
+
                 bool chooseAll = true;
                 for (var i in questions) {
                   if (i.choose == 5) chooseAll = false;
@@ -337,7 +363,16 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
             ),
-          )
+          ),
+          onCheck
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 12, left: 15.0),
+                  child: Text(
+                    '${scoreCheck.toString()}/${questions.length}',
+                    style: enFont('bold', 30, metallicBlue),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
@@ -347,5 +382,27 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       onCheck = true;
     });
+  }
+
+  Widget solutionButton(String url) {
+    double widthUI = MediaQuery.of(context).size.width;
+    return SizedBox(
+      height: widthUI < 550 ? 30 : 40,
+      width: widthUI < 550 ? 30 : 40,
+      child: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) => Dialog(
+                    child: Text(url),
+                    // child: Image.network(url, fit: BoxFit.cover),
+                  ));
+        },
+        backgroundColor: Colors.grey.shade400,
+        child: const Center(
+          child: Text('i'),
+        ),
+      ),
+    );
   }
 }
