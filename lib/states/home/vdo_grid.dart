@@ -130,15 +130,27 @@ class _VDOGridState extends State<VDOGrid> {
                                           children: [
                                             Text(
                                               '${vdos[index]['vdo_name']}',
-                                              style: enFont(
-                                                  'bold', 22, metallicBlue),
+                                              // style: enFont(
+                                              //     'bold', 22, metallicBlue),
+                                              style: TextStyle(
+                                                fontFamily: 'FCSubjectRounded',
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 21,
+                                                color: metallicBlue,
+                                              ),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             Text(
                                               '${vdos[index]['description']}',
-                                              style:
-                                                  enFont('bold', 14, glaucous),
+                                              // style:
+                                              //     enFont('bold', 14, glaucous),
+                                              style: TextStyle(
+                                                fontFamily: 'FCSubjectRounded',
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 16,
+                                                color: glaucous,
+                                              ),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),

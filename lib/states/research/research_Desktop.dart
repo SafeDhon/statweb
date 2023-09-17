@@ -184,7 +184,9 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
         child: TextField(
-          style: enFont('bold', 18, metallicBlue),
+        
+          style: thFont('bold', 18, metallicBlue),
+       
           textAlignVertical: TextAlignVertical.top,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(10),

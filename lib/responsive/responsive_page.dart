@@ -136,6 +136,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                     // color: Colors.pink.shade400,
                     width: widthUI < mobileWidth ? null : 1080,
                     child: RawScrollbar(
+                      mainAxisMargin: 10,
                       controller: mainpageController,
                       thumbColor: glaucous.withOpacity(0.6),
                       radius: const Radius.circular(20),

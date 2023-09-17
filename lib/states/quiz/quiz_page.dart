@@ -356,10 +356,14 @@ class _QuizPageState extends State<QuizPage> {
                 );
               },
               backgroundColor: metallicBlue,
-              child: const Center(
-                child: Icon(
-                  Icons.functions_rounded,
-                  color: Colors.white,
+              child: Center(
+                // child: Icon(
+                //   Icons.functions_rounded,
+                //   color: Colors.white,
+                // ),
+                child: Image.asset('assets/icons/function2.png',
+                height: 28,
+                width: 28,
                 ),
               ),
             ),
@@ -399,8 +403,10 @@ class _QuizPageState extends State<QuizPage> {
                   ));
         },
         backgroundColor: Colors.grey.shade400,
-        child: const Center(
-          child: Text('i'),
+        child: Center(
+          child: Text('!',
+          style: enFont('bold', 25, Colors.black),
+          ),
         ),
       ),
     );

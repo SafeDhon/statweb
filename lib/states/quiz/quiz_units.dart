@@ -70,6 +70,7 @@ class _QuizUnitState extends State<QuizUnit> {
                     child: Text(
                       'Quiz ${quiz_units[index].id}',
                       style: enFont('bold', 25, metallicBlue),
+                   
                     ),
                   ),
                   Expanded(

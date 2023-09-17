@@ -104,30 +104,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           textHomeBox('Home work Live !!', headFontSize),
-                          // Text(
-                          //   'Home work Live !!',
-                          //   style: TextStyle(
-                          //     color: Colors.white,
-                          //     fontFamily: 'Quicksand',
-                          //     fontSize: headFontSize,
-                          //     fontWeight: FontWeight.w700,
-                          //     shadows: const [
-                          //       Shadow(
-                          //         blurRadius: 5.0,
-                          //         color: Colors.black54,
-                          //         offset: Offset(3.0, 3.0),
-                          //       ),
-                          //     ],
-                          //   ),
-                          //   maxLines: 1,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
                           textHomeBox(description.toString(), descriptFontSize),
-                          // Text(
-                          //   description.toString(),
-                          //   style: homeworkTextStyle(descriptFontSize),
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
                           Column(
                             children: [
                               Row(

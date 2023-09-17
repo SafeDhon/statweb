@@ -114,6 +114,32 @@ flutter:
       - asset: fonts/EkkamaiNew-Thin.ttf
         weight: 300
 
+   - family: FCHome
+     fonts:
+      - asset: fonts/FC-Home-Black.ttf
+        weight: 700
+      - asset: fonts/FC-Home-Regular.ttf
+        weight: 500
+      - asset: fonts/FC-Home-Thin.ttf
+        weight: 300
+
+   - family: FCSubjectRounded
+     fonts:
+      - asset: fonts/FC-Subject-Rounded-Bold.ttf
+        weight: 700
+      - asset: fonts/FC-Subject-Rounded-Regular.ttf
+        weight: 500
+
+   - family: FCSavespaceRounded
+     fonts:
+      - asset: fonts/FC-SaveSpace-Rounded-Regular.ttf
+        weight: 500
+    
+   - family: FCGalaxy
+     fonts:
+      - asset: fonts/FC-Galaxy-Regular.ttf
+        weight: 500
+
    - family: MyIcons
      fonts:
       - asset: assets/MyIcons.ttf

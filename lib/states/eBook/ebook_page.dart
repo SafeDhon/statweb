@@ -29,7 +29,6 @@ class _EBookpageState extends State<EBookpage> {
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     return onQuiz
         ? QuizPage(
@@ -70,7 +69,12 @@ class _EBookpageState extends State<EBookpage> {
                         padding: const EdgeInsets.only(
                             left: 16, right: 16, top: 12, bottom: 4.0),
                         child: SingleChildScrollView(
-                            child: widget.pages[page - 1].contain),
+                          child: Image.asset(
+                            'assets/images/test1.jpg',
+                            height: 500,
+                          ),
+                          // child: widget.pages[page - 1].contain,
+                        ),
                       )),
                 ),
                 NavBarEBOOK(

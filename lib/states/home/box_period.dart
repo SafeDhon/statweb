@@ -50,21 +50,14 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
     return InkWell(
       onTap: () async {
         await getformPrefer().then((value) {
-          if (userID == '') {
+          if (userID == 'student' || userID == '') {
             showDialog(
               context: context,
-              builder: (BuildContext context) => const LoginDialog(),
-            ).then((value) async {
-              await getformPrefer();
-            });
+              builder: (BuildContext context) =>
+                  descriptionDialog(dateTime, description.toString()),
+            );
           } else {
-            userType == 'student'
-                ? showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        descriptionDialog(dateTime, description.toString()),
-                  )
-                : pickDateTime();
+            pickDateTime();
           }
         });
       },
@@ -93,23 +86,11 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           textHomeBox('Next Period !!', headFontSize),
-                          // Text(
-                          //   'Next Period !!',
-                          //   style: periodTextStyle(headFontSize),
-                          // ),
                           textHomeBox(description.toString(), descriptFontSize),
-                          // Text(description.toString(),
-                          //     overflow: TextOverflow.ellipsis,
-                          //     maxLines: 1,
-                          //     style: periodTextStyle(descriptFontSize)),
                           textHomeBox(
                               DateFormat('kk:mm    d MMM yyyy')
                                   .format(dateTime),
                               subFontSize),
-                          // Text(
-                          //     DateFormat('kk:mm    d MMM yyyy')
-                          //         .format(dateTime),
-                          //     style: periodTextStyle(subFontSize)),
                         ],
                       ),
                     ),

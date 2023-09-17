@@ -65,7 +65,9 @@ class InputParameter extends StatelessWidget {
                       ],
 
                       readOnly: readOnly,
-                      textAlignVertical: TextAlignVertical.top,
+                      textAlignVertical: widthUI < 501
+                          ? TextAlignVertical.bottom
+                          : TextAlignVertical.top,
                       // textAlign: TextAlign.center,
                       style: enFont('bold', fontSize2, metallicBlue),
                       onChanged: (value) {},
