@@ -406,10 +406,11 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: InkWell(
         onTap: () {
+          print(object.id);
           showDialog(
               context: context,
               builder: (BuildContext context) =>
-                  homeworSendDialog(object.id, object['deadline']));
+                  homeworkSendDialog(object.id, object['deadline']));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -455,7 +456,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
     );
   }
 
-  Widget homeworSendDialog(String homeworkID, var deadline) {
+  Widget homeworkSendDialog(String homeworkid, var deadline) {
     return Dialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -477,22 +478,37 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                     stream: FirebaseFirestore.instance
                         .collectionGroup('homeworks')
                         // .orderBy('timestamp')
-                        // .where('homwork_id', isNotEqualTo: 'bI7KH60J15NIZFlQV6dB')
+                        // .where('homework_id', isEqualTo: 'bROd3BBIs8S5bUOCS5Nk')
                         .snapshots(),
                     // .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData) {
+                      if (snapshot.hasData || snapshot.data!.docs.isNotEmpty) {
                         final snap = snapshot.data!.docs;
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: snap.length,
-                            itemBuilder: (context, index) {
-                              return snap[index].id == homeworkID
-                                  // ?Text(snap[index]['name'])
-                                  ? homeworksendContainer(snap[index], deadline)
-                                  : null;
-                            });
+                        var works = [];
+                        for (var data in snap) {
+                          if (data.id == homeworkid) {
+                            works.add(data);
+                          }
+                          // works.add(data);
+                        }
+                        if (works == []) {
+                          return SizedBox(
+                            height: 100,
+                            child: Center(
+                                child: Text('Empty',
+                                    style:
+                                        enFont('semibold', 20, metallicBlue))),
+                          );
+                        } else {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: works.length,
+                              itemBuilder: (context, index) {
+                                return homeworksendContainer(
+                                    works[index], deadline);
+                              });
+                        }
                       } else {
                         return SizedBox(
                           height: 100,
@@ -501,6 +517,16 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   style: enFont('semibold', 20, metallicBlue))),
                         );
                       }
+                      // final snap = snapshot.data!.docs;
+                      // return ListView.builder(
+                      //     shrinkWrap: true,
+                      //     itemCount: snap.length,
+                      //     itemBuilder: (context, index) {
+                      //       return snap[index].id == homeworkID3
+                      //           // ?Text(snap[index]['name'])
+                      //           ? homeworksendContainer(snap[index], deadline)
+                      //           : null;
+                      //     });
                     }),
               ],
             ),

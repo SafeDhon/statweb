@@ -34,7 +34,7 @@ class _EBookpageState extends State<EBookpage> {
         ? QuizPage(
             onBack: () => setState(() => onQuiz = false),
             unit: widget.pages[page - 1].quiz[0],
-            description: widget.pages[page - 1].quiz[1],
+            // description: widget.pages[page - 1].quiz[1],
           )
         : SizedBox(
             height: size.height * 0.85,
@@ -70,8 +70,8 @@ class _EBookpageState extends State<EBookpage> {
                             left: 16, right: 16, top: 12, bottom: 4.0),
                         child: SingleChildScrollView(
                           child: Image.asset(
-                            'assets/images/test1.jpg',
-                            height: 500,
+                            'assets/images/test2.png',
+                            fit: BoxFit.fitWidth,
                           ),
                           // child: widget.pages[page - 1].contain,
                         ),

@@ -8,13 +8,13 @@ import 'package:statweb/states/quiz/quizPage_class.dart';
 
 class QuizPage extends StatefulWidget {
   final int unit;
-  final String description;
+  // final String description;
   final Function() onBack;
 
   const QuizPage({
     Key? key,
     required this.unit,
-    required this.description,
+    // required this.description,
     required this.onBack,
   }) : super(key: key);
 
@@ -28,6 +28,8 @@ class _QuizPageState extends State<QuizPage> {
   bool onCheck = false;
   int questionID = 1;
   List<QuizQuestion> questions = [];
+
+  String description = '';
 
   Future<void> getQuizData() async {
     setState(() {
@@ -59,7 +61,23 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     super.initState();
-
+    switch (widget.unit) {
+      case 1:
+        setState(() => description = 'Probability');
+        break;
+      case 2:
+      setState(() => description = 'Random Variable');
+        break;
+      case 3:
+      setState(() => description = 'Discrete Probability Distributions');
+        break;
+      case 4:
+      setState(() => description = 'Continuous Probability Distributions');
+        break;
+      case 5:
+      setState(() => description = 'Sampling Distribution');
+        break;
+    }
     getQuizData().then((value) {
       setState(() {
         onloadQuestion = false;
@@ -113,7 +131,7 @@ class _QuizPageState extends State<QuizPage> {
               color: metallicBlue,
             ),
           ),
-          Text('  ${widget.description}',
+          Text('  $description',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: enFont('bold', widthUI < 550 ? 18 : 25, glaucous)),
@@ -361,9 +379,10 @@ class _QuizPageState extends State<QuizPage> {
                 //   Icons.functions_rounded,
                 //   color: Colors.white,
                 // ),
-                child: Image.asset('assets/icons/function2.png',
-                height: 28,
-                width: 28,
+                child: Image.asset(
+                  'assets/icons/function2.png',
+                  height: 28,
+                  width: 28,
                 ),
               ),
             ),
@@ -404,8 +423,9 @@ class _QuizPageState extends State<QuizPage> {
         },
         backgroundColor: Colors.grey.shade400,
         child: Center(
-          child: Text('!',
-          style: enFont('bold', 25, Colors.black),
+          child: Text(
+            '!',
+            style: enFont('bold', 25, Colors.black),
           ),
         ),
       ),

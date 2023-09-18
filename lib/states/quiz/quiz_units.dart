@@ -28,7 +28,7 @@ class _QuizUnitState extends State<QuizUnit> {
         ? QuizPage(
             onBack: () => setState(() => onChoose = false),
             unit: unitChoose,
-            description: descriptionQuiz,
+            // description: descriptionQuiz,
           )
         : unitGrid();
   }

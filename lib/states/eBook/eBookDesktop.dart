@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:statweb/constants.dart';
 import 'package:statweb/states/eBook/eBook_class.dart';
+import 'package:statweb/states/eBook/ebook_Test.dart';
 import 'package:statweb/states/eBook/ebook_page.dart';
 
 class EBookDeskTop extends StatefulWidget {
@@ -27,11 +28,16 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
       // height: 630,
       // width: 400,
       child: onChoose
-          ? EBookpage(
-              onBack: () => setState(() => onChoose = false),
-              pages: pages,
-              unit: unit,
+          // ? EBookpage(
+          //     onBack: () => setState(() => onChoose = false),
+          //     pages: pages,
+          //     unit: unit,
+          //     description: description,
+          //   )
+          ? EbookPageTest(
+              unit: int.parse(unit),
               description: description,
+              onBack: () => setState(() => onChoose = false),
             )
           : unitGrid(),
     );

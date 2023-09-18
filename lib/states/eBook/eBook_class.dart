@@ -36,13 +36,13 @@ List<EBook> ebook_units = [
     contains: Container(),
     pages: ebookU1,
   ),
-  EBook(
-    id: 2,
-    description: 'Random Variable',
-    picture: 'illustrations%2Febook2.png?alt=media&token=f0ae0505-63f0-4bf4-a8d9-623c56c3149e',
-    contains: Container(),
-    pages: ebookU2,
-  ),
+  // EBook(
+  //   id: 2,
+  //   description: 'Random Variable',
+  //   picture: 'illustrations%2Febook2.png?alt=media&token=f0ae0505-63f0-4bf4-a8d9-623c56c3149e',
+  //   contains: Container(),
+  //   pages: ebookU2,
+  // ),
   // EBook(
   //   id: 3,
   //   description: 'Discrete Probability Distributions',
