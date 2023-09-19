@@ -74,19 +74,15 @@ class _EBookDeskTopState extends State<EBookDeskTop> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: Text(
-                      'Unit ${ebook_units[index].id}',
-                      style: enFont('bold', 25, metallicBlue),
-                    ),
+                  Text(
+                    'Unit ${ebook_units[index].id}',
+                    style: enFont('bold', 27, metallicBlue),
                   ),
-                  Expanded(
-                    child: Text(
-                      ebook_units[index].description,
-                      style: enFont('bold', 18, glaucous),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  Text(
+                    ebook_units[index].description,
+                    style: enFont('bold', 20, glaucous),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Expanded(
                     flex: 5,

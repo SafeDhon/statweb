@@ -62,7 +62,7 @@ class _FormularDialogState extends State<FormularDialog> {
                   thumbColor: glaucous.withOpacity(0.6),
                   radius: const Radius.circular(20),
                   thumbVisibility: true,
-                  thickness: 10,
+                  thickness: 8,
                   scrollbarOrientation: ScrollbarOrientation.right,
 
                   // isAlwaysShown: true,

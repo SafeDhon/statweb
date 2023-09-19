@@ -66,16 +66,16 @@ class _QuizPageState extends State<QuizPage> {
         setState(() => description = 'Probability');
         break;
       case 2:
-      setState(() => description = 'Random Variable');
+        setState(() => description = 'Random Variable');
         break;
       case 3:
-      setState(() => description = 'Discrete Probability Distributions');
+        setState(() => description = 'Discrete Probability Distributions');
         break;
       case 4:
-      setState(() => description = 'Continuous Probability Distributions');
+        setState(() => description = 'Continuous Probability Distributions');
         break;
       case 5:
-      setState(() => description = 'Sampling Distribution');
+        setState(() => description = 'Sampling Distribution');
         break;
     }
     getQuizData().then((value) {
@@ -143,7 +143,11 @@ class _QuizPageState extends State<QuizPage> {
   Widget problemBox(int number) {
     double widthUI = MediaQuery.of(context).size.width;
     return Container(
-      height: 250,
+     
+
+      height: widthUI < 501
+      ? null
+      :250,
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -155,7 +159,12 @@ class _QuizPageState extends State<QuizPage> {
             child: onloadQuestion
                 ? myCircularLoading()
                 : Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.only(
+                      right: 16,
+                      left: 16,
+                      bottom: 42,
+                      top: 42,
+                    ),
                     child: Text(
                       questions[questionID - 1].question,
                       style:

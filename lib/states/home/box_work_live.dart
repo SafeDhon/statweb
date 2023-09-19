@@ -105,55 +105,59 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                         children: [
                           textHomeBox('Home work Live !!', headFontSize),
                           textHomeBox(description.toString(), descriptFontSize),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: textHomeBox('Assign', subFontSize),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: textHomeBox(
-                                        DateFormat(widthUI < 1150
-                                                ? ':  d/MM/yy'
-                                                : ':  d MMM yyyy')
-                                            .format(assign),
-                                        subFontSize),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: textHomeBox(
-                                        DateFormat('kk:mm').format(assign),
-                                        subFontSize),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: textHomeBox('Deadline', subFontSize),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: textHomeBox(
-                                        DateFormat(widthUI < 1150
-                                                ? ':  d/MM/yy'
-                                                : ':  d MMM yyyy')
-                                            .format(deadline),
-                                        subFontSize),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: textHomeBox(
-                                        DateFormat('kk:mm').format(deadline),
-                                        subFontSize),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          SizedBox(
+                            width: widthUI < 1150 ? 230 : null,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: textHomeBox('Assign', subFontSize),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: textHomeBox(
+                                          DateFormat(widthUI < 1150
+                                                  ? ':  d/MM/yy'
+                                                  : ':  d MMM yyyy')
+                                              .format(assign),
+                                          subFontSize),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: textHomeBox(
+                                          DateFormat('kk:mm').format(assign),
+                                          subFontSize),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child:
+                                          textHomeBox('Deadline', subFontSize),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: textHomeBox(
+                                          DateFormat(widthUI < 1150
+                                                  ? ':  d/MM/yy'
+                                                  : ':  d MMM yyyy')
+                                              .format(deadline),
+                                          subFontSize),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: textHomeBox(
+                                          DateFormat('kk:mm').format(deadline),
+                                          subFontSize),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),

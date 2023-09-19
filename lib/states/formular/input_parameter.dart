@@ -24,13 +24,13 @@ class InputParameter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widthUI = MediaQuery.of(context).size.width;
-    double fontSize1 = widthUI < 501 ? 22 : 25;
+    double fontSize1 = widthUI < 501 ? 20 : 25;
     double fontSize2 = widthUI < 501 ? 18 : 20;
     double boxHeight = widthUI < 501 ? 45 : 50;
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 8.0,
-        horizontal: widthUI < 501 ? 20 : 32,
+        horizontal: widthUI < 501 ? 6 : 32,
       ),
       child: SizedBox(
           height: boxHeight,
@@ -53,7 +53,10 @@ class InputParameter extends StatelessWidget {
                       )),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: 6.0, right: 12.0, left: 12.0),
+                      bottom: 3.0,
+                      right: 12.0,
+                      left: 12.0,
+                    ),
                     child: TextField(
                       // keyboardType:
                       // TextInputType.numberWithOptions(decimal: true),
@@ -65,10 +68,10 @@ class InputParameter extends StatelessWidget {
                       ],
 
                       readOnly: readOnly,
-                      textAlignVertical: widthUI < 501
-                          ? TextAlignVertical.bottom
-                          : TextAlignVertical.top,
-                      // textAlign: TextAlign.center,
+                      // textAlignVertical: widthUI < 501
+                      //     ? TextAlignVertical.bottom
+                      //     : TextAlignVertical.top,
+                      // textAlignVertical: TextAlignVertical.top,
                       style: enFont('bold', fontSize2, metallicBlue),
                       onChanged: (value) {},
                       controller: controller,
@@ -78,7 +81,7 @@ class InputParameter extends StatelessWidget {
                         hintStyle: readOnly
                             ? enFont('bold', fontSize2,
                                 onCalHint ? metallicBlue : beauBlue)
-                            : enFont('bold', 20,
+                            : enFont('bold', fontSize2,
                                 wrongParam ? Colors.red.shade300 : beauBlue),
                         border: InputBorder.none,
                       ),

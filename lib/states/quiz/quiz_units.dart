@@ -34,6 +34,7 @@ class _QuizUnitState extends State<QuizUnit> {
   }
 
   Widget unitGrid() {
+    double widthUI = MediaQuery.of(context).size.width;
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
@@ -66,21 +67,16 @@ class _QuizUnitState extends State<QuizUnit> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: Text(
-                      'Quiz ${quiz_units[index].id}',
-                      style: enFont('bold', 25, metallicBlue),
-                   
-                    ),
+                  Text(
+                    'Quiz ${quiz_units[index].id}',
+                    style: enFont('bold', 27, metallicBlue),
                   ),
-                  Expanded(
-                    child: Text(
-                      quiz_units[index].description,
-                      textAlign: TextAlign.center,
-                      style: enFont('bold', 18, glaucous),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  Text(
+                    quiz_units[index].description,
+                    textAlign: TextAlign.center,
+                    style: enFont('bold', 20, glaucous),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Expanded(
                     flex: 5,

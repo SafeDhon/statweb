@@ -88,7 +88,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                           textHomeBox('Next Period !!', headFontSize),
                           textHomeBox(description.toString(), descriptFontSize),
                           textHomeBox(
-                              DateFormat('kk:mm    d MMM yyyy')
+                              DateFormat('d MMM yyyy   kk:mm')
                                   .format(dateTime),
                               subFontSize),
                         ],

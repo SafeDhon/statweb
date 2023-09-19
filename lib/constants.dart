@@ -131,6 +131,9 @@ FirebaseOptions myFirebaseOptions() {
 Theme dateTimePickTheme(BuildContext context, Widget? child) {
   return Theme(
       data: Theme.of(context).copyWith(
+        // dialogTheme: const DialogTheme(
+        //     shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.all(Radius.circular(16)))),
         textTheme: TextTheme(
           headlineLarge: enFont('semibold', 15, metallicBlue),
           headlineMedium: enFont('semibold', 15, metallicBlue),
