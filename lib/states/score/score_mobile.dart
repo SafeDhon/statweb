@@ -161,23 +161,8 @@ class _ScoreMobileState extends State<ScoreMobile> {
                 Expanded(
                     flex: 2,
                     child: GestureDetector(
-                      onTap: userType == 'student' || userType == ''
+                      onTap: userType == 'admin' || userType == 'teacher'
                           ? () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    FullScoreDialog(
-                                  userID: userID,
-                                  header: name,
-                                  quiz1: quiz1,
-                                  quiz2: quiz2,
-                                  midterm: midterm,
-                                  finalterm: finalterm,
-                                  total: total,
-                                ),
-                              );
-                            }
-                          : () {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) =>
@@ -196,6 +181,21 @@ class _ScoreMobileState extends State<ScoreMobile> {
                                   setState(() => isloading = false);
                                 });
                               });
+                            }
+                          : () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    FullScoreDialog(
+                                  userID: userID,
+                                  header: name,
+                                  quiz1: quiz1,
+                                  quiz2: quiz2,
+                                  midterm: midterm,
+                                  finalterm: finalterm,
+                                  total: total,
+                                ),
+                              );
                             },
                       child: Text(
                         '$index. $name',

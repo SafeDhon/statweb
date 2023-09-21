@@ -57,6 +57,7 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
       child: SizedBox(
         width: 250,
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),

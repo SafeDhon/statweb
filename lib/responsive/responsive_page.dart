@@ -14,6 +14,7 @@ import 'package:statweb/states/manage/mangeUser_dialog.dart';
 import 'package:statweb/states/quiz/quiz_units.dart';
 import 'package:statweb/states/research/research_Desktop.dart';
 import 'package:statweb/states/score/score_mobile.dart';
+import 'package:statweb/states/score/score_test.dart';
 import 'package:statweb/util/login_top.dart';
 import 'package:statweb/util/logout_dialog.dart';
 
@@ -78,6 +79,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
     } else if (currentPage == DrawerSections.score) {
       contain =
           widthUI < mobileWidth ? const ScoreMobile() : const ScoreDesktop();
+      // contain = const ScoreTest();
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
       contain = const ResearchDesktop();
@@ -136,7 +138,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                     // color: Colors.pink.shade400,
                     width: widthUI < mobileWidth ? null : 1080,
                     child: RawScrollbar(
-                      mainAxisMargin: 10,
+                      mainAxisMargin: 6,
                       controller: mainpageController,
                       thumbColor: glaucous.withOpacity(0.6),
                       radius: const Radius.circular(20),
