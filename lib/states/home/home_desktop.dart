@@ -40,10 +40,17 @@ class _HomeDesktopState extends State<HomeDesktop> {
         // child: Container(color: Colors.blue,),
         child: Row(
           children: [
-            const Expanded(
+            Expanded(
               child: Padding(
                 padding: EdgeInsets.only(right: 16),
-                child: MyWorkLiveNav(),
+                child: MyWorkLiveNav(
+                  // future: showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) => const LoginDialog(),
+                  // ).then((value) async {
+                  //   // await getformPrefer();
+                  // }),
+                ),
               ),
             ),
             Expanded(
@@ -80,22 +87,29 @@ class _HomeDesktopState extends State<HomeDesktop> {
         padding: const EdgeInsets.only(bottom: 8.0),
         // child: Container(color: Colors.blue,),
         child: Column(
-          children: const [
+          children: [
             Expanded(
               flex: 4,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 16.0),
-                child: MyWorkLiveNav(),
+                child: MyWorkLiveNav(
+                  // future: showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) => const LoginDialog(),
+                  // ).then((value) async {
+                  //   // await getformPrefer();
+                  // }),
+                ),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 3,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: NextPeriodNav(),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 4.0),

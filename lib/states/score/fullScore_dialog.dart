@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:statweb/constants.dart';
 
 class FullScoreDialog extends StatelessWidget {
@@ -8,6 +9,8 @@ class FullScoreDialog extends StatelessWidget {
   final String quiz2;
   final String midterm;
   final String finalterm;
+  final String report;
+  final String homework;
   final String total;
   const FullScoreDialog({
     Key? key,
@@ -17,6 +20,8 @@ class FullScoreDialog extends StatelessWidget {
     required this.quiz2,
     required this.midterm,
     required this.finalterm,
+    required this.report,
+    required this.homework,
     required this.total,
   }) : super(key: key);
 
@@ -42,6 +47,8 @@ class FullScoreDialog extends StatelessWidget {
                 scoreWidget('Midterm', midterm),
                 scoreWidget('Quiz 2', quiz2),
                 scoreWidget('Final', finalterm),
+                scoreWidget('Report', report),
+                scoreWidget('Homework', homework),
                 scoreWidget('Total', total),
               ],
             ),

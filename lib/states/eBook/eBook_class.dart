@@ -50,13 +50,13 @@ List<EBook> ebook_units = [
   //   contains: Container(),
   //   pages: ebookU3,
   // ),
-  // EBook(
-  //   id: 4,
-  //   description: 'Continuous Probability Distributions',
-  //   picture: 'illustrations%2Febook4.png?alt=media&token=ac76aa63-0e71-4511-8111-cd85605b36fb',
-  //   contains: Container(),
-  //   pages: ebookU4,
-  // ),
+  EBook(
+    id: 4,
+    description: 'Continuous Probability Distributions',
+    picture: 'illustrations%2Febook4.png?alt=media&token=ac76aa63-0e71-4511-8111-cd85605b36fb',
+    contains: Container(),
+    pages: ebookU4,
+  ),
   // EBook(
   //   id: 5,
   //   description: 'Sampling Distribution',

@@ -163,24 +163,24 @@ class _ScoreDesktopState extends State<ScoreDesktop> {
                       onTap: userType == 'student' || userType == ''
                           ? () {}
                           : () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    UpdateScoreDialog(
-                                  userID: userID,
-                                  header: name,
-                                  quiz1: quiz1,
-                                  quiz2: quiz2,
-                                  midterm: midterm,
-                                  finalterm: finalterm,
-                                  total: total,
-                                ),
-                              ).then((value) {
-                                setState(() => scores = []);
-                                readDataID().then((value) {
-                                  setState(() => isloading = false);
-                                });
-                              });
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (BuildContext context) =>
+                              //       UpdateScoreDialog(
+                              //     userID: userID,
+                              //     header: name,
+                              //     quiz1: quiz1,
+                              //     quiz2: quiz2,
+                              //     midterm: midterm,
+                              //     finalterm: finalterm,
+                              //     total: total,
+                              //   ),
+                              // ).then((value) {
+                              //   setState(() => scores = []);
+                              //   readDataID().then((value) {
+                              //     setState(() => isloading = false);
+                              //   });
+                              // });
                             },
                       child: Text(
                         '$index. $name',

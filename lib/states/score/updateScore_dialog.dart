@@ -14,6 +14,8 @@ class UpdateScoreDialog extends StatefulWidget {
   final String quiz2;
   final String midterm;
   final String finalterm;
+  final String report;
+  final String homework;
   final String total;
 
   const UpdateScoreDialog({
@@ -24,6 +26,8 @@ class UpdateScoreDialog extends StatefulWidget {
     required this.quiz2,
     required this.midterm,
     required this.finalterm,
+    required this.report,
+    required this.homework,
     required this.total,
   }) : super(key: key);
 
@@ -37,6 +41,8 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
   String updateQuiz2 = '';
   String updateMidterm = '';
   String updateFinal = '';
+  String updateReport = '';
+  String updateHomework = '';
   String updateTotal = '';
 
   @override
@@ -46,6 +52,8 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
     updateQuiz2 = widget.quiz2;
     updateMidterm = widget.midterm;
     updateFinal = widget.finalterm;
+    updateReport = widget.report;
+    updateHomework = widget.homework;
     updateTotal = widget.total;
   }
 
@@ -68,6 +76,8 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
                 inputScore('Midterm', widget.midterm),
                 inputScore('Quiz 2', widget.quiz2),
                 inputScore('Final', widget.finalterm),
+                inputScore('Report', widget.report),
+                inputScore('Homework', widget.homework),
                 inputScore('Total', widget.total),
                 updateButton()
               ],
@@ -126,6 +136,20 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
                           setState(() => updateFinal = value.toString());
                         }
                         break;
+                         case 'Report':
+                        if (value.isEmpty) {
+                          setState(() => updateReport = widget.report);
+                        } else {
+                          setState(() => updateReport = value.toString());
+                        }
+                        break;
+                         case 'Homework':
+                        if (value.isEmpty) {
+                          setState(() => updateHomework = widget.homework);
+                        } else {
+                          setState(() => updateHomework = value.toString());
+                        }
+                        break;
                       case 'Total':
                         if (value.isEmpty) {
                           setState(() => updateTotal = widget.total);
@@ -172,7 +196,7 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
               .then((value) => setState(() => onUpdate = false));
         },
         child: Container(
-          height: 50,
+          height: 40,
           decoration: BoxDecoration(
               color: metallicBlue, borderRadius: BorderRadius.circular(18)),
           child: Center(
@@ -201,6 +225,8 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
         'midterm': updateMidterm,
         'quiz2': updateQuiz2,
         'final': updateFinal,
+        'report':updateReport,
+        'homework':updateHomework,
         'total': updateTotal,
       }).then((value) {
         Navigator.pop(context);
@@ -214,6 +240,7 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
       child: Text(
         text,
         style: enFont('semibold', 20, metallicBlue),
+        maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
     );

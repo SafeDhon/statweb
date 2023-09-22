@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 import 'package:statweb/constants.dart';
 import 'package:statweb/my_icons_icons.dart';
@@ -78,8 +79,8 @@ class _ResponsivePageState extends State<ResponsivePage> {
       currentHeader = 'Quiz';
     } else if (currentPage == DrawerSections.score) {
       contain =
-          widthUI < mobileWidth ? const ScoreMobile() : const ScoreDesktop();
-      // contain = const ScoreTest();
+          // widthUI < mobileWidth ? const ScoreMobile() : const ScoreDesktop();
+      contain = const ScoreTest();
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
       contain = const ResearchDesktop();
@@ -88,7 +89,6 @@ class _ResponsivePageState extends State<ResponsivePage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      
       appBar: widthUI < tabletWidth
           ? myAppBar(currentHeader, [
               Padding(

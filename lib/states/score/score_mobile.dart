@@ -163,39 +163,39 @@ class _ScoreMobileState extends State<ScoreMobile> {
                     child: GestureDetector(
                       onTap: userType == 'admin' || userType == 'teacher'
                           ? () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    UpdateScoreDialog(
-                                  userID: userID,
-                                  header: name,
-                                  quiz1: quiz1,
-                                  quiz2: quiz2,
-                                  midterm: midterm,
-                                  finalterm: finalterm,
-                                  total: total,
-                                ),
-                              ).then((value) {
-                                setState(() => scores = []);
-                                readDataID().then((value) {
-                                  setState(() => isloading = false);
-                                });
-                              });
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (BuildContext context) =>
+                              //       UpdateScoreDialog(
+                              //     userID: userID,
+                              //     header: name,
+                              //     quiz1: quiz1,
+                              //     quiz2: quiz2,
+                              //     midterm: midterm,
+                              //     finalterm: finalterm,
+                              //     total: total,
+                              //   ),
+                              // ).then((value) {
+                              //   setState(() => scores = []);
+                              //   readDataID().then((value) {
+                              //     setState(() => isloading = false);
+                              //   });
+                              // });
                             }
                           : () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    FullScoreDialog(
-                                  userID: userID,
-                                  header: name,
-                                  quiz1: quiz1,
-                                  quiz2: quiz2,
-                                  midterm: midterm,
-                                  finalterm: finalterm,
-                                  total: total,
-                                ),
-                              );
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (BuildContext context) =>
+                              //       FullScoreDialog(
+                              //     userID: userID,
+                              //     header: name,
+                              //     quiz1: quiz1,
+                              //     quiz2: quiz2,
+                              //     midterm: midterm,
+                              //     finalterm: finalterm,
+                              //     total: total,
+                              //   ),
+                              // );
                             },
                       child: Text(
                         '$index. $name',
