@@ -23,6 +23,7 @@ class ManageUserDialog extends StatefulWidget {
 }
 
 class _ManageUserDialogState extends State<ManageUserDialog> {
+  bool onEdit = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -43,6 +44,10 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
+                      // if (snapshot.connectionState == ConnectionState.waiting) {
+                      //   return SizedBox(
+                      //       height: 100, child: myCircularLoading());
+                      // }
                       if (snapshot.hasData) {
                         final snap = snapshot.data!.docs;
                         return ListView.builder(
@@ -56,7 +61,13 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                         return const SizedBox();
                       }
                     }),
-                addUserButt(),
+                Row(
+                  children: [
+                    Expanded(child: editUserButt()),
+                    const SizedBox(width: 5),
+                    Expanded(child: addUserButt()),
+                  ],
+                ),
               ],
             ),
           ),
@@ -99,32 +110,32 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                     ],
                   ),
                 ),
-                IconButton(
-                  onPressed: () async {
-                    print('>>>>>>>>>>>>>>>>>> ${widget.currentUserID}');
-                    print('>>>>>>>>>>>>>>>>>> ${widget.currentUserPassword}');
-                    deleteUser(object.id, object['password'])
-                        .then((value) async {
-                      await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: '${widget.currentUserID}@gmail.com',
-                              password: widget.currentUserPassword)
-                          .then(
-                              (value) => print('..................... ReAuth'));
-                    }).catchError((e) async {
-                      await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: '${widget.currentUserID}@gmail.com',
-                              password: widget.currentUserPassword)
-                          .then(
-                              (value) => print('..................... ReAuth'));
-                    });
-                  },
-                  icon: Icon(
-                    Icons.cancel_rounded,
-                    color: Colors.grey.shade600,
-                  ),
-                )
+                onEdit
+                    ? IconButton(
+                        onPressed: () async {
+                          deleteUser(object.id, object['password'])
+                              .then((value) async {
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: '${widget.currentUserID}@gmail.com',
+                                    password: widget.currentUserPassword)
+                                .then((value) =>
+                                    print('..................... ReAuth'));
+                          }).catchError((e) async {
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: '${widget.currentUserID}@gmail.com',
+                                    password: widget.currentUserPassword)
+                                .then((value) =>
+                                    print('..................... ReAuth'));
+                          });
+                        },
+                        icon: Icon(
+                          Icons.cancel_rounded,
+                          color: Colors.grey.shade500,
+                        ),
+                      )
+                    : Container()
               ],
             ),
           ),
@@ -139,12 +150,21 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
         .doc(id)
         .delete()
         .then((value) {
-      final userToDelete = FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: '$id@gmail.com', password: password)
-          .then((value) async {
-        final user = FirebaseAuth.instance.currentUser!;
-        await user.delete();
+      FirebaseFirestore.instance
+          .collection('score')
+          .doc(id)
+          .delete()
+          .then((value) {
+          
+        // var userToDelete = FirebaseAuth.instance
+        //     .signInWithEmailAndPassword(
+        //         email: '$id@gmail.com', password: password)
+        //     .then((value) async {
+        //   final user = FirebaseAuth.instance.currentUser!;
+        //   await user.delete();
+        //   await value.delete();
+        // });
+        // userToDelete.delete();
       });
     });
   }
@@ -175,8 +195,46 @@ class _ManageUserDialogState extends State<ManageUserDialog> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  'Create User',
+                  'Create',
                   style: enFont('bold', 18, Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget editUserButt() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            onEdit = !onEdit;
+          });
+        },
+        child: Container(
+          height: 40,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: onEdit ? paleYellow1 : Colors.grey.shade600,
+            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  onEdit ? Icons.done_rounded : Icons.edit_rounded,
+                  color: onEdit ? metallicBlue : Colors.white,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  onEdit ? 'Finish' : 'Edit',
+                  style:
+                      enFont('bold', 18, onEdit ? metallicBlue : Colors.white),
                 ),
               ],
             ),

@@ -211,6 +211,18 @@ class _InfoUserDialogState extends State<InfoUserDialog> {
       "year": "2",
       "typeuser": "student",
     };
+    var score = {
+      "id": int.parse(id),
+      "name": name,
+      "surname": surname,
+      "quiz1": "-",
+      "quiz2": "-",
+      "final": "-",
+      "midterm": "-",
+      "report": "-",
+      "homework": "-",
+      "total": "-",
+    };
     try {
       UserCredential? result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -220,8 +232,20 @@ class _InfoUserDialogState extends State<InfoUserDialog> {
             .collection('user')
             .doc(id)
             .set(data)
-            .then((value) {
-          setState(() => onCreate = false);
+            .then((value) async {
+          await FirebaseFirestore.instance
+              .collection('score')
+              .doc(id)
+              .set(score)
+              .then((value) {
+            setState(() => onCreate = false);
+          }).catchError((error) {
+            setState(() {
+              onError = true;
+              errorText = error.toString();
+              onCreate = false;
+            });
+          });
         }).catchError((error) {
           setState(() {
             onError = true;

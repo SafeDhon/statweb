@@ -128,10 +128,20 @@ class _ScoreTestState extends State<ScoreTest> {
       String homework,
       String total) {
     double widthUI = MediaQuery.of(context).size.width;
-    double accumulated = double.parse(quiz1) +
-        double.parse(quiz2) +
-        double.parse(report) +
-        double.parse(homework);
+    double accumulated = 0;
+    try {
+      accumulated = accumulated + double.parse(quiz1);
+    } catch (e) {}
+    try {
+      accumulated = accumulated + double.parse(quiz2);
+    } catch (e) {}
+    try {
+      accumulated = accumulated + double.parse(report);
+    } catch (e) {}
+    try {
+      accumulated = accumulated + double.parse(homework);
+    } catch (e) {}
+
     return SizedBox(
       height: 40,
       child: Column(
@@ -203,7 +213,9 @@ class _ScoreTestState extends State<ScoreTest> {
                             Expanded(child: studentStyle(midterm)),
                             Expanded(child: studentStyle(finalterm)),
                             Expanded(
-                                child: studentStyle(accumulated.toString())),
+                                child: studentStyle(accumulated == 0.0
+                                    ? "-"
+                                    : accumulated.toString())),
                             Expanded(child: studentStyle(total)),
                           ],
                         )
@@ -286,7 +298,7 @@ class _ScoreTestState extends State<ScoreTest> {
         // .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return myCircularLoading();
+            return SizedBox(height: 100, child: myCircularLoading());
           }
           if (snapshot.hasData || snapshot.data!.docs.isNotEmpty) {
             final snap = snapshot.data!.docs;

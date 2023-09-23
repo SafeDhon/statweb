@@ -84,7 +84,7 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  onEdit ? Icons.done_rounded : Icons.edit,
+                  onEdit ? Icons.done_rounded : Icons.edit_rounded,
                   color: onEdit ? metallicBlue : Colors.white,
                 ),
                 const SizedBox(width: 10),
