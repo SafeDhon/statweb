@@ -69,7 +69,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
             });
             // widget.future;
           } else {
-            if (userID == 'student' && homeworkID.isNotEmpty) {
+            if (userType == 'student' && hws != []) {
               showDialog(
                   context: context,
                   builder: (BuildContext context) => UploadDialog(
@@ -77,7 +77,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
 
                   // : manageDialog(),
                   );
-            } else {
+            } else if (userType == 'teacher' || userType == 'admin') {
               showDialog(
                   context: context,
                   builder: (BuildContext context) =>

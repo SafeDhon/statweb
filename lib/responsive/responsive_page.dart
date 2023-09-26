@@ -50,8 +50,20 @@ class _ResponsivePageState extends State<ResponsivePage> {
   @override
   void initState() {
     super.initState();
+    // addData();
     getformPrefer();
   }
+
+  // Future<void> addData() async {
+  //   await FirebaseFirestore.instance.collection('ebooks').doc('610').set({
+  //     "page": 10,
+  //     "unit": 6,
+  //     "quiz": 6,
+  //     "music": '',
+  //     "vdo": '',
+  //     "contain": '',
+  //   });
+  // }
 
   Future<void> getformPrefer() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -80,7 +92,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
     } else if (currentPage == DrawerSections.score) {
       contain =
           // widthUI < mobileWidth ? const ScoreMobile() : const ScoreDesktop();
-      contain = const ScoreTest();
+          contain = const ScoreTest();
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
       contain = const ResearchDesktop();

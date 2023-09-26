@@ -99,7 +99,7 @@ class _UpdateScoreDialogState extends State<UpdateScoreDialog> {
                 padding: const EdgeInsets.only(bottom: 3.0),
                 child: TextField(
                   inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp('[0-9.]'))
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.-]'))
                   ],
 
                   // readOnly: readOnly,

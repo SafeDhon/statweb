@@ -119,24 +119,23 @@ class _QuizPageState extends State<QuizPage> {
 
   Widget quizHeader() {
     double widthUI = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            onPressed: widget.onBack,
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: metallicBlue,
-            ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: widget.onBack,
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: metallicBlue,
           ),
-          Text('  $description',
+        ),
+        Expanded(
+          child: Text('  $description',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: enFont('bold', widthUI < 550 ? 18 : 25, glaucous)),
-        ],
-      ),
+              style: enFont('bold', widthUI < 550 ? 25 : 30, glaucous)),
+        ),
+      ],
     );
   }
 

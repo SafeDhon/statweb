@@ -39,12 +39,14 @@ class InputParameter extends StatelessWidget {
               Expanded(
                   child: Math.tex(paramWidget,
                       textStyle: enFont('bold', fontSize1, metallicBlue))),
-              Expanded(
-                  child: Text('=',
-                      style: enFont('bold', fontSize1, metallicBlue))),
+              widthUI < 501
+                  ? Container()
+                  : Expanded(
+                      child: Text('=',
+                          style: enFont('bold', fontSize1, metallicBlue))),
               Expanded(
                 flex: 4,
-                child: Container(
+                child: Container(alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
@@ -52,8 +54,8 @@ class InputParameter extends StatelessWidget {
                         width: 2,
                       )),
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 3.0,
+                    padding: EdgeInsets.only(
+                      // bottom: widthUI < 501 ? 0.0 : 3.0,
                       right: 12.0,
                       left: 12.0,
                     ),

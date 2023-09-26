@@ -79,7 +79,7 @@ class _EbookPageTestState extends State<EbookPageTest> {
                 child: Column(
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         IconButton(
                           onPressed: widget.onBack,
@@ -92,12 +92,14 @@ class _EbookPageTestState extends State<EbookPageTest> {
                         Text('Unit ${widget.unit}',
                             style: enFont('bold', size.width < 550 ? 25 : 30,
                                 metallicBlue)),
-                        Text(
-                          '  ${widget.description}',
-                          style: enFont(
-                              'bold', size.width < 550 ? 18 : 25, glaucous),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: Text(
+                            '  ${widget.description}',
+                            style: enFont(
+                                'bold', size.width < 550 ? 25 : 30, glaucous),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
@@ -115,10 +117,19 @@ class _EbookPageTestState extends State<EbookPageTest> {
                           child: myCircularLoading(),
                         ),
                         imageBuilder: (context, imageProvider) {
-                          return Image(
-                            image: imageProvider,
-                            fit: BoxFit.fitWidth,
-                          );
+                          return size.width < mobileWidth
+                              ? InteractiveViewer(
+                                  maxScale: 3.0,
+                                  minScale: 0.8,
+                                  child: Image(
+                                    image: imageProvider,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                )
+                              : Image(
+                                  image: imageProvider,
+                                  fit: BoxFit.fitWidth,
+                                );
                         },
                         errorWidget: (context, url, error) => Center(
                           child: Container(

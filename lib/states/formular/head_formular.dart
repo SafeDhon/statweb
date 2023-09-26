@@ -4,6 +4,7 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import '../../constants.dart';
 
 Padding headFormular(String formuText, BuildContext context) {
+  
   double widthUI = MediaQuery.of(context).size.width;
   double fontSize = widthUI < 501 ? 23 : 28;
   return Padding(
@@ -29,9 +30,10 @@ Padding headFormular(String formuText, BuildContext context) {
   );
 }
 
-Padding calBox(Function()? onTap, bool onCal) {
+Padding calBox(Function()? onTap, bool onCal,BuildContext context) {
+  double widthUI = MediaQuery.of(context).size.width;
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+    padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: widthUI < 501 ? 6 : 32),
     child: InkWell(
       onTap: onTap,
       child: Container(
