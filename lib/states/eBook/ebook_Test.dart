@@ -156,8 +156,10 @@ class _EbookPageTestState extends State<EbookPageTest> {
                         }
                       },
                       forwardPress: () {
-                        if (page != ebooks.length) {
-                          setState(() => page = page + 1);
+                        if (page + 1 != ebooks.length) {
+                          setState(() {
+                            page = page + 1;
+                          });
                         }
                       },
                       quizPress: () => setState(() => onQuiz = true),

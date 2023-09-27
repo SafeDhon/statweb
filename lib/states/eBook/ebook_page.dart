@@ -87,8 +87,10 @@ class _EBookpageState extends State<EBookpage> {
                   },
                   forwardPress: () {
                     if (page != widget.pages.length) {
+                      // print(page);
                       setState(() {
                         page = page + 1;
+                        
                       });
                     }
                   },

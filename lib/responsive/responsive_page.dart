@@ -54,16 +54,16 @@ class _ResponsivePageState extends State<ResponsivePage> {
     getformPrefer();
   }
 
-  // Future<void> addData() async {
-  //   await FirebaseFirestore.instance.collection('ebooks').doc('610').set({
-  //     "page": 10,
-  //     "unit": 6,
-  //     "quiz": 6,
-  //     "music": '',
-  //     "vdo": '',
-  //     "contain": '',
-  //   });
-  // }
+  Future<void> addData() async {
+    await FirebaseFirestore.instance.collection('ebooks').doc('721').set({
+      "page": 21,
+      "unit": 7,
+      "quiz": 7,
+      "music": '',
+      "vdo": '',
+      "contain": '',
+    });
+  }
 
   Future<void> getformPrefer() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
