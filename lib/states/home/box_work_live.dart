@@ -69,7 +69,7 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
             });
             // widget.future;
           } else {
-            if (userType == 'student' && hws != []) {
+            if (userType == 'student' && hws.isNotEmpty) {
               showDialog(
                   context: context,
                   builder: (BuildContext context) => UploadDialog(
@@ -116,6 +116,10 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return myCircularLoading();
+                            }
                             if (snapshot.hasData) {
                               final snap = snapshot.data!.docs;
                               // var hws = [];

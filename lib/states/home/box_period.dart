@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 import 'package:statweb/constants.dart';
-import 'package:statweb/util/login_dialog.dart';
+import 'package:statweb/states/home/manage_period.dart';
 
 class NextPeriodNav extends StatefulWidget {
   const NextPeriodNav({
@@ -18,20 +18,11 @@ class NextPeriodNav extends StatefulWidget {
 
 class _NextPeriodNavState extends State<NextPeriodNav> {
   bool onAdd = false;
-  DateTime dateTime = DateTime(2023, 8, 20, 00, 00);
+  DateTime dateTime = DateTime.now();
   String? description = 'No Description';
   String userID = '';
   String userType = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getFireBaseDateTime().then((value) {
-      setState(() {
-        onAdd = false;
-      });
-    });
-  }
+  var periods = [];
 
   Future<void> getformPrefer() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -43,21 +34,23 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
 
   @override
   Widget build(BuildContext context) {
-    double widthUI = MediaQuery.of(context).size.width;
-    double headFontSize = widthUI < 1150 ? 25 : 35;
-    double descriptFontSize = widthUI < 1150 ? 22 : 25;
-    double subFontSize = widthUI < 1150 ? 18 : 20;
     return InkWell(
       onTap: () async {
         await getformPrefer().then((value) {
-          if (userID == 'student' || userID == '') {
+          if (userType == 'student' || userType == '') {
+            if (periods.isNotEmpty) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    descriptionDialog(dateTime, description.toString()),
+              );
+            }
+          } else {
             showDialog(
               context: context,
-              builder: (BuildContext context) =>
-                  descriptionDialog(dateTime, description.toString()),
+              builder: (BuildContext context) => const ManagePeriod(),
             );
-          } else {
-            pickDateTime();
+            // pickDateTime();
           }
         });
       },
@@ -81,18 +74,21 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          textHomeBox('Next Period !!', headFontSize),
-                          textHomeBox(description.toString(), descriptFontSize),
-                          textHomeBox(
-                              DateFormat('d MMM yyyy   kk:mm')
-                                  .format(dateTime),
-                              subFontSize),
-                        ],
-                      ),
+                      // child: Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                      //     textHomeBox('Next Period !!', headFontSize),
+                      //     textHomeBox(description.toString(), descriptFontSize),
+                      //     textHomeBox(
+                      //         dateTime.year == 0
+                      //             ? "Time :   -"
+                      //             : DateFormat('d MMM yyyy   kk:mm')
+                      //                 .format(dateTime),
+                      //         subFontSize),
+                      //   ],
+                      // ),
+                      child: periodBuild(),
                     ),
                     Expanded(
                         child: SimpleShadow(
@@ -110,141 +106,6 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
         ),
       ),
     );
-  }
-
-  Future getFireBaseDateTime() async {
-    setState(() => onAdd = true);
-    var getPeriod = await FirebaseFirestore.instance
-        .collection('period')
-        .orderBy('dateTime')
-        .get();
-    var nextPeriod = getPeriod.docs.last;
-    DateTime dateTime = nextPeriod['dateTime'].toDate();
-    setState(() {
-      description = nextPeriod['description'];
-      this.dateTime = DateTime(
-        dateTime.year,
-        dateTime.month,
-        dateTime.day,
-        dateTime.hour,
-        dateTime.minute,
-      );
-    });
-  }
-
-  Future addFirebase(String addDescript, DateTime addDateTime) async {
-    setState(() => onAdd = true);
-    final data = <String, dynamic>{
-      'dateTime': addDateTime,
-      'description': addDescript,
-    };
-
-    FirebaseFirestore.instance
-        .collection("period")
-        .add(data)
-        .then((value) => print('$dateTime $description'));
-  }
-
-  Future pickDateTime() async {
-    DateTime? date = await pickDate();
-    if (date == null) return;
-
-    TimeOfDay? time = await pickTime();
-    if (time == null) return;
-
-    final dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-
-    await pickDescription(dateTime);
-  }
-
-  Future<DateTime?> pickDate() => showDatePicker(
-        context: context,
-        initialDate: dateTime,
-        firstDate: DateTime(2020), // start year
-        lastDate: DateTime(2050), // last year
-        builder: (context, child) {
-          return dateTimePickTheme(context, child);
-        },
-      );
-
-  Future<TimeOfDay?> pickTime() => showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(
-          hour: dateTime.hour,
-          minute: dateTime.minute,
-        ),
-        builder: (context, child) {
-          return dateTimePickTheme(context, child);
-        },
-      );
-
-  Future<void> pickDescription(DateTime dateTime) async {
-    // TextEditingController controller = TextEditingController();
-    String description = 'No Description';
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          'Add class description',
-          style: enFont('semibold', 18, metallicBlue),
-        ),
-        content: SizedBox(
-          width: 200,
-          child: TextField(
-            onChanged: (value) {
-              description = value.trim();
-            },
-            // controller: controller,
-            decoration: InputDecoration(
-              hintText: "Description",
-              hintStyle: enFont('semibold', 15, beauBlue),
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: metallicBlue)),
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: metallicBlue)),
-            ),
-
-            style: enFont('semibold', 15, metallicBlue),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              'CANCLE',
-              style: enFont('semibold', 15, metallicBlue),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              addFirebase(description, dateTime).then(
-                (value) {
-                  setState(() {
-                    onAdd = false;
-                    this.dateTime = dateTime;
-                    this.description = description;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            },
-            child: Text(
-              'OK',
-              style: enFont('semibold', 15, metallicBlue),
-            ),
-          ),
-        ],
-      ),
-    );
-    // return controller.toString();
   }
 
   Widget descriptionDialog(DateTime date, String description) {
@@ -288,5 +149,64 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
         ),
       )),
     );
+  }
+
+  Widget periodBuild() {
+    double widthUI = MediaQuery.of(context).size.width;
+    double headFontSize = widthUI < 1150 ? 25 : 35;
+    double descriptFontSize = widthUI < 1150 ? 22 : 25;
+    double subFontSize = widthUI < 1150 ? 18 : 20;
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('period')
+            .orderBy('dateTime')
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+           if (snapshot.connectionState == ConnectionState.waiting) {
+            return myCircularLoading();
+          }
+          if (snapshot.hasData) {
+            final snap = snapshot.data!.docs;
+            // var periods = [];
+            for (var data in snap) {
+              if (data['dateTime'].compareTo(Timestamp.now()) == 1) {
+                periods.add(data);
+              }
+            }
+            if (periods.isNotEmpty) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  textHomeBox('Next Period !!', headFontSize),
+                  textHomeBox(
+                      periods[0]['description'].toString(), descriptFontSize),
+                  textHomeBox(
+                      DateFormat('d MMM yyyy   kk:mm')
+                          .format(periods[0]['dateTime'].toDate()),
+                      subFontSize),
+                ],
+              );
+            } else {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  textHomeBox('Next Period !!', headFontSize),
+                  textHomeBox("There isn't period", descriptFontSize),
+                ],
+              );
+            }
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                textHomeBox('Next Period !!', headFontSize),
+                textHomeBox("There isn't period", descriptFontSize),
+              ],
+            );
+          }
+        });
   }
 }

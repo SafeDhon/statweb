@@ -37,7 +37,7 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData) {
+                      if (snapshot.hasData  && snapshot.data!.docs.isNotEmpty) {
                         final snap = snapshot.data!.docs;
                         return ListView.builder(
                             shrinkWrap: true,
@@ -47,7 +47,15 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                                   snap[index], snap[index].id);
                             });
                       } else {
-                        return const SizedBox();
+                        return SizedBox(
+                            height: 100,
+                          child: Center(
+                            child: Text(
+                              'No Homework',
+                              style: enFont('bold', 25, Colors.grey.shade400),
+                            ),
+                          ),
+                        );
                       }
                     }),
                 Row(
@@ -170,24 +178,26 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${object['description']}',
-                      style: enFont('semibold', 20,
-                          onActivate ? Colors.green.shade600 : metallicBlue),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    Text(
-                      '$assignShow - $deadlineShow',
-                      style: enFont('semibold', 14,
-                          onActivate ? Colors.green.shade300 : glaucous),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    )
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${object['description']}',
+                        style: enFont('semibold', 20,
+                            onActivate ? Colors.green.shade600 : metallicBlue),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      Text(
+                        '$assignShow - $deadlineShow',
+                        style: enFont('semibold', 14,
+                            onActivate ? Colors.green.shade300 : glaucous),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      )
+                    ],
+                  ),
                 ),
                 onEdit
                     ? IconButton(
@@ -238,6 +248,9 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                     // .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return myCircularLoading();
+                      }
                       if (snapshot.hasData || snapshot.data!.docs.isNotEmpty) {
                         final snap = snapshot.data!.docs;
                         var works = [];
@@ -247,7 +260,7 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                           }
                           // works.add(data);
                         }
-                        if (works == []) {
+                        if (works.isEmpty) {
                           return SizedBox(
                             height: 100,
                             child: Center(
