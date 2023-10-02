@@ -55,13 +55,13 @@ class _ResponsivePageState extends State<ResponsivePage> {
   }
 
   Future<void> addData() async {
-    await FirebaseFirestore.instance.collection('ebooks').doc('721').set({
-      "page": 21,
-      "unit": 7,
-      "quiz": 7,
-      "music": '',
-      "vdo": '',
-      "contain": '',
+    await FirebaseFirestore.instance.collection('quiz').doc('1005').set({
+      "answer": 0,
+      "unit": 10,
+      "id": 5,
+      "question": '',
+      "solution": '',
+      "choice": ["", "", "", ""],
     });
   }
 
