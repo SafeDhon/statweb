@@ -137,8 +137,24 @@ class _MyWorkLiveNavState extends State<MyWorkLiveNav> {
                                   children: [
                                     textHomeBox(
                                         'Home work Live !!', headFontSize),
-                                    textHomeBox(hws[0]['description'],
-                                        descriptFontSize),
+                                    Text(
+                                      hws[0]['description'],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Quicksand',
+                                        fontSize: descriptFontSize,
+                                        fontWeight: FontWeight.w700,
+                                        shadows: const [
+                                          Shadow(
+                                            blurRadius: 2.0,
+                                            color: Colors.black54,
+                                            offset: Offset(1.3, 1.3),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                     SizedBox(
                                       width: widthUI < 1150 ? 230 : null,
                                       child: Column(

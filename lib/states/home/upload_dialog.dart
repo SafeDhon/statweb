@@ -210,7 +210,7 @@ class _UploadDialogState extends State<UploadDialog> {
 
   Future<String> uploadToFirebase(String filename, Uint8List filebytes) async {
     String now =  DateFormat('dd_MMM_yy_kk:mm').format(DateTime.now());
-    final storageRef = FirebaseStorage.instance.ref('homeworks/$filename$now');
+    final storageRef = FirebaseStorage.instance.ref('homeworks/${widget.homeworkID}$now$filename');
     final uploadTask = storageRef.putData(filebytes);
     // await FirebaseStorage.instance.ref('homeworks/$filename').putData(filebytes);
     final takeSnapshot = await uploadTask.whenComplete(() => null);

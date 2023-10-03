@@ -63,6 +63,35 @@ class NavBarEBOOK extends StatelessWidget {
                   },
                 ),
               ),
+              vdo == '' ? Container() : SizedBox(width: iconPad),
+              vdo == ''
+                  ? Container()
+                  : Container(
+                      height: iconSize,
+                      width: iconSize,
+                      decoration: BoxDecoration(
+                        color: paleYellow,
+                        borderRadius: BorderRadius.circular(60),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade500,
+                            blurRadius: 5,
+                            spreadRadius: 0.5,
+                            offset: const Offset(2, 2),
+                          )
+                        ],
+                      ),
+                      child: IconButton(
+                        color: metallicBlue,
+                        icon: const Icon(
+                          MyIcons.icons8_youtube,
+                          // Icons.video_collection_rounded,
+                        ),
+                        onPressed: () {
+                          js.context.callMethod('open', [vdo]);
+                        },
+                      ),
+                    ),
               SizedBox(width: iconPad),
               Container(
                 height: iconSize,
@@ -82,36 +111,8 @@ class NavBarEBOOK extends StatelessWidget {
                 child: IconButton(
                   color: metallicBlue,
                   icon: const Icon(
-                    MyIcons.icons8_youtube,
-                    // Icons.video_collection_rounded,
-                  ),
-                  onPressed: () {
-                    js.context.callMethod('open', [vdo]);
-                  },
-                ),
-              ),
-              SizedBox(width: iconPad),
-              Container(
-                height: iconSize,
-                width: iconSize,
-                decoration: BoxDecoration(
-                  color: paleYellow,
-                  borderRadius: BorderRadius.circular(60),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade500,
-                      blurRadius: 5,
-                      spreadRadius: 0.5,
-                      offset: const Offset(2, 2),
-                    )
-                  ],
-                ),
-                child: IconButton(
-                  color: metallicBlue,
-                  icon: const Icon(
-                    // Icons.edit_note_rounded,
-                    MyIcons.icons8_edit
-                  ),
+                      // Icons.edit_note_rounded,
+                      MyIcons.icons8_edit),
                   onPressed: quizPress,
                 ),
               ),

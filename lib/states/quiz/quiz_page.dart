@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class _QuizPageState extends State<QuizPage> {
             answer: data['answer'],
             choose: 5,
             solution: data['solution'],
+            table: data['table'],
           );
           questions.add(model);
         }
@@ -76,6 +78,22 @@ class _QuizPageState extends State<QuizPage> {
         break;
       case 5:
         setState(() => description = 'Sampling Distribution');
+        break;
+      case 6:
+        setState(() => description = 'Estimation');
+        break;
+      case 7:
+        setState(() => description = 'Hypothesis Testing');
+        break;
+      case 8:
+        setState(() => description = 'Chi-Square Test');
+        break;
+      case 9:
+        setState(
+            () => description = 'Regression Analysis and Correlation Analysis');
+        break;
+      case 10:
+        setState(() => description = 'Analysis of Variance (ANOVA)');
         break;
     }
     getQuizData().then((value) {
@@ -142,11 +160,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget problemBox(int number) {
     double widthUI = MediaQuery.of(context).size.width;
     return Container(
-     
-
-      height: widthUI < 501
-      ? null
-      :250,
+      // height: widthUI < 501 ? null : 250,
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -161,13 +175,69 @@ class _QuizPageState extends State<QuizPage> {
                     padding: const EdgeInsets.only(
                       right: 16,
                       left: 16,
-                      bottom: 42,
-                      top: 42,
+                      bottom: 30,
+                      top: 50,
                     ),
-                    child: Text(
-                      questions[questionID - 1].question,
-                      style:
-                          thFont('bold', widthUI < 550 ? 16 : 18, Colors.black),
+                    child: Column(
+                      children: [
+                        Text(
+                          questions[questionID - 1].question,
+                          style: thFont(
+                              'bold', widthUI < 550 ? 16 : 18, Colors.black),
+                        ),
+                        questions[questionID - 1].table == ''
+                            ? Container()
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: CachedNetworkImage(
+                                  imageUrl: questions[questionID - 1].table,
+                                  placeholder: (context, url) => Container(
+                                    height: 500,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade300,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15))),
+                                    child: myCircularLoading(),
+                                  ),
+                                  imageBuilder: (context, imageProvider) {
+                                    return widthUI < mobileWidth
+                                        ? InteractiveViewer(
+                                            maxScale: 3.0,
+                                            minScale: 0.8,
+                                            child: Image(
+                                              image: imageProvider,
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                          )
+                                        : SizedBox(
+                                          width: 500,
+                                          child: Image(
+                                              image: imageProvider,
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                        );
+                                  },
+                                  errorWidget: (context, url, error) => Center(
+                                    child: Container(
+                                      height: 500,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade300,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(15))),
+                                      color: Colors.grey.shade500,
+                                      child: Center(
+                                        child: Text(
+                                          'Error loading',
+                                          style: enFont(
+                                              'bold', 15, Colors.grey.shade400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ],
                     ),
                   ),
           ),
@@ -415,7 +485,7 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
-  Widget solutionButton(String url) {
+  Widget solutionButton(List<dynamic> urlList) {
     double widthUI = MediaQuery.of(context).size.width;
     return SizedBox(
       height: widthUI < 550 ? 30 : 40,
@@ -425,7 +495,39 @@ class _QuizPageState extends State<QuizPage> {
           showDialog(
               context: context,
               builder: (BuildContext context) => Dialog(
-                    child: Text(url),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    child: SizedBox(
+                      width: 900,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: SingleChildScrollView(
+                          child: widthUI < mobileWidth
+                              ? InteractiveViewer(
+                                  maxScale: 3.0,
+                                  minScale: 0.8,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemCount: urlList.length,
+                                    itemBuilder: (context, index) {
+                                      return Image.network(urlList[index],
+                                          fit: BoxFit.cover);
+                                    },
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  itemCount: urlList.length,
+                                  itemBuilder: (context, index) {
+                                    return Image.network(urlList[index],
+                                        fit: BoxFit.cover);
+                                  },
+                                ),
+                        ),
+                      ),
+                    ),
                     // child: Image.network(url, fit: BoxFit.cover),
                   ));
         },

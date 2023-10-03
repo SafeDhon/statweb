@@ -17,7 +17,7 @@ class ResearchDesktop extends StatefulWidget {
 class _ResearchDesktopState extends State<ResearchDesktop> {
   String search = "";
   List<Map<String, dynamic>> data = [];
-  int filter = 0;
+  int filter = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +116,33 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
         InkWell(
           onTap: () {
             setState(() {
+              filter = 1;
+            });
+          },
+          child: Container(
+            height: boxHeight,
+            width: 110,
+            decoration: BoxDecoration(
+              color: filter == 0 ? Colors.transparent : metallicBlue,
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(
+                color: metallicBlue,
+                width: 2,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                'Research',
+                style: enFont(
+                    'bold', 18, filter == 0 ? metallicBlue : Colors.white),
+              ),
+            ),
+          ),
+        ),
+         const SizedBox(width: 15),
+        InkWell(
+          onTap: () {
+            setState(() {
               filter = 0;
             });
           },
@@ -140,32 +167,7 @@ class _ResearchDesktopState extends State<ResearchDesktop> {
           ),
         ),
         const SizedBox(width: 15),
-        InkWell(
-          onTap: () {
-            setState(() {
-              filter = 1;
-            });
-          },
-          child: Container(
-            height: boxHeight,
-            width: 110,
-            decoration: BoxDecoration(
-              color: filter == 0 ? Colors.transparent : metallicBlue,
-              borderRadius: BorderRadius.circular(25),
-              border: Border.all(
-                color: metallicBlue,
-                width: 2,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                'Report',
-                style: enFont(
-                    'bold', 18, filter == 0 ? metallicBlue : Colors.white),
-              ),
-            ),
-          ),
-        ),
+        
       ],
     );
   }

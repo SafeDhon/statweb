@@ -96,7 +96,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
       currentHeader = 'Score';
     } else if (currentPage == DrawerSections.research) {
       contain = const ResearchDesktop();
-      currentHeader = 'Research';
+      currentHeader = 'Download';
     }
 
     return Scaffold(
@@ -352,7 +352,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                       currentPage == DrawerSections.quiz ? true : false),
                   menuItem(4, "Score", MyIcons.icons8_document,
                       currentPage == DrawerSections.score ? true : false),
-                  menuItem(5, "Research", Icons.search_rounded,
+                  menuItem(5, "Download", Icons.search_rounded,
                       currentPage == DrawerSections.research ? true : false),
                   if (userType == 'admin' || userType == 'teacher')
                     menuItem(6, "Manage User", MyIcons.person_add,
@@ -366,8 +366,10 @@ class _ResponsivePageState extends State<ResponsivePage> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 15),
-              child: menuItem(7, "Logout", MyIcons.logout,
-                  currentPage == DrawerSections.logout ? true : false),
+              child: userID == ''
+                  ? Container()
+                  : menuItem(7, "Logout", MyIcons.logout,
+                      currentPage == DrawerSections.logout ? true : false),
             ),
           ))
         ],
