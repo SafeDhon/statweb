@@ -193,7 +193,7 @@ class _QuizPageState extends State<QuizPage> {
                                 child: CachedNetworkImage(
                                   imageUrl: questions[questionID - 1].table,
                                   placeholder: (context, url) => Container(
-                                    height: 500,
+                                    height: 200,
                                     decoration: BoxDecoration(
                                         color: Colors.grey.shade300,
                                         borderRadius: const BorderRadius.all(
@@ -211,16 +211,16 @@ class _QuizPageState extends State<QuizPage> {
                                             ),
                                           )
                                         : SizedBox(
-                                          width: 500,
-                                          child: Image(
+                                            width: 500,
+                                            child: Image(
                                               image: imageProvider,
                                               fit: BoxFit.fitWidth,
                                             ),
-                                        );
+                                          );
                                   },
                                   errorWidget: (context, url, error) => Center(
                                     child: Container(
-                                      height: 500,
+                                      height: 200,
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
                                           borderRadius: const BorderRadius.all(
@@ -522,6 +522,30 @@ class _QuizPageState extends State<QuizPage> {
                                   itemCount: urlList.length,
                                   itemBuilder: (context, index) {
                                     return Image.network(urlList[index],
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return SizedBox(
+                                            height: 100,
+                                            width: 100,
+                                            child: myCircularLoading(),
+                                          );
+                                        },
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                SizedBox(
+                                                  height: 100,
+                                                  width: 100,
+                                                  child: Center(
+                                                    child: Text(
+                                                      'error loading',
+                                                      style: enFont('bold', 15,
+                                                          Colors.grey.shade500),
+                                                    ),
+                                                  ),
+                                                ),
                                         fit: BoxFit.cover);
                                   },
                                 ),
