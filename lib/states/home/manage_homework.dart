@@ -16,8 +16,8 @@ class ManageHomeWorkDialog extends StatefulWidget {
 class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
   bool onEdit = false;
   bool onAdd = false;
-  DateTime assign = DateTime(2023, 8, 20, 00, 00);
-  DateTime deadline = DateTime(2023, 8, 20, 00, 00);
+  DateTime assign = DateTime.now();
+  DateTime deadline = DateTime.now();
   String? description = 'No Description';
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,11 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                 StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('homework')
+                        .orderBy('assign')
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData  && snapshot.data!.docs.isNotEmpty) {
+                      if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
                         final snap = snapshot.data!.docs;
                         return ListView.builder(
                             shrinkWrap: true,
@@ -48,7 +49,7 @@ class _ManageHomeWorkDialogState extends State<ManageHomeWorkDialog> {
                             });
                       } else {
                         return SizedBox(
-                            height: 100,
+                          height: 100,
                           child: Center(
                             child: Text(
                               'No Homework',

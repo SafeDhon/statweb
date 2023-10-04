@@ -32,80 +32,272 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
     });
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return InkWell(
+  //     onTap: () async {
+  //       await getformPrefer().then((value) {
+  //         if (userType == 'student' || userType == '') {
+  //           if (periods.isNotEmpty) {
+  //             print('ssssss');
+  //             showDialog(
+  //               context: context,
+  //               builder: (BuildContext context) =>
+  //                   descriptionDialog(dateTime, description.toString()),
+  //             );
+  //           }
+  //         } else {
+  //           showDialog(
+  //             context: context,
+  //             builder: (BuildContext context) => const ManagePeriod(),
+  //           );
+  //           // pickDateTime();
+  //         }
+  //       });
+  //     },
+  //     child: Container(
+  //       decoration: homeBox(paleYellow1),
+  //       child: Padding(
+  //         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
+  //         child: onAdd
+  //             ? Center(
+  //                 child: SizedBox(
+  //                   height: 25,
+  //                   width: 25,
+  //                   child: CircularProgressIndicator(
+  //                     color: metallicBlue,
+  //                     strokeWidth: 2,
+  //                   ),
+  //                 ),
+  //               )
+  //             : Row(
+  //                 crossAxisAlignment: CrossAxisAlignment.center,
+  //                 children: [
+  //                   Expanded(
+  //                     flex: 3,
+  //                     // child: Column(
+  //                     //   crossAxisAlignment: CrossAxisAlignment.start,
+  //                     //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                     //   children: [
+  //                     //     textHomeBox('Next Period !!', headFontSize),
+  //                     //     textHomeBox(description.toString(), descriptFontSize),
+  //                     //     textHomeBox(
+  //                     //         dateTime.year == 0
+  //                     //             ? "Time :   -"
+  //                     //             : DateFormat('d MMM yyyy   kk:mm')
+  //                     //                 .format(dateTime),
+  //                     //         subFontSize),
+  //                     //   ],
+  //                     // ),
+  //                     child: periodBuild(),
+  //                   ),
+  //                   Expanded(
+  //                       child: SimpleShadow(
+  //                     opacity: 0.9, // Default: 0.5
+  //                     color: Colors.black, // Default: Black
+  //                     offset: const Offset(0, 0), // Default: Offset(2, 2)
+  //                     sigma: 2,
+  //                     child: Image.asset(
+  //                       'assets/images/period.png',
+  //                       height: 500,
+  //                     ),
+  //                   )),
+  //                 ],
+  //               ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await getformPrefer().then((value) {
-          if (userType == 'student' || userType == '') {
+    double widthUI = MediaQuery.of(context).size.width;
+    double headFontSize = widthUI < 1150 ? 25 : 35;
+    double descriptFontSize = widthUI < 1150 ? 22 : 25;
+    double subFontSize = widthUI < 1150 ? 18 : 20;
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('period')
+            .orderBy('dateTime')
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              decoration: homeBox(paleYellow1),
+              child: myCircularLoading(),
+            );
+          }
+          if (snapshot.hasData) {
+            final snap = snapshot.data!.docs;
+            // var periods = [];
+            for (var data in snap) {
+              if (data['dateTime'].compareTo(Timestamp.now()) == 1) {
+                periods.add(data);
+              }
+            }
             if (periods.isNotEmpty) {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    descriptionDialog(dateTime, description.toString()),
+              return InkWell(
+                onTap: () async {
+                  await getformPrefer().then((value) {
+                    if (userType == 'student' || userType == '') {
+                      if (periods.isNotEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => descriptionDialog(
+                              periods[0]['dateTime'].toDate(), periods[0]['description'].toString()),
+                        );
+                      }
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const ManagePeriod(),
+                      );
+                      // pickDateTime();
+                    }
+                  });
+                },
+                child: Container(
+                  decoration: homeBox(paleYellow1),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25.0, vertical: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              textHomeBox('Next Period !!', headFontSize),
+                              textHomeBox(periods[0]['description'].toString(),
+                                  descriptFontSize),
+                              textHomeBox(
+                                  DateFormat('d MMM yyyy   kk:mm')
+                                      .format(periods[0]['dateTime'].toDate()),
+                                  subFontSize),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                            child: SimpleShadow(
+                          opacity: 0.9, // Default: 0.5
+                          color: Colors.black, // Default: Black
+                          offset: const Offset(0, 0), // Default: Offset(2, 2)
+                          sigma: 2,
+                          child: Image.asset(
+                            'assets/images/period.png',
+                            height: 500,
+                          ),
+                        )),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return InkWell(
+                onTap: () async {
+                  await getformPrefer().then((value) {
+                    if (userType == 'student' || userType == '') {
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const ManagePeriod(),
+                      );
+                      // pickDateTime();
+                    }
+                  });
+                },
+                child: Container(
+                  decoration: homeBox(paleYellow1),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25.0, vertical: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              textHomeBox('Next Period !!', headFontSize),
+                              textHomeBox(
+                                  "There isn't period", descriptFontSize),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                            child: SimpleShadow(
+                          opacity: 0.9, // Default: 0.5
+                          color: Colors.black, // Default: Black
+                          offset: const Offset(0, 0), // Default: Offset(2, 2)
+                          sigma: 2,
+                          child: Image.asset(
+                            'assets/images/period.png',
+                            height: 500,
+                          ),
+                        )),
+                      ],
+                    ),
+                  ),
+                ),
               );
             }
           } else {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => const ManagePeriod(),
+            return InkWell(
+              onTap: () async {
+                await getformPrefer().then((value) {
+                  if (userType == 'student' || userType == '') {
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const ManagePeriod(),
+                    );
+                    // pickDateTime();
+                  }
+                });
+              },
+              child: Container(
+                decoration: homeBox(paleYellow1),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            textHomeBox('Next Period !!', headFontSize),
+                            textHomeBox("There isn't period", descriptFontSize),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                          child: SimpleShadow(
+                        opacity: 0.9, // Default: 0.5
+                        color: Colors.black, // Default: Black
+                        offset: const Offset(0, 0), // Default: Offset(2, 2)
+                        sigma: 2,
+                        child: Image.asset(
+                          'assets/images/period.png',
+                          height: 500,
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
+              ),
             );
-            // pickDateTime();
           }
         });
-      },
-      child: Container(
-        decoration: homeBox(paleYellow1),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 4),
-          child: onAdd
-              ? Center(
-                  child: SizedBox(
-                    height: 25,
-                    width: 25,
-                    child: CircularProgressIndicator(
-                      color: metallicBlue,
-                      strokeWidth: 2,
-                    ),
-                  ),
-                )
-              : Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      // child: Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: [
-                      //     textHomeBox('Next Period !!', headFontSize),
-                      //     textHomeBox(description.toString(), descriptFontSize),
-                      //     textHomeBox(
-                      //         dateTime.year == 0
-                      //             ? "Time :   -"
-                      //             : DateFormat('d MMM yyyy   kk:mm')
-                      //                 .format(dateTime),
-                      //         subFontSize),
-                      //   ],
-                      // ),
-                      child: periodBuild(),
-                    ),
-                    Expanded(
-                        child: SimpleShadow(
-                      opacity: 0.9, // Default: 0.5
-                      color: Colors.black, // Default: Black
-                      offset: const Offset(0, 0), // Default: Offset(2, 2)
-                      sigma: 2,
-                      child: Image.asset(
-                        'assets/images/period.png',
-                        height: 500,
-                      ),
-                    )),
-                  ],
-                ),
-        ),
-      ),
-    );
   }
 
   Widget descriptionDialog(DateTime date, String description) {
@@ -162,7 +354,7 @@ class _NextPeriodNavState extends State<NextPeriodNav> {
             .orderBy('dateTime')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-           if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return myCircularLoading();
           }
           if (snapshot.hasData) {

@@ -185,11 +185,10 @@ class _QuizPageState extends State<QuizPage> {
                           // style: thFont(
                           //     'bold', widthUI < 550 ? 16 : 18, Colors.black),
                           style: TextStyle(
-                            fontFamily: 'FCHome',
-                            fontWeight: FontWeight.w500,
-                            fontSize: widthUI < 550 ? 24 : 26,
-                            color: Colors.black
-                          ),
+                              fontFamily: 'FCHome',
+                              fontWeight: FontWeight.w500,
+                              fontSize: widthUI < 550 ? 24 : 26,
+                              color: Colors.black),
                         ),
                         questions[questionID - 1].table == ''
                             ? Container()
@@ -329,21 +328,19 @@ class _QuizPageState extends State<QuizPage> {
                                 : 'D.  ',
                     // style:
                     //     thFont('bold', widthUI < 550 ? 16 : 20, metallicBlue),
-                        style: TextStyle(
-                            fontFamily: 'FCHome',
-                            fontWeight: FontWeight.w500,
-                            fontSize: widthUI < 550 ? 24 : 26,
-                            color: Colors.black
-                          ),
+                    style: TextStyle(
+                        fontFamily: 'FCHome',
+                        fontWeight: FontWeight.w500,
+                        fontSize: widthUI < 550 ? 24 : 26,
+                        color: Colors.black),
                   ),
                   Text(
                     onloadQuestion ? 'loading choice' : question.choice[index],
                     style: TextStyle(
-                            fontFamily: 'FCHome',
-                            fontWeight: FontWeight.w500,
-                            fontSize: widthUI < 550 ? 24 : 26,
-                            color: Colors.black
-                          ),
+                        fontFamily: 'FCHome',
+                        fontWeight: FontWeight.w500,
+                        fontSize: widthUI < 550 ? 24 : 26,
+                        color: Colors.black),
                     // style:
                     //     thFont('bold', widthUI < 550 ? 16 : 20, Colors.black),
                     maxLines: 1,
@@ -393,15 +390,29 @@ class _QuizPageState extends State<QuizPage> {
                   questionID = index + 1;
                 });
               },
+              // backgroundColor: questionID == index + 1
+              //     // ? metallicBlue
+              //     // : onCheck
+              //     //     ? questions[index].answer == questions[index].choose
+              //     //         ? Colors.green.shade300
+              //     //         : Colors.red.shade300
+              //     //     : questions[index].choose == 5
+              //     //         ? paleYellow
+              //     //         : glaucous,
               backgroundColor: questionID == index + 1
-                  ? metallicBlue
+                  ? onCheck
+                      ? questions[index].answer == questions[index].choose
+                          ? Colors.green.shade700
+                          : Colors.red.shade700
+                      : metallicBlue
                   : onCheck
                       ? questions[index].answer == questions[index].choose
-                          ? Colors.green.shade300
-                          : Colors.red.shade300
+                          ? Colors.green.shade200
+                          : Colors.red.shade200
                       : questions[index].choose == 5
                           ? paleYellow
                           : glaucous,
+
               child: Center(
                 child: Text(
                   (index + 1).toString(),
