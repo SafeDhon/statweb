@@ -182,8 +182,14 @@ class _QuizPageState extends State<QuizPage> {
                       children: [
                         Text(
                           questions[questionID - 1].question,
-                          style: thFont(
-                              'bold', widthUI < 550 ? 16 : 18, Colors.black),
+                          // style: thFont(
+                          //     'bold', widthUI < 550 ? 16 : 18, Colors.black),
+                          style: TextStyle(
+                            fontFamily: 'FCHome',
+                            fontWeight: FontWeight.w500,
+                            fontSize: widthUI < 550 ? 24 : 26,
+                            color: Colors.black
+                          ),
                         ),
                         questions[questionID - 1].table == ''
                             ? Container()
@@ -321,13 +327,25 @@ class _QuizPageState extends State<QuizPage> {
                             : index == 2
                                 ? 'C.  '
                                 : 'D.  ',
-                    style:
-                        thFont('bold', widthUI < 550 ? 16 : 20, metallicBlue),
+                    // style:
+                    //     thFont('bold', widthUI < 550 ? 16 : 20, metallicBlue),
+                        style: TextStyle(
+                            fontFamily: 'FCHome',
+                            fontWeight: FontWeight.w500,
+                            fontSize: widthUI < 550 ? 24 : 26,
+                            color: Colors.black
+                          ),
                   ),
                   Text(
                     onloadQuestion ? 'loading choice' : question.choice[index],
-                    style:
-                        thFont('bold', widthUI < 550 ? 16 : 20, Colors.black),
+                    style: TextStyle(
+                            fontFamily: 'FCHome',
+                            fontWeight: FontWeight.w500,
+                            fontSize: widthUI < 550 ? 24 : 26,
+                            color: Colors.black
+                          ),
+                    // style:
+                    //     thFont('bold', widthUI < 550 ? 16 : 20, Colors.black),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
